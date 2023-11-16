@@ -1,12 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webui/helper/localization/language.dart';
-import 'package:webui/helper/services/auth_services.dart';
+import 'package:webui/helper/services/auth_service.dart';
 import 'package:webui/helper/theme/theme_customizer.dart';
 
 class LocalStorage {
   static const String _loggedInUserKey = "user";
   static const String _themeCustomizerKey = "theme_customizer";
   static const String _languageKey = "lang_code";
+  static const String _tokenKey = "token";
+  static const String _hakAksesKey = "akses";
 
   static SharedPreferences? _preferencesInstance;
 
@@ -42,6 +44,22 @@ class LocalStorage {
 
   static String? getLanguage() {
     return preferences.getString(_languageKey);
+  }
+
+  static Future<bool> setToken(String token) {
+    return preferences.setString(_tokenKey, token);
+  }
+
+  static String? getToken() {
+    return preferences.getString(_tokenKey);
+  }
+
+  static Future<bool> setHakAkses(String token) {
+    return preferences.setString(_hakAksesKey, token);
+  }
+
+  static String? getHakAkses() {
+    return preferences.getString(_hakAksesKey);
   }
 
   static Future<bool> removeLoggedInUser() async {

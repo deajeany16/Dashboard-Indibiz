@@ -2,93 +2,92 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:webui/helper/services/json_decoder.dart';
+// ignore: unused_import
 import 'package:webui/models/identifier_model.dart';
 
-class Inputan extends IdentifierModel {
-  final String user,
+class Inputan {
+  final String orderid,
       nama,
       namasales,
       kodesales,
       datel,
       sto,
       namaperusahaan,
-      alamatperusahaan,
+      alamat,
       koordinat,
       odp,
-      noHp,
-      noHp2,
+      nohp,
+      nohp2,
       email,
       paket,
       nosc,
       status,
-      ketstatus,
-      ketlain;
+      ket,
+      ketLain;
   final DateTime createdAt;
 
   Inputan(
-      super.id,
-      this.user,
+      this.orderid,
       this.nama,
       this.namasales,
       this.kodesales,
       this.datel,
       this.sto,
       this.namaperusahaan,
-      this.alamatperusahaan,
+      this.alamat,
       this.koordinat,
       this.odp,
-      this.noHp,
-      this.noHp2,
+      this.nohp,
+      this.nohp2,
       this.email,
       this.paket,
       this.nosc,
       this.status,
-      this.ketstatus,
-      this.ketlain,
+      this.ket,
+      this.ketLain,
       this.createdAt);
 
   static Inputan fromJSON(Map<String, dynamic> json) {
     JSONDecoder decoder = JSONDecoder(json);
 
-    String user = decoder.getString('user');
+    String orderid = decoder.getString('orderid');
     String nama = decoder.getString('nama');
     String namasales = decoder.getString('namasales');
     String kodesales = decoder.getString('kodesales');
     String datel = decoder.getString('datel');
     String sto = decoder.getString('sto');
     String namaperusahaan = decoder.getString('namaperusahaan');
-    String alamatperusahaan = decoder.getString('alamatperusahaan');
+    String alamat = decoder.getString('alamat');
     String koordinat = decoder.getString('koordinat');
     String odp = decoder.getString('odp');
-    String noHp = decoder.getString('no_hp');
-    String noHp2 = decoder.getString('no_hp2');
+    String nohp = decoder.getString('no_hp');
+    String nohp2 = decoder.getString('no_hp2');
     String email = decoder.getString('email');
     String paket = decoder.getString('paket');
     String nosc = decoder.getString('nosc');
     String status = decoder.getString('status');
-    String ketStatus = decoder.getString('ket_status');
+    String ket = decoder.getString('ket');
     String ketLain = decoder.getString('ket_lain');
     DateTime createdAt = decoder.getDateTime('created_at');
 
     return Inputan(
-        decoder.getId,
-        user,
+        orderid,
         nama,
         namasales,
         kodesales,
         datel,
         sto,
         namaperusahaan,
-        alamatperusahaan,
+        alamat,
         koordinat,
         odp,
-        noHp,
-        noHp2,
+        nohp,
+        nohp2,
         email,
         paket,
         nosc,
         status,
-        ketStatus,
+        ket,
         ketLain,
         createdAt);
   }

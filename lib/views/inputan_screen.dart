@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/instance_manager.dart';
 import 'package:webui/controller/inputan_controller.dart';
 import 'package:webui/helper/extensions/string.dart';
+import 'package:webui/helper/theme/admin_theme.dart';
 import 'package:webui/helper/theme/app_style.dart';
 import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
@@ -18,6 +19,7 @@ import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
+import 'package:webui/widgets/custom_input_dialog.dart';
 
 class InputanScreen extends StatefulWidget {
   const InputanScreen({super.key});
@@ -75,518 +77,11 @@ class _InputanScreenState extends State<InputanScreen>
                           MyButton(
                             onPressed: () => showDialog(
                                 context: context,
-                                builder: (context) => AlertDialog(
-                                      scrollable: true,
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      titlePadding: MySpacing.xy(16, 12),
-                                      insetPadding: MySpacing.y(100),
-                                      actionsPadding: MySpacing.xy(250, 16),
-                                      // contentPadding: MySpacing.x(16),
-                                      content: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            MyText.titleMedium(
-                                              "Add Order".tr(),
-                                              fontSize: 18,
-                                              fontWeight: 600,
-                                            ),
-                                            MySpacing.height(16),
-                                            MyText.bodyMedium("Nama Inputer :"),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('nama'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('nama'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: Ciya Angel",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(16),
-                                            MyText.bodyMedium("Nama Sales :"),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('namasales'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('namasales'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: Ciya",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(16),
-                                            MyText.bodyMedium("Kode Sales :"),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('kodesales'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('kodesales'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: DS1234",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "Datel".tr().capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('datel'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('datel'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: Palangka Raya",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "STO".tr().capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('sto'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('sto'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: PLK",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "Nama Perusahaan"
-                                                  .tr()
-                                                  .capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation(
-                                                      'namaPerusahaan'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController(
-                                                      'namaPerusahaan'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: Rocket Chicken",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "Alamat Perusahaan"
-                                                  .tr()
-                                                  .capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation(
-                                                      'alamatPerusahaan'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController(
-                                                      'alamatPerushaan'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText:
-                                                    "eg: JL. Tjilik Riwut",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "ODP".tr().capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('ODP'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('ODP'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: ....",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "Koordinat".tr().capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('koordinat'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('koordinat'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: .....",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "No Hp".tr().capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('nohp'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('nohp'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: 081211223344",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "No Hp Alternatif"
-                                                  .tr()
-                                                  .capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('noHp2'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('noHp2'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: 081211223344",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "Email".tr().capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('email'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('email'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText:
-                                                    "eg: rocky123@gmail.com",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "Paket".tr(),
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('paket'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('paket'),
-                                              keyboardType:
-                                                  TextInputType.multiline,
-                                              maxLines: 3,
-                                              decoration: InputDecoration(
-                                                hintText:
-                                                    "eg : Paket 1S Indibiz",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "No SC".tr().capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('nosc'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('nosc'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText: "eg: SC-1000224431",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(25),
-                                            MyText.labelMedium(
-                                              "Keterangan Lain"
-                                                  .tr()
-                                                  .capitalizeWords,
-                                            ),
-                                            MySpacing.height(8),
-                                            TextFormField(
-                                              validator: controller
-                                                  .basicValidator
-                                                  .getValidation('ketLain'),
-                                              controller: controller
-                                                  .basicValidator
-                                                  .getController('ketLain'),
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                hintText:
-                                                    "eg: Cancel/Input Ulang/etc...",
-                                                hintStyle:
-                                                    MyTextStyle.bodySmall(
-                                                        xMuted: true),
-                                                border: outlineInputBorder,
-                                                enabledBorder:
-                                                    outlineInputBorder,
-                                                focusedBorder:
-                                                    focusedInputBorder,
-                                                contentPadding:
-                                                    MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                    FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                          ]),
-                                      actions: [
-                                        MyButton(
-                                          onPressed: () {
-                                            if (Form.of(context).validate()) {
-                                              // Process form submission
-                                              // controller.onSubmit();
-                                              Navigator.pop(context);
-                                            }
-                                          },
-                                          elevation: 0,
-                                          backgroundColor: contentTheme.primary,
-                                          borderRadiusAll:
-                                              AppStyle.buttonRadius.medium,
-                                          child: MyText.bodyMedium(
-                                            "Add",
-                                            color: contentTheme.onPrimary,
-                                          ),
-                                        ),
-                                        MyButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          elevation: 0,
-                                          backgroundColor: contentTheme.primary,
-                                          borderRadiusAll:
-                                              AppStyle.buttonRadius.medium,
-                                          child: MyText.bodyMedium(
-                                            "Cancel",
-                                            color: contentTheme.onPrimary,
-                                          ),
-                                        ),
-                                      ],
-                                    )),
+                                builder: (context) => CustomInputDialog(
+                                    title: "Tambah Order",
+                                    outlineInputBorder: outlineInputBorder,
+                                    focusedInputBorder: focusedInputBorder,
+                                    contentTheme: contentTheme)),
                             elevation: 0,
                             padding: MySpacing.xy(20, 16),
                             backgroundColor: contentTheme.primary,
@@ -723,16 +218,16 @@ class _InputanScreenState extends State<InputanScreen>
                                       color: contentTheme.primary,
                                     )),
                                   ],
-                                  rows: controller.inputan
+                                  rows: controller.semuaInputan
                                       .mapIndexed((index, data) => DataRow(
                                               onSelectChanged: (_) {},
                                               cells: [
                                                 DataCell(MyText.bodyMedium(
-                                                    '${data.id}')),
+                                                    '${index + 1}')),
                                                 DataCell(MyText.bodyMedium(
                                                     '${data.createdAt}')),
                                                 DataCell(MyText.bodyMedium(
-                                                    data.user)),
+                                                    data.nama)),
                                                 DataCell(MyText.bodyMedium(
                                                     data.namasales)),
                                                 DataCell(MyText.bodyMedium(
@@ -744,15 +239,15 @@ class _InputanScreenState extends State<InputanScreen>
                                                 DataCell(MyText.bodyMedium(
                                                     data.namaperusahaan)),
                                                 DataCell(MyText.bodyMedium(
-                                                    data.alamatperusahaan)),
+                                                    data.alamat)),
                                                 DataCell(MyText.bodyMedium(
                                                     data.koordinat)),
                                                 DataCell(MyText.bodyMedium(
                                                     data.odp)),
                                                 DataCell(MyText.bodyMedium(
-                                                    data.noHp)),
+                                                    data.nohp)),
                                                 DataCell(MyText.bodyMedium(
-                                                    data.noHp2)),
+                                                    data.nohp2)),
                                                 DataCell(MyText.bodyMedium(
                                                     data.email)),
                                                 DataCell(MyText.bodyMedium(
@@ -762,20 +257,49 @@ class _InputanScreenState extends State<InputanScreen>
                                                 DataCell(MyText.bodyMedium(
                                                     data.status)),
                                                 DataCell(MyText.bodyMedium(
-                                                    data.ketstatus)),
+                                                    data.ket)),
                                                 DataCell(MyText.bodyMedium(
-                                                    data.ketlain)),
+                                                    data.ketLain)),
                                                 DataCell(Row(
                                                   children: [
                                                     IconButton(
-                                                        onPressed: () {},
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        onPressed: () async {
+                                                          await controller
+                                                              .getOrder(
+                                                                  data.orderid);
+                                                          await controller
+                                                              .onEdit();
+                                                          if (mounted) {
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder: (context) => CustomInputDialog(
+                                                                    title:
+                                                                        "Edit Order",
+                                                                    outlineInputBorder:
+                                                                        outlineInputBorder,
+                                                                    focusedInputBorder:
+                                                                        focusedInputBorder,
+                                                                    contentTheme:
+                                                                        contentTheme));
+                                                          }
+                                                        },
                                                         icon: Icon(
                                                           Icons.edit,
                                                           color: theme
                                                               .primaryColor,
                                                         )),
                                                     IconButton(
-                                                        onPressed: () {},
+                                                        onPressed: () {
+                                                          // if (Form.of(context).validate()) {
+                                                          // Process form submission
+                                                          controller
+                                                              .deleteOrder(
+                                                                  data.orderid);
+                                                          // }
+                                                        },
                                                         icon: Icon(Icons.delete,
                                                             color: Colors.red))
                                                   ],

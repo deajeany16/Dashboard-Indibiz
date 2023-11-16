@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webui/controller/auth/login_controller.dart';
 import 'package:webui/helper/extensions/string.dart';
 import 'package:webui/helper/utils/ui_mixins.dart';
@@ -36,140 +35,147 @@ class _LoginScreenState extends State<LoginScreen>
         builder: (controller) {
           return Form(
             key: controller.basicValidator.formKey,
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: MySpacing.all(30),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        Images.logoIcon,
-                        height: 32,
-                        alignment: Alignment.center,
-                      ),
-                      MyText.bodyLarge(
-                        'INDIBIZ KALTENG',
-                        fontSize: 30,
-                        textAlign: TextAlign.center,
-                        fontWeight: 600,
-                      ),
-                    ],
+            child: SingleChildScrollView(
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: MySpacing.all(30),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          Images.logoIcon,
+                          height: 32,
+                          alignment: Alignment.center,
+                        ),
+                        MyText.bodyLarge(
+                          'INDIBIZ KALTENG',
+                          fontSize: 30,
+                          textAlign: TextAlign.center,
+                          fontWeight: 600,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Divider(),
-                Padding(
-                  padding: MySpacing.xy(50, 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.titleLarge(
-                        "Welcome",
-                        fontWeight: 700,
-                        fontSize: 24,
-                      ),
-                      MyText.bodySmall(
-                        "Login your account",
-                        fontSize: 14,
-                        muted: true,
-                      ),
-                      MySpacing.height(30),
-                      MyText.bodyMedium(
-                        "Email",
-                        fontWeight: 600,
-                      ),
-                      MySpacing.height(8),
-                      TextFormField(
-                        validator:
-                            controller.basicValidator.getValidation('email'),
-                        controller:
-                            controller.basicValidator.getController('email'),
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                            border: outlineInputBorder,
-                            prefixIcon: const Icon(
-                              LucideIcons.mail,
-                              size: 20,
-                            ),
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior: FloatingLabelBehavior.never),
-                      ),
-                      MySpacing.height(20),
-                      MyText.bodyMedium(
-                        "password".tr(),
-                        fontWeight: 600,
-                      ),
-                      MySpacing.height(8),
-                      TextFormField(
-                        validator:
-                            controller.basicValidator.getValidation('password'),
-                        controller:
-                            controller.basicValidator.getController('password'),
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: !controller.showPassword,
-                        decoration: InputDecoration(
-                            border: outlineInputBorder,
-                            prefixIcon: const Icon(
-                              LucideIcons.lock,
-                              size: 20,
-                            ),
-                            suffixIcon: InkWell(
-                              onTap: controller.onChangeShowPassword,
-                              child: Icon(
-                                controller.showPassword
-                                    ? LucideIcons.eye
-                                    : LucideIcons.eyeOff,
+                  Divider(),
+                  Padding(
+                    padding: MySpacing.xy(50, 40),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.titleLarge(
+                          "Welcome",
+                          fontWeight: 700,
+                          fontSize: 24,
+                        ),
+                        MyText.bodySmall(
+                          "Login your account",
+                          fontSize: 14,
+                          muted: true,
+                        ),
+                        MySpacing.height(30),
+                        MyText.bodyMedium(
+                          "Username",
+                          fontWeight: 600,
+                        ),
+                        MySpacing.height(8),
+                        TextFormField(
+                          validator: controller.basicValidator
+                              .getValidation('username'),
+                          controller: controller.basicValidator
+                              .getController('username'),
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                              border: outlineInputBorder,
+                              prefixIcon: const Icon(
+                                Icons.mail,
                                 size: 20,
                               ),
+                              labelText: "Username",
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never),
+                        ),
+                        MySpacing.height(20),
+                        MyText.bodyMedium(
+                          "password".tr(),
+                          fontWeight: 600,
+                        ),
+                        MySpacing.height(8),
+                        TextFormField(
+                          validator:
+                              controller.basicValidator.getValidation('pass'),
+                          controller:
+                              controller.basicValidator.getController('pass'),
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: !controller.showPassword,
+                          decoration: InputDecoration(
+                              border: outlineInputBorder,
+                              prefixIcon: const Icon(
+                                Icons.lock,
+                                size: 20,
+                              ),
+                              labelText: "Password",
+                              suffixIcon: InkWell(
+                                onTap: controller.onChangeShowPassword,
+                                child: Icon(
+                                  controller.showPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  size: 20,
+                                ),
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never),
+                        ),
+                        MySpacing.height(12),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: MyButton.text(
+                            onPressed: () => controller.goToForgotPassword(),
+                            elevation: 0,
+                            padding: MySpacing.xy(8, 0),
+                            splashColor:
+                                contentTheme.secondary.withOpacity(0.1),
+                            child: MyText.labelSmall(
+                              'forgot_password?'.tr().capitalizeWords,
+                              color: contentTheme.secondary,
                             ),
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior: FloatingLabelBehavior.never),
-                      ),
-                      MySpacing.height(12),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: MyButton.text(
-                          onPressed: () => controller.goToForgotPassword(),
-                          elevation: 0,
-                          padding: MySpacing.xy(8, 0),
-                          splashColor: contentTheme.secondary.withOpacity(0.1),
-                          child: MyText.labelSmall(
-                            'forgot_password?'.tr().capitalizeWords,
-                            color: contentTheme.secondary,
                           ),
                         ),
-                      ),
-                      MySpacing.height(20),
-                      Center(
-                        child: MyButton.block(
-                          onPressed: () => controller.onLogin(),
-                          elevation: 0,
-                          padding: MySpacing.xy(40, 20),
-                          backgroundColor: contentTheme.primary,
-                          child: MyText.bodyMedium(
-                            'login'.tr(),
-                            color: contentTheme.onPrimary,
-                          ),
-                        ),
-                      ),
-                      MySpacing.height(5),
-                      Center(
-                        child: MyButton.text(
-                            onPressed: controller.gotoRegister,
-                            padding: MySpacing.xy(8, 4),
+                        MySpacing.height(20),
+                        Center(
+                          child: MyButton.block(
+                            onPressed: () => controller.onLogin(),
+                            elevation: 0,
+                            padding: MySpacing.xy(40, 20),
+                            backgroundColor: contentTheme.primary,
                             child: MyText.bodyMedium(
-                              "Don't have an account",
-                              fontWeight: 600,
-                            )),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                              'login'.tr(),
+                              color: contentTheme.onPrimary,
+                            ),
+                          ),
+                        ),
+                        MySpacing.height(5),
+                        Center(
+                          child: MyButton.text(
+                              onPressed: controller.gotoRegister,
+                              padding: MySpacing.xy(8, 4),
+                              child: MyText.bodyMedium(
+                                "Don't have an account",
+                                fontWeight: 600,
+                              )),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },

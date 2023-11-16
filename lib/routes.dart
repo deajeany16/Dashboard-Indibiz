@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:webui/helper/services/auth_services.dart';
-import 'package:webui/views/sales_screen.dart';
+import 'package:webui/helper/services/auth_service.dart';
 import 'package:webui/views/user_screen.dart';
 import 'package:webui/views/auth/forgot_password_screen.dart';
 import 'package:webui/views/auth/locked_screen.dart';
@@ -30,15 +29,15 @@ getPageRoute() {
         page: () => const ProjectScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: '/datare',
+        name: '/data-re',
         page: () => REScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: '/datapi',
+        name: '/data-pi',
         page: () => PIScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: '/dataps',
+        name: '/data-ps',
         page: () => PSScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
@@ -46,15 +45,11 @@ getPageRoute() {
         page: () => ProjectScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: '/datainputan',
+        name: '/data-inputan',
         page: () => InputanScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: '/user', page: () => UserList(), middlewares: [AuthMiddleware()]),
-    GetPage(
-        name: '/sales',
-        page: () => SalesList(),
-        middlewares: [AuthMiddleware()]),
     //------------------Authentication Screens------------------
     GetPage(name: '/auth/login', page: () => const LoginScreen()),
     GetPage(name: '/auth/sign_up', page: () => const SignUpScreen()),

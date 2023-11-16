@@ -104,6 +104,13 @@ class MyFormValidator {
     return map;
   }
 
+  void setControllerText(String name, String text) {
+    if (_controllers.containsKey(name)) {
+      _controllers[name]?.text = text;
+      _data[name] = text;
+    }
+  }
+
   void resetForm() {
     formKey.currentState?.reset();
   }

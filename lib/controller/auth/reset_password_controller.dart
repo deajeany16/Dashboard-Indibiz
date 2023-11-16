@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webui/controller/my_controller.dart';
-import 'package:webui/helper/services/auth_services.dart';
+import 'package:webui/helper/services/auth_service.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/helper/widgets/my_validators.dart';
 
@@ -36,17 +36,46 @@ class ResetPasswordController extends MyController {
     );
   }
 
+  // Future<void> onLogin() async {
+  //   if (basicValidator.validateForm()) {
+  //     var errors = await AuthService.loginUser(basicValidator.getData());
+  //     if (errors != null) {
+  //       basicValidator.addErrors(errors);
+  //       basicValidator.validateForm();
+  //       basicValidator.clearErrors();
+  //     }
+  //     Get.toNamed('/dashboard');
+  //     update();
+  //   }
+  // }
+
   Future<void> onLogin() async {
-    if (basicValidator.validateForm()) {
-      var errors = await AuthService.loginUser(basicValidator.getData());
-      if (errors != null) {
-        basicValidator.addErrors(errors);
-        basicValidator.validateForm();
-        basicValidator.clearErrors();
+    try {
+      if (basicValidator.validateForm()) {
+        update();
+        var auth = Get.put(AuthService());
+        var login = await auth.login(basicValidator.getData());
+        if (login.statusCode == 401) {
+          basicValidator.addErrors({"Auth Failed": "Gagal"});
+          basicValidator.validateForm();
+          basicValidator.clearErrors();
+        } else {
+          String nextUrl =
+              Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
+                      .queryParameters['next'] ??
+                  "/dashboard";
+          Get.toNamed(
+            nextUrl,
+          );
+        }
       }
-      Get.toNamed('/dashboard');
-      update();
+    } catch (e) {
+      basicValidator.addErrors({"Auth Failed": "failed"});
+      basicValidator.validateForm();
+      basicValidator.clearErrors();
     }
+
+    update();
   }
 
   void select(int select) {

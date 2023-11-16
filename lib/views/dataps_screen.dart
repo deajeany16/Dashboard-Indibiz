@@ -214,11 +214,11 @@ class _PSScreenState extends State<PSScreen>
                                           .mapIndexed(
                                               (index, data) => DataRow(cells: [
                                                     DataCell(MyText.bodyMedium(
-                                                        '${data.id}')),
+                                                        data.orderid)),
                                                     DataCell(MyText.bodyMedium(
                                                         '${data.createdAt}')),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.user)),
+                                                        data.nama)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.namasales)),
                                                     DataCell(MyText.bodyMedium(
@@ -230,15 +230,15 @@ class _PSScreenState extends State<PSScreen>
                                                     DataCell(MyText.bodyMedium(
                                                         data.namaperusahaan)),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.alamatperusahaan)),
+                                                        data.alamat)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.koordinat)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.odp)),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.noHp)),
+                                                        data.nohp)),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.noHp2)),
+                                                        data.nohp2)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.email)),
                                                     DataCell(MyText.bodyMedium(
@@ -248,9 +248,9 @@ class _PSScreenState extends State<PSScreen>
                                                     DataCell(MyText.bodyMedium(
                                                         data.status)),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.ketstatus)),
+                                                        data.ket)),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.ketlain)),
+                                                        data.ketLain)),
                                                   ]))
                                           .toList()),
                                 ),
