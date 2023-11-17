@@ -40,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: MySpacing.all(30),
+                  padding: MySpacing.all(20),
                   child: Row(
                     children: [
                       Image.asset(
@@ -50,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                       ),
                       MyText.bodyLarge(
                         'INDIBIZ KALTENG',
-                        fontSize: 25,
+                        fontSize: 20,
                         textAlign: TextAlign.center,
                         fontWeight: 600,
                       ),
@@ -59,16 +59,16 @@ class _SignUpScreenState extends State<SignUpScreen>
                 ),
                 Divider(),
                 Padding(
-                  padding: MySpacing.xy(50, 30),
+                  padding: MySpacing.xy(50, 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MyText.titleLarge(
                         'SIGN UP',
-                        fontSize: 25,
+                        fontSize: 18,
                         muted: true,
                       ),
-                      MySpacing.height(20),
+                      MySpacing.height(15),
                       MyText.bodyMedium(
                         'Name',
                       ),
@@ -85,7 +85,24 @@ class _SignUpScreenState extends State<SignUpScreen>
                             isCollapsed: true,
                             floatingLabelBehavior: FloatingLabelBehavior.never),
                       ),
-                      MySpacing.height(20),
+                      MySpacing.height(15),
+                      MyText.bodyMedium(
+                        'Username',
+                      ),
+                      MySpacing.height(8),
+                      TextFormField(
+                        validator:
+                            controller.basicValidator.getValidation('username'),
+                        controller:
+                            controller.basicValidator.getController('username'),
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            border: outlineInputBorder,
+                            contentPadding: MySpacing.all(16),
+                            isCollapsed: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never),
+                      ),
+                      MySpacing.height(15),
                       MyText.bodyMedium(
                         'Password',
                       ),
@@ -102,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                             isCollapsed: true,
                             floatingLabelBehavior: FloatingLabelBehavior.never),
                       ),
-                      MySpacing.height(20),
+                      MySpacing.height(15),
                       MyText.bodyMedium(
                         'Hak Akses',
                       ),
@@ -145,7 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                           ],
                         ),
                       ),
-                      MySpacing.height(35),
+                      MySpacing.height(15),
                       Center(
                         child: MyButton.block(
                             elevation: 0,
