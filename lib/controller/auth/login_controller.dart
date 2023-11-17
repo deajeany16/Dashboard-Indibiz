@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/auth_service.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
-import 'package:webui/helper/widgets/my_text_utils.dart';
 import 'package:webui/helper/widgets/my_validators.dart';
 
 class LoginController extends MyController {

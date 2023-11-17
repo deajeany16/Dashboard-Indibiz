@@ -3,7 +3,6 @@ import 'package:webui/controller/inputan_controller.dart';
 import 'package:get/instance_manager.dart';
 import 'package:webui/helper/extensions/extensions.dart';
 import 'package:webui/helper/theme/admin_theme.dart';
-import 'package:webui/helper/theme/app_style.dart';
 import 'package:webui/helper/widgets/my_button.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
