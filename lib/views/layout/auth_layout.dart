@@ -43,12 +43,14 @@ class AuthLayout extends StatelessWidget {
   }
 
   Widget largeScreen(BuildContext context) {
-    return Scaffold(
-      key: controller.scaffoldKey,
-      backgroundColor: Colors.white,
-      body: Container(
-        padding: MySpacing.x(300),
-        child: child,
+    return SelectionArea(
+      child: Scaffold(
+        key: controller.scaffoldKey,
+        backgroundColor: Colors.white,
+        body: Container(
+          padding: MySpacing.x(300),
+          child: child,
+        ),
       ),
     );
   }
