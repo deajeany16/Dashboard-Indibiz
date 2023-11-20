@@ -25,8 +25,55 @@ class AuthService extends ApiClient {
       isLoggedIn = true;
       // var resJson = json.decode(response.body);
       String token = response.body["token"];
+      String hakAkses = response.body["hak_akses"];
       await LocalStorage.setToken(token);
       await LocalStorage.setLoggedInUser(true);
+      await LocalStorage.setHakAkses(hakAkses);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getAllUsersByAdmin() async {
+    try {
+      var token = LocalStorage.getToken();
+      var response = await get(
+        "users/admin",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getAllUsersBySales() async {
+    try {
+      var token = LocalStorage.getToken();
+      var response = await get(
+        "users/sales",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getAllUsersByInputer() async {
+    try {
+      var token = LocalStorage.getToken();
+      var response = await get(
+        "users/inputer",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
       return response;
     } catch (e) {
       rethrow;

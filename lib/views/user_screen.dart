@@ -93,7 +93,7 @@ class _UserListState extends State<UserList>
               GridView.builder(
                 padding: MySpacing.x(20),
                 shrinkWrap: true,
-                itemCount: controller.user.length,
+                itemCount: controller.semuaUser.length,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 400,
                   childAspectRatio: 2.5,
@@ -116,13 +116,13 @@ class _UserListState extends State<UserList>
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 MyText.titleMedium(
-                                  controller.user[index].nama,
+                                  controller.semuaUser[index].nama,
                                   fontWeight: 600,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 // MySpacing.height(8),
                                 MyText.bodyMedium(
-                                  controller.user[index].username,
+                                  controller.semuaUser[index].username,
                                   fontSize: 16,
                                   fontWeight: 500,
                                   muted: true,

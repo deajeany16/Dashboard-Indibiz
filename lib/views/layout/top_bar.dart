@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webui/helper/services/auth_service.dart';
+import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/app_style.dart';
 import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/theme/theme_customizer.dart';
@@ -13,7 +15,6 @@ import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/images.dart';
-import 'package:webui/views/auth/login_screen.dart';
 import 'package:webui/widgets/custom_pop_menu.dart';
 
 class TopBar extends StatefulWidget {
@@ -27,7 +28,7 @@ class TopBar extends StatefulWidget {
 
 class _TopBarState extends State<TopBar>
     with SingleTickerProviderStateMixin, UIMixin {
-  Function? languageHideFn;
+  Function? accountHideFn;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +105,7 @@ class _TopBarState extends State<TopBar>
                 MySpacing.width(4),
                 CustomPopupMenu(
                   backdrop: true,
+                  hideFn: (_) => accountHideFn = _,
                   onChange: (_) {},
                   offsetX: -60,
                   offsetY: 8,
@@ -279,7 +281,11 @@ class _TopBarState extends State<TopBar>
             child: MyButton(
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {
-                Get.off(LoginScreen());
+                AuthService.isLoggedIn = false;
+                LocalStorage.setLoggedInUser(false);
+                LocalStorage.setToken('');
+                Get.offNamed('/auth/login');
+                accountHideFn?.call();
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,
               padding: MySpacing.xy(8, 4),
