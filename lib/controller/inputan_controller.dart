@@ -38,13 +38,13 @@ class InputanController extends MyController {
     inputValidator.addField(
       'datel',
       label: "datel",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
       'sto',
       label: "sto",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
@@ -56,25 +56,25 @@ class InputanController extends MyController {
     inputValidator.addField(
       'alamat',
       label: "alamatPerusahaan",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
       'odp',
       label: "odp",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
       'koordinat',
       label: "koordinat",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
       'nohp',
       label: "noHp",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
@@ -86,7 +86,7 @@ class InputanController extends MyController {
     inputValidator.addField(
       'email',
       label: "email",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
@@ -104,7 +104,7 @@ class InputanController extends MyController {
     inputValidator.addField(
       'ket',
       label: "ketLain",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     editValidator.addField(
@@ -117,182 +117,105 @@ class InputanController extends MyController {
       'namasales',
       label: "Nama Sales",
       required: true,
-      controller: TextEditingController(text: inputan['nama']),
+      controller: TextEditingController(text: inputan['namasales']),
     );
     editValidator.addField(
       'kodesales',
       label: "Kode Sales",
       required: true,
-      controller: TextEditingController(),
+      controller: TextEditingController(text: inputan['kodesales']),
     );
     editValidator.addField(
       'datel',
       label: "datel",
-      required: true,
-      controller: TextEditingController(),
+      required: false,
+      controller: TextEditingController(text: inputan['datel']),
     );
     editValidator.addField(
       'sto',
       label: "sto",
-      required: true,
-      controller: TextEditingController(),
+      required: false,
+      controller: TextEditingController(text: inputan['sto']),
     );
     editValidator.addField(
       'namaperusahaan',
       label: "Nama Perusahaan",
       required: true,
-      controller: TextEditingController(),
+      controller: TextEditingController(text: inputan['namaperusahaan']),
     );
     editValidator.addField(
       'alamat',
       label: "alamatPerusahaan",
-      required: true,
-      controller: TextEditingController(),
+      required: false,
+      controller: TextEditingController(text: inputan['alamat']),
     );
     editValidator.addField(
       'odp',
       label: "odp",
-      required: true,
-      controller: TextEditingController(),
+      required: false,
+      controller: TextEditingController(text: inputan['odp']),
     );
     editValidator.addField(
       'koordinat',
       label: "koordinat",
-      required: true,
-      controller: TextEditingController(),
+      required: false,
+      controller: TextEditingController(text: inputan['koordinat']),
     );
     editValidator.addField(
       'nohp',
       label: "noHp",
-      required: true,
-      controller: TextEditingController(),
+      required: false,
+      controller: TextEditingController(text: inputan['nohp']),
     );
     editValidator.addField(
       'nohp2',
       label: "noHp2",
       required: false,
-      controller: TextEditingController(),
+      controller: TextEditingController(text: inputan['nohp2']),
     );
     editValidator.addField(
       'email',
       label: "email",
-      required: true,
-      controller: TextEditingController(),
+      required: false,
+      controller: TextEditingController(text: inputan['email']),
     );
     editValidator.addField(
       'paket',
       label: "paket",
       required: true,
-      controller: TextEditingController(),
+      controller: TextEditingController(text: inputan['paket']),
     );
     editValidator.addField(
       'nosc',
       label: "nosc",
       required: true,
-      controller: TextEditingController(),
+      controller: TextEditingController(text: inputan['nosc']),
     );
     editValidator.addField(
       'ket',
-      label: "Keterangan Status",
-      required: true,
-      controller: TextEditingController(),
+      label: "Keterangan Lain",
+      required: false,
+      controller: TextEditingController(text: inputan['ket']),
     );
-    // basicValidator.addField(
-    //   'nama',
-    //   label: "Nama Inputer",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'namasales',
-    //   label: "Nama Sales",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'kodesales',
-    //   label: "Kode Sales",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'datel',
-    //   label: "datel",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'sto',
-    //   label: "sto",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'namaperusahaan',
-    //   label: "Nama Perusahaan",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'alamat',
-    //   label: "alamatPerusahaan",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'odp',
-    //   label: "odp",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'koordinat',
-    //   label: "koordinat",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'nohp',
-    //   label: "noHp",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'nohp2',
-    //   label: "noHp2",
-    //   required: false,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'email',
-    //   label: "email",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'paket',
-    //   label: "paket",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'nosc',
-    //   label: "nosc",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
-    // basicValidator.addField(
-    //   'ket',
-    //   label: "ketLain",
-    //   required: true,
-    //   controller: TextEditingController(),
-    // );
   }
 
   Future<void> onEdit() async {
     editValidator.setControllerText('nama', inputan['nama']);
     editValidator.setControllerText('namasales', inputan['namasales']);
     editValidator.setControllerText('kodesales', inputan['kodesales']);
+    editValidator.setControllerText('datel', inputan['datel']);
+    editValidator.setControllerText('sto', inputan['sto']);
+    editValidator.setControllerText(
+        'namaperusahaan', inputan['namaperusahaan']);
+    editValidator.setControllerText('alamat', inputan['alamat']);
+    editValidator.setControllerText('kodesales', inputan['kodesales']);
+    editValidator.setControllerText('odp', inputan['odp']);
+    editValidator.setControllerText('koordinat', inputan['koordinat']);
+    editValidator.setControllerText('nohp', inputan['nohp2']);
+    editValidator.setControllerText('email', inputan['email']);
+    editValidator.setControllerText('paket', inputan['paket']);
+    editValidator.setControllerText('nosc', inputan['nosc']);
+    editValidator.setControllerText('ket', inputan['ket']);
   }
 
   Future<void> getAllOrder() async {
