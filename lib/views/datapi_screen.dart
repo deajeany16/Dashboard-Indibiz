@@ -248,9 +248,9 @@ class _PIScreenState extends State<PIScreen>
                                                     DataCell(MyText.bodyMedium(
                                                         data.status)),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.ket)),
-                                                    DataCell(MyText.bodyMedium(
                                                         data.ketLain)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.ket)),
                                                   ]))
                                           .toList()),
                                 ),
