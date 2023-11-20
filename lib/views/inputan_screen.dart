@@ -255,9 +255,9 @@ class _InputanScreenState extends State<InputanScreen>
                                                 DataCell(MyText.bodyMedium(
                                                     data.status)),
                                                 DataCell(MyText.bodyMedium(
-                                                    data.ket)),
-                                                DataCell(MyText.bodyMedium(
                                                     data.ketLain)),
+                                                DataCell(MyText.bodyMedium(
+                                                    data.ket)),
                                                 DataCell(Row(
                                                   children: [
                                                     IconButton(
