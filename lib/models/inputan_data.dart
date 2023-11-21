@@ -60,8 +60,8 @@ class Inputan {
     String alamat = decoder.getString('alamat');
     String koordinat = decoder.getString('koordinat');
     String odp = decoder.getString('odp');
-    String nohp = decoder.getString('no_hp');
-    String nohp2 = decoder.getString('no_hp2');
+    String nohp = decoder.getString('nohp');
+    String nohp2 = decoder.getString('nohp2');
     String email = decoder.getString('email');
     String paket = decoder.getString('paket');
     String nosc = decoder.getString('nosc');

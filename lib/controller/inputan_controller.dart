@@ -211,7 +211,8 @@ class InputanController extends MyController {
     editValidator.setControllerText('kodesales', inputan['kodesales']);
     editValidator.setControllerText('odp', inputan['odp']);
     editValidator.setControllerText('koordinat', inputan['koordinat']);
-    editValidator.setControllerText('nohp', inputan['nohp2']);
+    editValidator.setControllerText('nohp', inputan['nohp']);
+    editValidator.setControllerText('nohp2', inputan['nohp2']);
     editValidator.setControllerText('email', inputan['email']);
     editValidator.setControllerText('paket', inputan['paket']);
     editValidator.setControllerText('nosc', inputan['nosc']);
