@@ -22,8 +22,8 @@ class Inputan {
       paket,
       nosc,
       status,
-      ket,
-      ketLain;
+      ketstat,
+      ket;
   final DateTime createdAt;
 
   Inputan(
@@ -43,8 +43,8 @@ class Inputan {
       this.paket,
       this.nosc,
       this.status,
+      this.ketstat,
       this.ket,
-      this.ketLain,
       this.createdAt);
 
   static Inputan fromJSON(Map<String, dynamic> json) {
@@ -66,8 +66,8 @@ class Inputan {
     String paket = decoder.getString('paket');
     String nosc = decoder.getString('nosc');
     String status = decoder.getString('status');
+    String ketstat = decoder.getString('ketstat');
     String ket = decoder.getString('ket');
-    String ketLain = decoder.getString('ket_lain');
     DateTime createdAt = decoder.getDateTime('created_at');
 
     return Inputan(
@@ -87,8 +87,8 @@ class Inputan {
         paket,
         nosc,
         status,
+        ketstat,
         ket,
-        ketLain,
         createdAt);
   }
 
