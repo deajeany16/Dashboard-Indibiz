@@ -60,6 +60,48 @@ class OrderService extends ApiClient {
     }
   }
 
+  Future<Response> getPIOrderByAdmin() async {
+    try {
+      var response = await get(
+        "order/admin/pi",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getPSOrderByAdmin() async {
+    try {
+      var response = await get(
+        "order/admin/ps",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getREOrderByAdmin() async {
+    try {
+      var response = await get(
+        "order/admin/re",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<Response> getAllOrderByInputer() async {
     try {
       var response = await get(
@@ -74,10 +116,94 @@ class OrderService extends ApiClient {
     }
   }
 
+  Future<Response> getPIOrderByInputer() async {
+    try {
+      var response = await get(
+        "order/inputer/pi",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getPSOrderByInputer() async {
+    try {
+      var response = await get(
+        "order/inputer/ps",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getREOrderByInputer() async {
+    try {
+      var response = await get(
+        "order/inputer/re",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<Response> getAllOrderBySales() async {
     try {
       var response = await get(
         "order/sales",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getPIOrderBySales() async {
+    try {
+      var response = await get(
+        "order/sales/pi",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getPSOrderBySales() async {
+    try {
+      var response = await get(
+        "order/sales/ps",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> getREOrderBySales() async {
+    try {
+      var response = await get(
+        "order/sales/re",
         headers: {
           'Authorization': 'Bearer $token', //carrier
         },

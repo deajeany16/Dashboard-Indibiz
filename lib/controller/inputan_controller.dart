@@ -3,26 +3,9 @@ import 'package:get/get.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/order_service.dart';
 import 'package:webui/helper/storage/local_storage.dart';
-import 'package:webui/helper/widgets/my_field_validator.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/models/inputan_data.dart';
-import 'package:quickalert/quickalert.dart';
-
-enum Keterangan {
-  re,
-  pi,
-  ps;
-
-  const Keterangan();
-}
-
-class KeteranganValidator extends MyFieldValidatorRule<Keterangan> {
-  @override
-  String? validate(
-      Keterangan? value, bool required, Map<String, dynamic> data) {
-    return null;
-  }
-}
+import 'package:webui/widgets/custom_alert.dart';
 
 class InputanController extends MyController {
   bool isLoading = false;
@@ -123,12 +106,6 @@ class InputanController extends MyController {
       controller: TextEditingController(),
     );
     inputValidator.addField(
-      'ketstat',
-      label: "Keterangan Status",
-      required: true,
-      validators: [KeteranganValidator()],
-    );
-    inputValidator.addField(
       'ket',
       label: "Keterangan Lain",
       required: false,
@@ -219,16 +196,10 @@ class InputanController extends MyController {
       controller: TextEditingController(text: inputan['nosc']),
     );
     editValidator.addField(
-      'ketstat',
-      label: "Keterangan Status",
-      required: true,
-      validators: [KeteranganValidator()],
-    );
-    inputValidator.addField(
       'ket',
       label: "Keterangan Lain",
       required: false,
-      controller: TextEditingController(),
+      controller: TextEditingController(text: inputan['ket']),
     );
   }
 
@@ -249,7 +220,6 @@ class InputanController extends MyController {
     editValidator.setControllerText('email', inputan['email']);
     editValidator.setControllerText('paket', inputan['paket']);
     editValidator.setControllerText('nosc', inputan['nosc']);
-    editValidator.setControllerText('ketstat', inputan['ketstat']);
     editValidator.setControllerText('ket', inputan['ket']);
   }
 
@@ -269,21 +239,21 @@ class InputanController extends MyController {
         case "sales":
           orders = await orderService.getAllOrderBySales();
           break;
-        default:
-          orders = await orderService.getAllOrderByAdmin();
       }
       if (orders.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        update();
       } else {
         semuaInputan = Inputan.listFromJSON(orders.body);
         update();
       }
     } catch (e) {
-      QuickAlert.show(
+      Get.dialog(CustomAlert(
         context: Get.context!,
-        type: QuickAlertType.error,
+        title: 'Error',
         text: e.toString(),
-      );
+        confirmBtnText: 'Okay',
+      ));
     }
   }
 
@@ -303,32 +273,26 @@ class InputanController extends MyController {
         case "sales":
           order = await orderService.getOrderBySales(id);
           break;
-        default:
-          order = await orderService.getOrderByAdmin(id);
       }
       if (order.statusCode == 401) {
-        String nextUrl =
-            Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
-                    .queryParameters['next'] ??
-                "/login";
-        Get.toNamed(
-          nextUrl,
-        );
+        LocalStorage.setLoggedInUser(false);
+        update();
       } else {
         inputan = order.body;
         isLoading = false;
         update();
       }
     } catch (e) {
-      QuickAlert.show(
+      Get.dialog(CustomAlert(
         context: Get.context!,
-        type: QuickAlertType.error,
+        title: 'Error',
         text: e.toString(),
-      );
+        confirmBtnText: 'Okay',
+      ));
     }
   }
 
-  Future<void> addOrder(context) async {
+  Future<void> addOrder() async {
     try {
       if (inputValidator.validateForm()) {
         update();
@@ -346,28 +310,30 @@ class InputanController extends MyController {
             break;
         }
         if (order.statusCode == 200) {
-          Navigator.pop(context);
-          QuickAlert.show(
-            context: context,
-            type: QuickAlertType.success,
+          Get.back();
+          Get.dialog(CustomAlert(
+            context: Get.context!,
+            title: 'Berhasil',
             text: 'Data Berhasil Diinput',
-          );
+            confirmBtnText: 'Okay',
+          ));
           inputValidator.resetForm();
           getAllOrder();
         }
       }
     } catch (e) {
-      QuickAlert.show(
+      Get.dialog(CustomAlert(
         context: Get.context!,
-        type: QuickAlertType.error,
+        title: 'Error',
         text: e.toString(),
-      );
+        confirmBtnText: 'Okay',
+      ));
     }
 
     update();
   }
 
-  Future<void> editOrder(context) async {
+  Future<void> editOrder() async {
     try {
       if (editValidator.validateForm()) {
         update();
@@ -383,35 +349,26 @@ class InputanController extends MyController {
             order = await orderService.editOrderByInputer(
                 editValidator.getData(), inputan['orderid']);
             break;
-          default:
-            order = await orderService.editOrderByAdmin(
-                editValidator.getData(), inputan['orderid']);
         }
         if (order.statusCode == 200) {
-          Navigator.pop(context);
-          Get.defaultDialog(
-              title: "Sukses",
-              middleText: "Data telah diedit",
-              backgroundColor: Colors.teal,
-              titleStyle: TextStyle(color: Colors.white),
-              middleTextStyle: TextStyle(color: Colors.white),
-              radius: 30);
+          Get.back();
+          Get.dialog(CustomAlert(
+            context: Get.context!,
+            title: 'Berhasil',
+            text: 'Data Berhasil Diedit',
+            confirmBtnText: 'Okay',
+          ));
           editValidator.resetForm();
           getAllOrder();
         }
-      } else {
-        editValidator.addErrors({"isi": "isi"});
-        editValidator.validateForm();
-        editValidator.clearErrors();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      Get.dialog(CustomAlert(
+        context: Get.context!,
+        title: 'Error',
+        text: e.toString(),
+        confirmBtnText: 'Okay',
+      ));
     }
 
     update();
@@ -430,23 +387,24 @@ class InputanController extends MyController {
         case "inputer":
           order = await orderService.deleteOrderByInputer(id);
           break;
-        default:
-          order = await orderService.deleteOrderByAdmin(id);
       }
       if (order.statusCode == 200) {
-        QuickAlert.show(
+        Get.back();
+        Get.dialog(CustomAlert(
           context: Get.context!,
-          type: QuickAlertType.success,
+          title: 'Berhasil',
           text: 'Data Telah Dihapus',
-        );
+          confirmBtnText: 'Okay',
+        ));
         getAllOrder();
       }
     } catch (e) {
-      QuickAlert.show(
+      Get.dialog(CustomAlert(
         context: Get.context!,
-        type: QuickAlertType.error,
+        title: 'Error',
         text: e.toString(),
-      );
+        confirmBtnText: 'Okay',
+      ));
     }
 
     update();

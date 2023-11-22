@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/instance_manager.dart';
+import 'package:webui/app_constant.dart';
 import 'package:webui/controller/inputan_controller.dart';
 import 'package:webui/helper/extensions/string.dart';
 import 'package:webui/helper/storage/local_storage.dart';
@@ -18,6 +19,7 @@ import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
+import 'package:webui/widgets/custom_alert.dart';
 import 'package:webui/widgets/custom_input_dialog.dart';
 
 class InputanScreen extends StatefulWidget {
@@ -33,9 +35,17 @@ class _InputanScreenState extends State<InputanScreen>
 
   @override
   void initState() {
-    controller = Get.put(InputanController());
     super.initState();
+    Get.delete<InputanController>();
+    controller = Get.put(InputanController());
   }
+
+  // @override
+  // void dispose() {
+  //   Get.delete<InputanController>();
+  //   super.dispose();
+  //   // LeftbarObserver.detachListener(widget.title);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -222,96 +232,136 @@ class _InputanScreenState extends State<InputanScreen>
                                       )),
                                   ],
                                   rows: controller.semuaInputan
-                                      .mapIndexed((index, data) => DataRow(
-                                              onSelectChanged: (_) {},
-                                              cells: [
-                                                DataCell(MyText.bodyMedium(
-                                                    '${index + 1}')),
-                                                DataCell(MyText.bodyMedium(
-                                                    '${data.createdAt}')),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.nama)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.namasales)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.kodesales)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.datel)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.sto)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.namaperusahaan)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.alamat)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.koordinat)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.odp)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.nohp)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.nohp2)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.email)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.paket)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.nosc)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.status)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.ketstat)),
-                                                DataCell(MyText.bodyMedium(
-                                                    data.ket)),
-                                                if (hakAkses == 'admin' ||
-                                                    hakAkses == 'inputer')
-                                                  DataCell(Row(
-                                                    children: [
-                                                      IconButton(
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          onPressed: () async {
-                                                            await controller
-                                                                .getOrder(data
-                                                                    .orderid);
-                                                            await controller
-                                                                .onEdit();
-                                                            if (mounted) {
-                                                              showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder: (context) => CustomInputDialog(
-                                                                      title:
-                                                                          "Edit Order",
-                                                                      outlineInputBorder:
-                                                                          outlineInputBorder,
-                                                                      focusedInputBorder:
-                                                                          focusedInputBorder,
-                                                                      contentTheme:
-                                                                          contentTheme));
-                                                            }
-                                                          },
-                                                          icon: Icon(
-                                                            Icons.edit,
-                                                            color: theme
-                                                                .primaryColor,
-                                                          )),
-                                                      IconButton(
-                                                          onPressed: () {
-                                                            // if (Form.of(context).validate()) {
-                                                            // Process form submission
-                                                            controller
-                                                                .deleteOrder(data
-                                                                    .orderid);
-                                                            // }
-                                                          },
-                                                          icon: Icon(
-                                                              Icons.delete,
-                                                              color:
-                                                                  Colors.red))
-                                                    ],
-                                                  )),
-                                              ]))
+                                      .mapIndexed(
+                                          (index, data) => DataRow(
+                                                  onSelectChanged: (_) {},
+                                                  cells: [
+                                                    DataCell(MyText.bodyMedium(
+                                                        '${index + 1}')),
+                                                    DataCell(MyText.bodyMedium(
+                                                        dateFormatter.format(
+                                                            data.createdAt))),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.nama)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.namasales)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.kodesales)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.datel)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.sto)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.namaperusahaan)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.alamat)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.koordinat)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.odp)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.nohp)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.nohp2)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.email)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.paket)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.nosc)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.status)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.ketstat)),
+                                                    DataCell(MyText.bodyMedium(
+                                                        data.ket)),
+                                                    if (hakAkses == 'admin' ||
+                                                        hakAkses == 'inputer')
+                                                      DataCell(Row(
+                                                        children: [
+                                                          IconButton(
+                                                              splashRadius: 30,
+                                                              onPressed:
+                                                                  () async {
+                                                                await controller
+                                                                    .getOrder(data
+                                                                        .orderid);
+                                                                await controller
+                                                                    .onEdit();
+                                                                if (mounted) {
+                                                                  showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder: (context) => CustomInputDialog(
+                                                                          title:
+                                                                              "Edit Order",
+                                                                          outlineInputBorder:
+                                                                              outlineInputBorder,
+                                                                          focusedInputBorder:
+                                                                              focusedInputBorder,
+                                                                          contentTheme:
+                                                                              contentTheme));
+                                                                }
+                                                              },
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .edit_document,
+                                                                color: theme
+                                                                    .primaryColor,
+                                                              )),
+                                                          IconButton(
+                                                              splashRadius: 30,
+                                                              onPressed: () {
+                                                                showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) =>
+                                                                            CustomAlert(
+                                                                              context: context,
+                                                                              title: 'Hapus Data?',
+                                                                              text: 'Anda Yakin Ingin Menghapus Data?',
+                                                                              confirmBtnColor: theme.colorScheme.error,
+                                                                              showCancelText: true,
+                                                                              onConfirmBtnTap: () => controller.deleteOrder(data.orderid),
+                                                                            ));
+
+                                                                //   QuickAlert.show(
+                                                                //       context:
+                                                                //           context,
+                                                                //       type:
+                                                                //           QuickAlertType
+                                                                //               .confirm,
+                                                                //       width: 300,
+                                                                //       confirmBtnText:
+                                                                //           'Yes',
+                                                                //       cancelBtnText:
+                                                                //           'No',
+                                                                //       title:
+                                                                //           'Hapus Data?',
+                                                                //       text:
+                                                                //           'Anda Yakin Ingin Menghapus Data?',
+                                                                //       confirmBtnColor:
+                                                                //           AppTheme
+                                                                //               .theme
+                                                                //               .primaryColor,
+                                                                //       borderRadius: 8,
+                                                                //       onConfirmBtnTap:
+                                                                //           () => controller
+                                                                //               .deleteOrder(data
+                                                                //                   .orderid),
+                                                                //       onCancelBtnTap:
+                                                                //           () => Navigator
+                                                                //               .pop(
+                                                                //                   context));
+                                                              },
+                                                              icon: Icon(
+                                                                  Icons.delete,
+                                                                  color: Colors
+                                                                      .red))
+                                                        ],
+                                                      )),
+                                                  ]))
                                       .toList()),
                             ),
                           ),

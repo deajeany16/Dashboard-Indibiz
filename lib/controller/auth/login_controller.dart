@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quickalert/quickalert.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/auth_service.dart';
-import 'package:webui/helper/theme/admin_theme.dart';
-import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/helper/widgets/my_validators.dart';
-import 'package:webui/helper/utils/ui_mixins.dart';
+import 'package:webui/widgets/custom_alert.dart';
 
 class LoginController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -70,12 +67,11 @@ class LoginController extends MyController {
         }
       }
     } catch (e) {
-      QuickAlert.show(
+      Get.dialog(CustomAlert(
         context: Get.context!,
-        type: QuickAlertType.error,
+        title: 'Error',
         text: e.toString(),
-      );
-      basicValidator.addErrors({"Auth Failed": "failed"});
+      ));
       basicValidator.validateForm();
       basicValidator.clearErrors();
     }

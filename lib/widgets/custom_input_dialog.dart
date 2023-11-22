@@ -28,12 +28,12 @@ class CustomInputDialog extends StatelessWidget {
       // scrollable: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       // titlePadding: MySpacing.xy(16, 12),
-      insetPadding: MySpacing.xy(200, 100),
+      insetPadding: MySpacing.xy(150, 100),
       // actionsAlignment: MainAxisAlignment.end,
       // actionsPadding: MySpacing.xy(250, 16),
       // contentPadding: MySpacing.x(16),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(32.0),
         child: Form(
           key: title == "Tambah Order"
               ? controller.inputValidator.formKey
@@ -379,43 +379,6 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(25),
               MyText.labelMedium(
-                "Keterangan".tr().capitalizeWords,
-              ),
-              MySpacing.height(8),
-              DropdownButtonFormField<Keterangan>(
-                  dropdownColor: contentTheme.background,
-                  menuMaxHeight: 200,
-                  padding: EdgeInsets.all(10),
-                  items: Keterangan.values
-                      .map((keterangan) => DropdownMenuItem<Keterangan>(
-                          value: keterangan,
-                          child: MyText.labelMedium(
-                            keterangan.name.capitalizeWords,
-                          )))
-                      .toList(),
-                  icon: Icon(
-                    Icons.expand_more,
-                    size: 20,
-                  ),
-                  decoration: InputDecoration(
-                      hintText: "Pilih Keterangan",
-                      hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                      border: outlineInputBorder,
-                      enabledBorder: outlineInputBorder,
-                      focusedBorder: focusedInputBorder,
-                      contentPadding: MySpacing.all(16),
-                      isCollapsed: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
-                  onChanged: title == "Tambah Order"
-                      ? controller.inputValidator.onChanged<Object?>('ketstat')
-                      : controller.editValidator.onChanged<Object?>('ketstat'),
-                  validator: title == "Tambah Order"
-                      ? controller.inputValidator
-                          .getValidation<Keterangan?>('ketstat')
-                      : controller.editValidator
-                          .getValidation<Keterangan?>('ketstat')),
-              MySpacing.height(25),
-              MyText.labelMedium(
                 "Keterangan Lain".tr().capitalizeWords,
               ),
               MySpacing.height(8),
@@ -459,9 +422,9 @@ class CustomInputDialog extends StatelessWidget {
                     MyButton.rounded(
                       onPressed: () async {
                         if (title == "Tambah Order") {
-                          await controller.addOrder(context);
+                          await controller.addOrder();
                         } else {
-                          await controller.editOrder(context);
+                          await controller.editOrder();
                         }
                       },
                       elevation: 0,

@@ -94,7 +94,7 @@ class _ComingSoonScreenState extends State<ComingSoonScreen>
                           paddingAll: 0,
                           child: Center(
                               child: MyText.titleLarge(
-                            '$days',
+                            days,
                             fontSize: 32,
                           )),
                         ),
