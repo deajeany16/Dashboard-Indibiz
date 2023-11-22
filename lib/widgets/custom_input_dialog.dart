@@ -379,6 +379,43 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(25),
               MyText.labelMedium(
+                "Keterangan".tr().capitalizeWords,
+              ),
+              MySpacing.height(8),
+              DropdownButtonFormField<Keterangan>(
+                  dropdownColor: contentTheme.background,
+                  menuMaxHeight: 200,
+                  padding: EdgeInsets.all(10),
+                  items: Keterangan.values
+                      .map((keterangan) => DropdownMenuItem<Keterangan>(
+                          value: keterangan,
+                          child: MyText.labelMedium(
+                            keterangan.name.capitalizeWords,
+                          )))
+                      .toList(),
+                  icon: Icon(
+                    Icons.expand_more,
+                    size: 20,
+                  ),
+                  decoration: InputDecoration(
+                      hintText: "Pilih Keterangan",
+                      hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                      border: outlineInputBorder,
+                      enabledBorder: outlineInputBorder,
+                      focusedBorder: focusedInputBorder,
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                  onChanged: title == "Tambah Order"
+                      ? controller.inputValidator.onChanged<Object?>('ketstat')
+                      : controller.editValidator.onChanged<Object?>('ketstat'),
+                  validator: title == "Tambah Order"
+                      ? controller.inputValidator
+                          .getValidation<Keterangan?>('ketstat')
+                      : controller.editValidator
+                          .getValidation<Keterangan?>('ketstat')),
+              MySpacing.height(25),
+              MyText.labelMedium(
                 "Keterangan Lain".tr().capitalizeWords,
               ),
               MySpacing.height(8),

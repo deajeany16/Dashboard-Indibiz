@@ -60,6 +60,7 @@ dependencies:
   syncfusion_flutter_maps: ^22.2.12
   intl: ^0.18.1
   flutter_native_splash: ^2.3.5
+  quickalert: ^1.0.2
 
 
 

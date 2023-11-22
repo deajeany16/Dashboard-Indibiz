@@ -14,6 +14,7 @@ import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/theme/theme_customizer.dart';
 import 'package:webui/routes.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:webui/views/error_pages/error_404.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +44,10 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeCustomizer.instance.theme,
           navigatorKey: NavigationService.navigatorKey,
+          unknownRoute: GetPage(
+              name: '/notfound',
+              page: () => (Error404()),
+              middlewares: [AuthMiddleware()]),
           initialRoute: "/dashboard",
           getPages: getPageRoute(),
           builder: (_, child) {

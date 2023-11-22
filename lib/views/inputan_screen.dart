@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/instance_manager.dart';
 import 'package:webui/controller/inputan_controller.dart';
 import 'package:webui/helper/extensions/string.dart';
+import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/app_style.dart';
 import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
@@ -38,6 +39,7 @@ class _InputanScreenState extends State<InputanScreen>
 
   @override
   Widget build(BuildContext context) {
+    String? hakAkses = LocalStorage.getHakAkses();
     return Layout(
         child: GetBuilder<InputanController>(
             init: controller,
@@ -72,34 +74,35 @@ class _InputanScreenState extends State<InputanScreen>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          MyButton(
-                            onPressed: () => showDialog(
-                                context: context,
-                                builder: (context) => CustomInputDialog(
-                                    title: "Tambah Order",
-                                    outlineInputBorder: outlineInputBorder,
-                                    focusedInputBorder: focusedInputBorder,
-                                    contentTheme: contentTheme)),
-                            elevation: 0,
-                            padding: MySpacing.xy(20, 16),
-                            backgroundColor: contentTheme.primary,
-                            borderRadiusAll: AppStyle.buttonRadius.medium,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.add_outlined,
-                                  size: 20,
-                                  color: contentTheme.onPrimary,
-                                ),
-                                MySpacing.width(8),
-                                MyText.labelMedium(
-                                  'Tambah Data'.tr().capitalizeWords,
-                                  color: contentTheme.onPrimary,
-                                ),
-                              ],
+                          if (hakAkses == 'admin' || hakAkses == 'inputer')
+                            MyButton(
+                              onPressed: () => showDialog(
+                                  context: context,
+                                  builder: (context) => CustomInputDialog(
+                                      title: "Tambah Order",
+                                      outlineInputBorder: outlineInputBorder,
+                                      focusedInputBorder: focusedInputBorder,
+                                      contentTheme: contentTheme)),
+                              elevation: 0,
+                              padding: MySpacing.xy(20, 16),
+                              backgroundColor: contentTheme.primary,
+                              borderRadiusAll: AppStyle.buttonRadius.medium,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.add_outlined,
+                                    size: 20,
+                                    color: contentTheme.onPrimary,
+                                  ),
+                                  MySpacing.width(8),
+                                  MyText.labelMedium(
+                                    'Tambah Data'.tr().capitalizeWords,
+                                    color: contentTheme.onPrimary,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
                           MySpacing.height(16),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
@@ -210,11 +213,13 @@ class _InputanScreenState extends State<InputanScreen>
                                       'Keterangan Lain'.tr().capitalizeWords,
                                       color: contentTheme.primary,
                                     )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Aksi'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
-                                    )),
+                                    if (hakAkses == 'admin' ||
+                                        hakAkses == 'inputer')
+                                      DataColumn(
+                                          label: MyText.labelLarge(
+                                        'Aksi'.tr().capitalizeWords,
+                                        color: contentTheme.primary,
+                                      )),
                                   ],
                                   rows: controller.semuaInputan
                                       .mapIndexed((index, data) => DataRow(
@@ -255,53 +260,57 @@ class _InputanScreenState extends State<InputanScreen>
                                                 DataCell(MyText.bodyMedium(
                                                     data.status)),
                                                 DataCell(MyText.bodyMedium(
-                                                    data.ketLain)),
+                                                    data.ketstat)),
                                                 DataCell(MyText.bodyMedium(
                                                     data.ket)),
-                                                DataCell(Row(
-                                                  children: [
-                                                    IconButton(
-                                                        hoverColor:
-                                                            Colors.transparent,
-                                                        onPressed: () async {
-                                                          await controller
-                                                              .getOrder(
-                                                                  data.orderid);
-                                                          await controller
-                                                              .onEdit();
-                                                          if (mounted) {
-                                                            showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder: (context) => CustomInputDialog(
-                                                                    title:
-                                                                        "Edit Order",
-                                                                    outlineInputBorder:
-                                                                        outlineInputBorder,
-                                                                    focusedInputBorder:
-                                                                        focusedInputBorder,
-                                                                    contentTheme:
-                                                                        contentTheme));
-                                                          }
-                                                        },
-                                                        icon: Icon(
-                                                          Icons.edit,
-                                                          color: theme
-                                                              .primaryColor,
-                                                        )),
-                                                    IconButton(
-                                                        onPressed: () {
-                                                          // if (Form.of(context).validate()) {
-                                                          // Process form submission
-                                                          controller
-                                                              .deleteOrder(
-                                                                  data.orderid);
-                                                          // }
-                                                        },
-                                                        icon: Icon(Icons.delete,
-                                                            color: Colors.red))
-                                                  ],
-                                                )),
+                                                if (hakAkses == 'admin' ||
+                                                    hakAkses == 'inputer')
+                                                  DataCell(Row(
+                                                    children: [
+                                                      IconButton(
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .getOrder(data
+                                                                    .orderid);
+                                                            await controller
+                                                                .onEdit();
+                                                            if (mounted) {
+                                                              showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder: (context) => CustomInputDialog(
+                                                                      title:
+                                                                          "Edit Order",
+                                                                      outlineInputBorder:
+                                                                          outlineInputBorder,
+                                                                      focusedInputBorder:
+                                                                          focusedInputBorder,
+                                                                      contentTheme:
+                                                                          contentTheme));
+                                                            }
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.edit,
+                                                            color: theme
+                                                                .primaryColor,
+                                                          )),
+                                                      IconButton(
+                                                          onPressed: () {
+                                                            // if (Form.of(context).validate()) {
+                                                            // Process form submission
+                                                            controller
+                                                                .deleteOrder(data
+                                                                    .orderid);
+                                                            // }
+                                                          },
+                                                          icon: Icon(
+                                                              Icons.delete,
+                                                              color:
+                                                                  Colors.red))
+                                                    ],
+                                                  )),
                                               ]))
                                       .toList()),
                             ),

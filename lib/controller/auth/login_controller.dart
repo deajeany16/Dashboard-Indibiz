@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/auth_service.dart';
+import 'package:webui/helper/theme/admin_theme.dart';
+import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/helper/widgets/my_validators.dart';
+import 'package:webui/helper/utils/ui_mixins.dart';
 
 class LoginController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -50,11 +54,7 @@ class LoginController extends MyController {
         update();
         var authService = Get.put(AuthService());
         var login = await authService.login(basicValidator.getData());
-        if (login.statusCode == 401) {
-          basicValidator.addErrors({"Auth Failed": "Gagal"});
-          basicValidator.validateForm();
-          basicValidator.clearErrors();
-        } else {
+        if (login.statusCode == 200) {
           String nextUrl =
               Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
                       .queryParameters['next'] ??
@@ -62,16 +62,19 @@ class LoginController extends MyController {
           Get.toNamed(
             nextUrl,
           );
+        } else {
+          basicValidator.addErrors({"username": "Username / Password Salah"});
+          basicValidator.addErrors({"pass": "Username / Password Salah"});
+          basicValidator.validateForm();
+          basicValidator.clearErrors();
         }
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      QuickAlert.show(
+        context: Get.context!,
+        type: QuickAlertType.error,
+        text: e.toString(),
+      );
       basicValidator.addErrors({"Auth Failed": "failed"});
       basicValidator.validateForm();
       basicValidator.clearErrors();

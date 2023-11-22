@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:webui/controller/inputan_controller.dart';
 import 'package:webui/helper/widgets/my_field_validator.dart';
 
 class MyFormValidator {
@@ -95,9 +96,23 @@ class MyFormValidator {
     var map = {
       ..._data,
     };
+
     for (var key in _controllers.keys) {
       if (_controllers[key]?.text != null) {
         map[key] = _controllers[key]!.text;
+      }
+    }
+
+    for (var key in _data.keys) {
+      if (_data[key] is List<String>) {
+        // Handle DropdownButtonFormField
+        map[key] = _data[key].isEmpty ? null : _data[key].first;
+      } else if (_data[key] is Keterangan) {
+        // Handle enum type
+        map[key] = _data[key]
+            ?.toString()
+            .split('.')[1]
+            .capitalize; // Get the enum value
       }
     }
 

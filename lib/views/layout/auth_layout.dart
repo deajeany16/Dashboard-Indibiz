@@ -47,9 +47,14 @@ class AuthLayout extends StatelessWidget {
       child: Scaffold(
         key: controller.scaffoldKey,
         backgroundColor: Colors.white,
-        body: Container(
-          padding: MySpacing.x(300),
-          child: child,
+        body: SingleChildScrollView(
+          key: controller.scrollKey,
+          child: Center(
+            child: SizedBox(
+              width: 500,
+              child: child,
+            ),
+          ),
         ),
       ),
     );

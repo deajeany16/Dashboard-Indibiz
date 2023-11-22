@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen>
                           decoration: InputDecoration(
                               border: outlineInputBorder,
                               prefixIcon: const Icon(
-                                Icons.mail,
+                                Icons.person,
                                 size: 20,
                               ),
                               labelText: "Username",

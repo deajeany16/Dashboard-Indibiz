@@ -3,8 +3,26 @@ import 'package:get/get.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/order_service.dart';
 import 'package:webui/helper/storage/local_storage.dart';
+import 'package:webui/helper/widgets/my_field_validator.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/models/inputan_data.dart';
+import 'package:quickalert/quickalert.dart';
+
+enum Keterangan {
+  re,
+  pi,
+  ps;
+
+  const Keterangan();
+}
+
+class KeteranganValidator extends MyFieldValidatorRule<Keterangan> {
+  @override
+  String? validate(
+      Keterangan? value, bool required, Map<String, dynamic> data) {
+    return null;
+  }
+}
 
 class InputanController extends MyController {
   bool isLoading = false;
@@ -17,6 +35,9 @@ class InputanController extends MyController {
   void onInit() {
     super.onInit();
     getAllOrder();
+  }
+
+  InputanController() {
     inputValidator.addField(
       'nama',
       label: "Nama Inputer",
@@ -102,8 +123,14 @@ class InputanController extends MyController {
       controller: TextEditingController(),
     );
     inputValidator.addField(
+      'ketstat',
+      label: "Keterangan Status",
+      required: true,
+      validators: [KeteranganValidator()],
+    );
+    inputValidator.addField(
       'ket',
-      label: "ketLain",
+      label: "Keterangan Lain",
       required: false,
       controller: TextEditingController(),
     );
@@ -192,10 +219,16 @@ class InputanController extends MyController {
       controller: TextEditingController(text: inputan['nosc']),
     );
     editValidator.addField(
+      'ketstat',
+      label: "Keterangan Status",
+      required: true,
+      validators: [KeteranganValidator()],
+    );
+    inputValidator.addField(
       'ket',
       label: "Keterangan Lain",
       required: false,
-      controller: TextEditingController(text: inputan['ket']),
+      controller: TextEditingController(),
     );
   }
 
@@ -215,6 +248,7 @@ class InputanController extends MyController {
     editValidator.setControllerText('email', inputan['email']);
     editValidator.setControllerText('paket', inputan['paket']);
     editValidator.setControllerText('nosc', inputan['nosc']);
+    editValidator.setControllerText('ketstat', inputan['ketstat']);
     editValidator.setControllerText('ket', inputan['ket']);
   }
 
@@ -238,25 +272,17 @@ class InputanController extends MyController {
           orders = await orderService.getAllOrderByAdmin();
       }
       if (orders.statusCode == 401) {
-        String nextUrl =
-            Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
-                    .queryParameters['next'] ??
-                "/login";
-        Get.toNamed(
-          nextUrl,
-        );
+        LocalStorage.setLoggedInUser(false);
       } else {
         semuaInputan = Inputan.listFromJSON(orders.body);
         update();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      QuickAlert.show(
+        context: Get.context!,
+        type: QuickAlertType.error,
+        text: e.toString(),
+      );
     }
   }
 
@@ -293,13 +319,11 @@ class InputanController extends MyController {
         update();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      QuickAlert.show(
+        context: Get.context!,
+        type: QuickAlertType.error,
+        text: e.toString(),
+      );
     }
   }
 
@@ -319,35 +343,24 @@ class InputanController extends MyController {
             order =
                 await orderService.addOrderByInputer(inputValidator.getData());
             break;
-          default:
-            order =
-                await orderService.addOrderByAdmin(inputValidator.getData());
         }
         if (order.statusCode == 200) {
           Navigator.pop(context);
-          Get.defaultDialog(
-              title: "Sukses",
-              middleText: "Data telah diinput",
-              backgroundColor: Colors.teal,
-              titleStyle: TextStyle(color: Colors.white),
-              middleTextStyle: TextStyle(color: Colors.white),
-              radius: 30);
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.success,
+            text: 'Data Berhasil Diinput',
+          );
           inputValidator.resetForm();
           getAllOrder();
         }
-      } else {
-        inputValidator.addErrors({"isi": "isi"});
-        inputValidator.validateForm();
-        inputValidator.clearErrors();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      QuickAlert.show(
+        context: Get.context!,
+        type: QuickAlertType.error,
+        text: e.toString(),
+      );
     }
 
     update();
@@ -420,23 +433,19 @@ class InputanController extends MyController {
           order = await orderService.deleteOrderByAdmin(id);
       }
       if (order.statusCode == 200) {
-        Get.defaultDialog(
-            title: "Sukses",
-            middleText: "Data telah dihapus",
-            backgroundColor: Colors.teal,
-            titleStyle: TextStyle(color: Colors.white),
-            middleTextStyle: TextStyle(color: Colors.white),
-            radius: 30);
+        QuickAlert.show(
+          context: Get.context!,
+          type: QuickAlertType.success,
+          text: 'Data Telah Dihapus',
+        );
         getAllOrder();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      QuickAlert.show(
+        context: Get.context!,
+        type: QuickAlertType.error,
+        text: e.toString(),
+      );
     }
 
     update();

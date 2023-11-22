@@ -25,10 +25,6 @@ class AuthMiddleware extends GetMiddleware {
 getPageRoute() {
   var routes = [
     GetPage(
-        name: '/',
-        page: () => const ProjectScreen(),
-        middlewares: [AuthMiddleware()]),
-    GetPage(
         name: '/data-re',
         page: () => REScreen(),
         middlewares: [AuthMiddleware()]),

@@ -248,7 +248,7 @@ class _PSScreenState extends State<PSScreen>
                                                     DataCell(MyText.bodyMedium(
                                                         data.status)),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.ketLain)),
+                                                        data.ketstat)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.ket)),
                                                   ]))
