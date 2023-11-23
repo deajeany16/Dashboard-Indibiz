@@ -87,7 +87,7 @@ class _PIScreenState extends State<PIScreen>
                                         focusedInputBorder: focusedInputBorder,
                                         contentTheme: contentTheme,
                                         validator: controller.inputValidator,
-                                        submit: controller.addOrder(),
+                                        submit: () => controller.addOrder(),
                                       )),
                               elevation: 0,
                               padding: MySpacing.xy(20, 16),
@@ -308,7 +308,7 @@ class _PIScreenState extends State<PIScreen>
                                                                                 focusedInputBorder: focusedInputBorder,
                                                                                 contentTheme: contentTheme,
                                                                                 validator: controller.editValidator,
-                                                                                submit: controller.editOrder(),
+                                                                                submit: () => controller.editOrder(),
                                                                               ));
                                                                 }
                                                               },

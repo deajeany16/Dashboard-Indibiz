@@ -40,13 +40,6 @@ class _InputanScreenState extends State<InputanScreen>
     controller = Get.put(InputanController());
   }
 
-  // @override
-  // void dispose() {
-  //   Get.delete<InputanController>();
-  //   super.dispose();
-  //   // LeftbarObserver.detachListener(widget.title);
-  // }
-
   @override
   Widget build(BuildContext context) {
     String? hakAkses = LocalStorage.getHakAkses();
@@ -94,7 +87,7 @@ class _InputanScreenState extends State<InputanScreen>
                                         focusedInputBorder: focusedInputBorder,
                                         contentTheme: contentTheme,
                                         validator: controller.inputValidator,
-                                        submit: controller.addOrder(),
+                                        submit: () => controller.addOrder(),
                                       )),
                               elevation: 0,
                               padding: MySpacing.xy(20, 16),
@@ -304,7 +297,7 @@ class _InputanScreenState extends State<InputanScreen>
                                                                 await controller
                                                                     .onEdit();
                                                                 if (mounted) {
-                                                                  showDialog(
+                                                                  await showDialog(
                                                                       context:
                                                                           context,
                                                                       builder:
@@ -315,7 +308,7 @@ class _InputanScreenState extends State<InputanScreen>
                                                                                 focusedInputBorder: focusedInputBorder,
                                                                                 contentTheme: contentTheme,
                                                                                 validator: controller.editValidator,
-                                                                                submit: controller.editOrder(),
+                                                                                submit: () => controller.editOrder(),
                                                                               ));
                                                                 }
                                                               },

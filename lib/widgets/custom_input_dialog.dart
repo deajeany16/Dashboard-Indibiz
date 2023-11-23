@@ -22,7 +22,7 @@ class CustomInputDialog extends StatelessWidget {
   final ContentTheme contentTheme;
   final String title;
   final MyFormValidator validator;
-  final Future submit;
+  final Future Function() submit;
 
   @override
   Widget build(BuildContext context) {
@@ -361,7 +361,7 @@ class CustomInputDialog extends StatelessWidget {
                     MySpacing.width(16),
                     MyButton.rounded(
                       onPressed: () async {
-                        submit;
+                        submit();
                       },
                       elevation: 0,
                       padding: MySpacing.xy(20, 16),
