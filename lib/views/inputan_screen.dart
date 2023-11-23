@@ -89,10 +89,13 @@ class _InputanScreenState extends State<InputanScreen>
                               onPressed: () => showDialog(
                                   context: context,
                                   builder: (context) => CustomInputDialog(
-                                      title: "Tambah Order",
-                                      outlineInputBorder: outlineInputBorder,
-                                      focusedInputBorder: focusedInputBorder,
-                                      contentTheme: contentTheme)),
+                                        title: "Tambah Order",
+                                        outlineInputBorder: outlineInputBorder,
+                                        focusedInputBorder: focusedInputBorder,
+                                        contentTheme: contentTheme,
+                                        validator: controller.inputValidator,
+                                        submit: controller.addOrder(),
+                                      )),
                               elevation: 0,
                               padding: MySpacing.xy(20, 16),
                               backgroundColor: contentTheme.primary,
@@ -251,10 +254,16 @@ class _InputanScreenState extends State<InputanScreen>
                                                         data.datel)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.sto)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.namaperusahaan)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.alamat)),
+                                                    DataCell(SizedBox(
+                                                      width: 200,
+                                                      child: MyText.bodyMedium(
+                                                          data.namaperusahaan),
+                                                    )),
+                                                    DataCell(SizedBox(
+                                                      width: 200,
+                                                      child: MyText.bodyMedium(
+                                                          data.alamat),
+                                                    )),
                                                     DataCell(MyText.bodyMedium(
                                                         data.koordinat)),
                                                     DataCell(MyText.bodyMedium(
@@ -265,12 +274,18 @@ class _InputanScreenState extends State<InputanScreen>
                                                         data.nohp2)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.email)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.paket)),
+                                                    DataCell(SizedBox(
+                                                      width: 200,
+                                                      child: MyText.bodyMedium(
+                                                          data.paket),
+                                                    )),
                                                     DataCell(MyText.bodyMedium(
                                                         data.nosc)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.status)),
+                                                    DataCell(SizedBox(
+                                                      width: 200,
+                                                      child: MyText.bodyMedium(
+                                                          data.status),
+                                                    )),
                                                     DataCell(MyText.bodyMedium(
                                                         data.ketstat)),
                                                     DataCell(MyText.bodyMedium(
@@ -292,15 +307,16 @@ class _InputanScreenState extends State<InputanScreen>
                                                                   showDialog(
                                                                       context:
                                                                           context,
-                                                                      builder: (context) => CustomInputDialog(
-                                                                          title:
-                                                                              "Edit Order",
-                                                                          outlineInputBorder:
-                                                                              outlineInputBorder,
-                                                                          focusedInputBorder:
-                                                                              focusedInputBorder,
-                                                                          contentTheme:
-                                                                              contentTheme));
+                                                                      builder:
+                                                                          (context) =>
+                                                                              CustomInputDialog(
+                                                                                title: "Edit Order",
+                                                                                outlineInputBorder: outlineInputBorder,
+                                                                                focusedInputBorder: focusedInputBorder,
+                                                                                contentTheme: contentTheme,
+                                                                                validator: controller.editValidator,
+                                                                                submit: controller.editOrder(),
+                                                                              ));
                                                                 }
                                                               },
                                                               icon: Icon(
@@ -325,35 +341,6 @@ class _InputanScreenState extends State<InputanScreen>
                                                                               showCancelText: true,
                                                                               onConfirmBtnTap: () => controller.deleteOrder(data.orderid),
                                                                             ));
-
-                                                                //   QuickAlert.show(
-                                                                //       context:
-                                                                //           context,
-                                                                //       type:
-                                                                //           QuickAlertType
-                                                                //               .confirm,
-                                                                //       width: 300,
-                                                                //       confirmBtnText:
-                                                                //           'Yes',
-                                                                //       cancelBtnText:
-                                                                //           'No',
-                                                                //       title:
-                                                                //           'Hapus Data?',
-                                                                //       text:
-                                                                //           'Anda Yakin Ingin Menghapus Data?',
-                                                                //       confirmBtnColor:
-                                                                //           AppTheme
-                                                                //               .theme
-                                                                //               .primaryColor,
-                                                                //       borderRadius: 8,
-                                                                //       onConfirmBtnTap:
-                                                                //           () => controller
-                                                                //               .deleteOrder(data
-                                                                //                   .orderid),
-                                                                //       onCancelBtnTap:
-                                                                //           () => Navigator
-                                                                //               .pop(
-                                                                //                   context));
                                                               },
                                                               icon: Icon(
                                                                   Icons.delete,

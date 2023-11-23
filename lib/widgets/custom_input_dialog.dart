@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:webui/controller/inputan_controller.dart';
-import 'package:get/instance_manager.dart';
 import 'package:webui/helper/extensions/extensions.dart';
 import 'package:webui/helper/theme/admin_theme.dart';
 import 'package:webui/helper/widgets/my_button.dart';
+import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/my_text_style.dart';
@@ -14,16 +13,19 @@ class CustomInputDialog extends StatelessWidget {
       required this.outlineInputBorder,
       required this.focusedInputBorder,
       required this.contentTheme,
-      required this.title});
+      required this.title,
+      required this.validator,
+      required this.submit});
 
   final OutlineInputBorder outlineInputBorder;
   final OutlineInputBorder focusedInputBorder;
   final ContentTheme contentTheme;
   final String title;
+  final MyFormValidator validator;
+  final Future submit;
 
   @override
   Widget build(BuildContext context) {
-    InputanController controller = Get.find<InputanController>();
     return Dialog(
       // scrollable: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -35,9 +37,7 @@ class CustomInputDialog extends StatelessWidget {
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(32.0),
         child: Form(
-          key: title == "Tambah Order"
-              ? controller.inputValidator.formKey
-              : controller.editValidator.formKey,
+          key: validator.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -50,12 +50,8 @@ class CustomInputDialog extends StatelessWidget {
               MyText.bodyMedium("Nama Inputer :"),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('nama')
-                    : controller.editValidator.getValidation('nama'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('nama')
-                    : controller.editValidator.getController('nama'),
+                validator: validator.getValidation('nama'),
+                controller: validator.getController('nama'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: Ciya",
@@ -72,12 +68,8 @@ class CustomInputDialog extends StatelessWidget {
               MyText.bodyMedium("Nama Sales :"),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('namasales')
-                    : controller.editValidator.getValidation('namasales'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('namasales')
-                    : controller.editValidator.getController('namasales'),
+                validator: validator.getValidation('namasales'),
+                controller: validator.getController('namasales'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: Ciya",
@@ -94,12 +86,8 @@ class CustomInputDialog extends StatelessWidget {
               MyText.bodyMedium("Kode Sales :"),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('kodesales')
-                    : controller.editValidator.getValidation('kodesales'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('kodesales')
-                    : controller.editValidator.getController('kodesales'),
+                validator: validator.getValidation('kodesales'),
+                controller: validator.getController('kodesales'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: DS1234",
@@ -118,12 +106,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('datel')
-                    : controller.editValidator.getValidation('datel'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('datel')
-                    : controller.editValidator.getController('datel'),
+                validator: validator.getValidation('datel'),
+                controller: validator.getController('datel'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: Palangka Raya",
@@ -142,12 +126,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('sto')
-                    : controller.editValidator.getValidation('sto'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('sto')
-                    : controller.editValidator.getController('sto'),
+                validator: validator.getValidation('sto'),
+                controller: validator.getController('sto'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: PLK",
@@ -166,12 +146,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('namaperusahaan')
-                    : controller.editValidator.getValidation('namaperusahaan'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('namaperusahaan')
-                    : controller.editValidator.getController('namaperusahaan'),
+                validator: validator.getValidation('namaperusahaan'),
+                controller: validator.getController('namaperusahaan'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: Rocket Chicken",
@@ -190,12 +166,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('alamat')
-                    : controller.editValidator.getValidation('alamat'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('alamat')
-                    : controller.editValidator.getController('alamat'),
+                validator: validator.getValidation('alamat'),
+                controller: validator.getController('alamat'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: JL. Tjilik Riwut",
@@ -214,12 +186,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('odp')
-                    : controller.editValidator.getValidation('odp'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('odp')
-                    : controller.editValidator.getController('odp'),
+                validator: validator.getValidation('odp'),
+                controller: validator.getController('odp'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: ....",
@@ -238,12 +206,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('koordinat')
-                    : controller.editValidator.getValidation('koordinat'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('koordinat')
-                    : controller.editValidator.getController('koordinat'),
+                validator: validator.getValidation('koordinat'),
+                controller: validator.getController('koordinat'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: .....",
@@ -262,12 +226,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('nohp')
-                    : controller.editValidator.getValidation('nohp'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('nohp')
-                    : controller.editValidator.getController('nohp'),
+                validator: validator.getValidation('nohp'),
+                controller: validator.getController('nohp'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: 081211223344",
@@ -286,12 +246,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('nohp2')
-                    : controller.editValidator.getValidation('nohp2'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('nohp2')
-                    : controller.editValidator.getController('nohp2'),
+                validator: validator.getValidation('nohp2'),
+                controller: validator.getController('nohp2'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: 081211223344",
@@ -310,12 +266,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('email')
-                    : controller.editValidator.getValidation('email'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('email')
-                    : controller.editValidator.getController('email'),
+                validator: validator.getValidation('email'),
+                controller: validator.getController('email'),
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   labelText: "eg: rocky123@gmail.com",
@@ -334,12 +286,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('paket')
-                    : controller.editValidator.getValidation('paket'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('paket')
-                    : controller.editValidator.getController('paket'),
+                validator: validator.getValidation('paket'),
+                controller: validator.getController('paket'),
                 keyboardType: TextInputType.multiline,
                 maxLines: 3,
                 decoration: InputDecoration(
@@ -359,12 +307,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('nosc')
-                    : controller.editValidator.getValidation('nosc'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('nosc')
-                    : controller.editValidator.getController('nosc'),
+                validator: validator.getValidation('nosc'),
+                controller: validator.getController('nosc'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: SC-1000224431",
@@ -383,12 +327,8 @@ class CustomInputDialog extends StatelessWidget {
               ),
               MySpacing.height(8),
               TextFormField(
-                validator: title == "Tambah Order"
-                    ? controller.inputValidator.getValidation('ket')
-                    : controller.editValidator.getValidation('ket'),
-                controller: title == "Tambah Order"
-                    ? controller.inputValidator.getController('ket')
-                    : controller.editValidator.getController('ket'),
+                validator: validator.getValidation('ket'),
+                controller: validator.getController('ket'),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                   labelText: "eg: Cancel/Input Ulang/etc...",
@@ -421,11 +361,7 @@ class CustomInputDialog extends StatelessWidget {
                     MySpacing.width(16),
                     MyButton.rounded(
                       onPressed: () async {
-                        if (title == "Tambah Order") {
-                          await controller.addOrder();
-                        } else {
-                          await controller.editOrder();
-                        }
+                        submit;
                       },
                       elevation: 0,
                       padding: MySpacing.xy(20, 16),

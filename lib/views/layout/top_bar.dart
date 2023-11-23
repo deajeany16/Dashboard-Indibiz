@@ -14,7 +14,6 @@ import 'package:webui/helper/widgets/my_dashed_divider.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/my_text_style.dart';
-import 'package:webui/images.dart';
 import 'package:webui/widgets/custom_pop_menu.dart';
 
 class TopBar extends StatefulWidget {
@@ -116,13 +115,7 @@ class _TopBarState extends State<TopBar>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         MyContainer.rounded(
-                            paddingAll: 0,
-                            child: Image.asset(
-                              Images.avatars[0],
-                              height: 28,
-                              width: 28,
-                              fit: BoxFit.cover,
-                            )),
+                            paddingAll: 0, child: Icon(Icons.person)),
                         MySpacing.width(8),
                         MyText.labelLarge(nama ?? 'user')
                       ],
