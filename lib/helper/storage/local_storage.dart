@@ -9,6 +9,7 @@ class LocalStorage {
   static const String _languageKey = "lang_code";
   static const String _tokenKey = "token";
   static const String _hakAksesKey = "akses";
+  static const String _namaKey = "namauser";
 
   static SharedPreferences? _preferencesInstance;
 
@@ -60,6 +61,14 @@ class LocalStorage {
 
   static String? getHakAkses() {
     return preferences.getString(_hakAksesKey);
+  }
+
+  static Future<bool> setNama(String nama) {
+    return preferences.setString(_namaKey, nama);
+  }
+
+  static String? getNama() {
+    return preferences.getString(_namaKey);
   }
 
   static Future<bool> removeLoggedInUser() async {

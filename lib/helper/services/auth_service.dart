@@ -24,11 +24,15 @@ class AuthService extends ApiClient {
       var response = await post("users/login", body);
       isLoggedIn = true;
       // var resJson = json.decode(response.body);
-      String token = response.body["token"];
-      String hakAkses = response.body["hak_akses"];
-      await LocalStorage.setToken(token);
-      await LocalStorage.setLoggedInUser(true);
-      await LocalStorage.setHakAkses(hakAkses);
+      if (response.statusCode == 200) {
+        String token = response.body["token"];
+        String nama = response.body["nama"];
+        String hakAkses = response.body["hak_akses"];
+        await LocalStorage.setToken(token);
+        await LocalStorage.setLoggedInUser(true);
+        await LocalStorage.setNama(nama);
+        await LocalStorage.setHakAkses(hakAkses);
+      }
       return response;
     } catch (e) {
       rethrow;

@@ -5,6 +5,7 @@ import 'package:webui/helper/services/order_service.dart';
 import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/models/inputan_data.dart';
+import 'package:webui/widgets/custom_alert.dart';
 
 class InputanController extends MyController {
   bool isLoading = false;
@@ -17,6 +18,9 @@ class InputanController extends MyController {
   void onInit() {
     super.onInit();
     getAllOrder();
+  }
+
+  InputanController() {
     inputValidator.addField(
       'nama',
       label: "Nama Inputer",
@@ -103,7 +107,7 @@ class InputanController extends MyController {
     );
     inputValidator.addField(
       'ket',
-      label: "ketLain",
+      label: "Keterangan Lain",
       required: false,
       controller: TextEditingController(),
     );
@@ -235,29 +239,21 @@ class InputanController extends MyController {
         case "sales":
           orders = await orderService.getAllOrderBySales();
           break;
-        default:
-          orders = await orderService.getAllOrderByAdmin();
       }
       if (orders.statusCode == 401) {
-        String nextUrl =
-            Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
-                    .queryParameters['next'] ??
-                "/login";
-        Get.toNamed(
-          nextUrl,
-        );
+        LocalStorage.setLoggedInUser(false);
+        update();
       } else {
         semuaInputan = Inputan.listFromJSON(orders.body);
         update();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      Get.dialog(CustomAlert(
+        context: Get.context!,
+        title: 'Error',
+        text: e.toString(),
+        confirmBtnText: 'Okay',
+      ));
     }
   }
 
@@ -277,34 +273,26 @@ class InputanController extends MyController {
         case "sales":
           order = await orderService.getOrderBySales(id);
           break;
-        default:
-          order = await orderService.getOrderByAdmin(id);
       }
       if (order.statusCode == 401) {
-        String nextUrl =
-            Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
-                    .queryParameters['next'] ??
-                "/login";
-        Get.toNamed(
-          nextUrl,
-        );
+        LocalStorage.setLoggedInUser(false);
+        update();
       } else {
         inputan = order.body;
         isLoading = false;
         update();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      Get.dialog(CustomAlert(
+        context: Get.context!,
+        title: 'Error',
+        text: e.toString(),
+        confirmBtnText: 'Okay',
+      ));
     }
   }
 
-  Future<void> addOrder(context) async {
+  Future<void> addOrder() async {
     try {
       if (inputValidator.validateForm()) {
         update();
@@ -320,41 +308,32 @@ class InputanController extends MyController {
             order =
                 await orderService.addOrderByInputer(inputValidator.getData());
             break;
-          default:
-            order =
-                await orderService.addOrderByAdmin(inputValidator.getData());
         }
         if (order.statusCode == 200) {
-          Navigator.pop(context);
-          Get.defaultDialog(
-              title: "Sukses",
-              middleText: "Data telah diinput",
-              backgroundColor: Colors.teal,
-              titleStyle: TextStyle(color: Colors.white),
-              middleTextStyle: TextStyle(color: Colors.white),
-              radius: 30);
+          Get.back();
+          Get.dialog(CustomAlert(
+            context: Get.context!,
+            title: 'Berhasil',
+            text: 'Data Berhasil Diinput',
+            confirmBtnText: 'Okay',
+          ));
           inputValidator.resetForm();
           getAllOrder();
         }
-      } else {
-        inputValidator.addErrors({"isi": "isi"});
-        inputValidator.validateForm();
-        inputValidator.clearErrors();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      Get.dialog(CustomAlert(
+        context: Get.context!,
+        title: 'Error',
+        text: e.toString(),
+        confirmBtnText: 'Okay',
+      ));
     }
 
     update();
   }
 
-  Future<void> editOrder(context) async {
+  Future<void> editOrder() async {
     try {
       if (editValidator.validateForm()) {
         update();
@@ -370,35 +349,26 @@ class InputanController extends MyController {
             order = await orderService.editOrderByInputer(
                 editValidator.getData(), inputan['orderid']);
             break;
-          default:
-            order = await orderService.editOrderByAdmin(
-                editValidator.getData(), inputan['orderid']);
         }
         if (order.statusCode == 200) {
-          Navigator.pop(context);
-          Get.defaultDialog(
-              title: "Sukses",
-              middleText: "Data telah diedit",
-              backgroundColor: Colors.teal,
-              titleStyle: TextStyle(color: Colors.white),
-              middleTextStyle: TextStyle(color: Colors.white),
-              radius: 30);
+          Get.back();
+          Get.dialog(CustomAlert(
+            context: Get.context!,
+            title: 'Berhasil',
+            text: 'Data Berhasil Diedit',
+            confirmBtnText: 'Okay',
+          ));
           editValidator.resetForm();
           getAllOrder();
         }
-      } else {
-        editValidator.addErrors({"isi": "isi"});
-        editValidator.validateForm();
-        editValidator.clearErrors();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      Get.dialog(CustomAlert(
+        context: Get.context!,
+        title: 'Error',
+        text: e.toString(),
+        confirmBtnText: 'Okay',
+      ));
     }
 
     update();
@@ -417,27 +387,24 @@ class InputanController extends MyController {
         case "inputer":
           order = await orderService.deleteOrderByInputer(id);
           break;
-        default:
-          order = await orderService.deleteOrderByAdmin(id);
       }
       if (order.statusCode == 200) {
-        Get.defaultDialog(
-            title: "Sukses",
-            middleText: "Data telah dihapus",
-            backgroundColor: Colors.teal,
-            titleStyle: TextStyle(color: Colors.white),
-            middleTextStyle: TextStyle(color: Colors.white),
-            radius: 30);
+        Get.back();
+        Get.dialog(CustomAlert(
+          context: Get.context!,
+          title: 'Berhasil',
+          text: 'Data Telah Dihapus',
+          confirmBtnText: 'Okay',
+        ));
         getAllOrder();
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
+      Get.dialog(CustomAlert(
+        context: Get.context!,
+        title: 'Error',
+        text: e.toString(),
+        confirmBtnText: 'Okay',
+      ));
     }
 
     update();

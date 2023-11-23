@@ -36,6 +36,7 @@ class _ProjectScreenState extends State<ProjectScreen>
 
   @override
   void initState() {
+    Get.delete<ProjectController>();
     controller = Get.put(ProjectController());
     super.initState();
   }

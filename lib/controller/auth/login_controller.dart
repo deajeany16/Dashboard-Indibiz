@@ -4,6 +4,7 @@ import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/auth_service.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/helper/widgets/my_validators.dart';
+import 'package:webui/widgets/custom_alert.dart';
 
 class LoginController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -50,11 +51,7 @@ class LoginController extends MyController {
         update();
         var authService = Get.put(AuthService());
         var login = await authService.login(basicValidator.getData());
-        if (login.statusCode == 401) {
-          basicValidator.addErrors({"Auth Failed": "Gagal"});
-          basicValidator.validateForm();
-          basicValidator.clearErrors();
-        } else {
+        if (login.statusCode == 200) {
           String nextUrl =
               Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
                       .queryParameters['next'] ??
@@ -62,17 +59,19 @@ class LoginController extends MyController {
           Get.toNamed(
             nextUrl,
           );
+        } else {
+          basicValidator.addErrors({"username": "Username / Password Salah"});
+          basicValidator.addErrors({"pass": "Username / Password Salah"});
+          basicValidator.validateForm();
+          basicValidator.clearErrors();
         }
       }
     } catch (e) {
-      Get.defaultDialog(
-          title: "Error",
-          middleText: "Unexpected error",
-          backgroundColor: Colors.teal,
-          titleStyle: TextStyle(color: Colors.white),
-          middleTextStyle: TextStyle(color: Colors.white),
-          radius: 30);
-      basicValidator.addErrors({"Auth Failed": "failed"});
+      Get.dialog(CustomAlert(
+        context: Get.context!,
+        title: 'Error',
+        text: e.toString(),
+      ));
       basicValidator.validateForm();
       basicValidator.clearErrors();
     }

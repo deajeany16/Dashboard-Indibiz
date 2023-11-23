@@ -68,7 +68,7 @@ class Inputan {
     String status = decoder.getString('status');
     String ketstat = decoder.getString('ketstat');
     String ket = decoder.getString('ket');
-    DateTime createdAt = decoder.getDateTime('created_at');
+    DateTime createdAt = decoder.getDateTime('createdAt');
 
     return Inputan(
         orderid,

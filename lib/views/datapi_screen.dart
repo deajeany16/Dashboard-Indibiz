@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/instance_manager.dart';
+import 'package:webui/app_constant.dart';
 import 'package:webui/controller/pi_controller.dart';
 import 'package:webui/helper/extensions/string.dart';
+import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/app_style.dart';
+import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
 import 'package:webui/helper/utils/ui_mixins.dart';
 import 'package:webui/helper/widgets/my_breadcrumb.dart';
@@ -16,6 +19,8 @@ import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
+import 'package:webui/widgets/custom_alert.dart';
+import 'package:webui/widgets/custom_input_dialog.dart';
 
 class PIScreen extends StatefulWidget {
   const PIScreen({super.key});
@@ -30,12 +35,14 @@ class _PIScreenState extends State<PIScreen>
 
   @override
   void initState() {
+    Get.delete<PIScreenController>();
     controller = Get.put(PIScreenController());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    String? hakAkses = LocalStorage.getHakAkses();
     return Layout(
         child: GetBuilder<PIScreenController>(
             init: controller,
@@ -70,153 +77,163 @@ class _PIScreenState extends State<PIScreen>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          MyButton(
-                            onPressed: controller.goToCreatePI,
-                            elevation: 0,
-                            padding: MySpacing.xy(20, 16),
-                            backgroundColor: contentTheme.primary,
-                            borderRadiusAll: AppStyle.buttonRadius.medium,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.add_outlined,
-                                  size: 20,
-                                  color: contentTheme.onPrimary,
-                                ),
-                                MySpacing.width(8),
-                                MyText.labelMedium(
-                                  'tambah data'.tr().capitalizeWords,
-                                  color: contentTheme.onPrimary,
-                                ),
-                              ],
+                          if (hakAkses == 'admin' || hakAkses == 'inputer')
+                            MyButton(
+                              onPressed: () => showDialog(
+                                  context: context,
+                                  builder: (context) => CustomInputDialog(
+                                      title: "Tambah Order",
+                                      outlineInputBorder: outlineInputBorder,
+                                      focusedInputBorder: focusedInputBorder,
+                                      contentTheme: contentTheme)),
+                              elevation: 0,
+                              padding: MySpacing.xy(20, 16),
+                              backgroundColor: contentTheme.primary,
+                              borderRadiusAll: AppStyle.buttonRadius.medium,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.add_outlined,
+                                    size: 20,
+                                    color: contentTheme.onPrimary,
+                                  ),
+                                  MySpacing.width(8),
+                                  MyText.labelMedium(
+                                    'Tambah Data'.tr().capitalizeWords,
+                                    color: contentTheme.onPrimary,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
                           MySpacing.height(16),
                           SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: MyContainer.none(
-                                  borderRadiusAll: 4,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  child: DataTable(
-                                      sortAscending: true,
-                                      onSelectAll: (_) => {},
-                                      headingRowColor: MaterialStatePropertyAll(
-                                          contentTheme.primary.withAlpha(40)),
-                                      dataRowMaxHeight: 60,
-                                      showBottomBorder: false,
-                                      columns: [
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'No'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Tanggal Input'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Inputer'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Nama SP/SA/CSR'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Kode SP/SA/CSR'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Datel'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'STO'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Nama Perusahaan'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Alamat Perusahaan'
-                                              .tr()
-                                              .capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Koordinat'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'ODP'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'No HP'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'No HP Alternatif'
-                                              .tr()
-                                              .capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Email'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Paket'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'No SC'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Status SC'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Keterangan'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Keterangan Lain'
-                                              .tr()
-                                              .capitalizeWords,
-                                          color: contentTheme.primary,
-                                        )),
-                                      ],
-                                      rows: controller.pi
-                                          .mapIndexed(
-                                              (index, data) => DataRow(cells: [
+                            scrollDirection: Axis.horizontal,
+                            child: MyContainer.none(
+                              borderRadiusAll: 4,
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: DataTable(
+                                  showCheckboxColumn: false,
+                                  sortAscending: true,
+                                  onSelectAll: (_) => {},
+                                  headingRowColor: MaterialStatePropertyAll(
+                                      contentTheme.primary.withAlpha(40)),
+                                  dataRowMaxHeight: 60,
+                                  showBottomBorder: false,
+                                  columns: [
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'No'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Tanggal Input'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Inputer'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Nama SP/SA/CSR'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Kode SP/SA/CSR'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Datel'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'STO'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Nama Perusahaan'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Alamat Perusahaan'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Koordinat'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'ODP'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'No HP'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'No HP Alternatif'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Email'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Paket'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'No SC'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Status SC'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Keterangan'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Keterangan Lain'.tr().capitalizeWords,
+                                      color: contentTheme.primary,
+                                    )),
+                                    if (hakAkses == 'admin' ||
+                                        hakAkses == 'inputer')
+                                      DataColumn(
+                                          label: MyText.labelLarge(
+                                        'Aksi'.tr().capitalizeWords,
+                                        color: contentTheme.primary,
+                                      )),
+                                  ],
+                                  rows: controller.pi
+                                      .mapIndexed(
+                                          (index, data) => DataRow(
+                                                  onSelectChanged: (_) {},
+                                                  cells: [
                                                     DataCell(MyText.bodyMedium(
-                                                        data.orderid)),
+                                                        '${index + 1}')),
                                                     DataCell(MyText.bodyMedium(
-                                                        '${data.createdAt}')),
+                                                        dateFormatter.format(
+                                                            data.createdAt))),
                                                     DataCell(MyText.bodyMedium(
                                                         data.nama)),
                                                     DataCell(MyText.bodyMedium(
@@ -251,10 +268,96 @@ class _PIScreenState extends State<PIScreen>
                                                         data.ketstat)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.ket)),
+                                                    if (hakAkses == 'admin' ||
+                                                        hakAkses == 'inputer')
+                                                      DataCell(Row(
+                                                        children: [
+                                                          IconButton(
+                                                              splashRadius: 30,
+                                                              onPressed:
+                                                                  () async {
+                                                                await controller
+                                                                    .getOrder(data
+                                                                        .orderid);
+                                                                await controller
+                                                                    .onEdit();
+                                                                if (mounted) {
+                                                                  showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder: (context) => CustomInputDialog(
+                                                                          title:
+                                                                              "Edit Order",
+                                                                          outlineInputBorder:
+                                                                              outlineInputBorder,
+                                                                          focusedInputBorder:
+                                                                              focusedInputBorder,
+                                                                          contentTheme:
+                                                                              contentTheme));
+                                                                }
+                                                              },
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .edit_document,
+                                                                color: theme
+                                                                    .primaryColor,
+                                                              )),
+                                                          IconButton(
+                                                              splashRadius: 30,
+                                                              onPressed: () {
+                                                                showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) =>
+                                                                            CustomAlert(
+                                                                              context: context,
+                                                                              title: 'Hapus Data?',
+                                                                              text: 'Anda Yakin Ingin Menghapus Data?',
+                                                                              confirmBtnColor: theme.colorScheme.error,
+                                                                              showCancelText: true,
+                                                                              onConfirmBtnTap: () => controller.deleteOrder(data.orderid),
+                                                                            ));
+
+                                                                //   QuickAlert.show(
+                                                                //       context:
+                                                                //           context,
+                                                                //       type:
+                                                                //           QuickAlertType
+                                                                //               .confirm,
+                                                                //       width: 300,
+                                                                //       confirmBtnText:
+                                                                //           'Yes',
+                                                                //       cancelBtnText:
+                                                                //           'No',
+                                                                //       title:
+                                                                //           'Hapus Data?',
+                                                                //       text:
+                                                                //           'Anda Yakin Ingin Menghapus Data?',
+                                                                //       confirmBtnColor:
+                                                                //           AppTheme
+                                                                //               .theme
+                                                                //               .primaryColor,
+                                                                //       borderRadius: 8,
+                                                                //       onConfirmBtnTap:
+                                                                //           () => controller
+                                                                //               .deleteOrder(data
+                                                                //                   .orderid),
+                                                                //       onCancelBtnTap:
+                                                                //           () => Navigator
+                                                                //               .pop(
+                                                                //                   context));
+                                                              },
+                                                              icon: Icon(
+                                                                  Icons.delete,
+                                                                  color: Colors
+                                                                      .red))
+                                                        ],
+                                                      )),
                                                   ]))
-                                          .toList()),
-                                ),
-                              )),
+                                      .toList()),
+                            ),
+                          ),
                         ],
                       )),
                 ],

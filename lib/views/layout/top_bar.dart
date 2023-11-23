@@ -32,6 +32,7 @@ class _TopBarState extends State<TopBar>
 
   @override
   Widget build(BuildContext context) {
+    String? nama = LocalStorage.getNama();
     return MyCard(
       shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
       height: 60,
@@ -123,7 +124,7 @@ class _TopBarState extends State<TopBar>
                               fit: BoxFit.cover,
                             )),
                         MySpacing.width(8),
-                        MyText.labelLarge("Jon")
+                        MyText.labelLarge(nama ?? 'user')
                       ],
                     ),
                   ),

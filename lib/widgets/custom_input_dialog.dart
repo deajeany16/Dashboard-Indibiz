@@ -28,12 +28,12 @@ class CustomInputDialog extends StatelessWidget {
       // scrollable: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       // titlePadding: MySpacing.xy(16, 12),
-      insetPadding: MySpacing.xy(200, 100),
+      insetPadding: MySpacing.xy(150, 100),
       // actionsAlignment: MainAxisAlignment.end,
       // actionsPadding: MySpacing.xy(250, 16),
       // contentPadding: MySpacing.x(16),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(32.0),
         child: Form(
           key: title == "Tambah Order"
               ? controller.inputValidator.formKey
@@ -422,9 +422,9 @@ class CustomInputDialog extends StatelessWidget {
                     MyButton.rounded(
                       onPressed: () async {
                         if (title == "Tambah Order") {
-                          await controller.addOrder(context);
+                          await controller.addOrder();
                         } else {
-                          await controller.editOrder(context);
+                          await controller.editOrder();
                         }
                       },
                       elevation: 0,

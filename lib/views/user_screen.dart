@@ -27,6 +27,7 @@ class _UserListState extends State<UserList>
   @override
   void initState() {
     super.initState();
+    Get.delete<UserController>();
     controller = Get.put(UserController());
   }
 

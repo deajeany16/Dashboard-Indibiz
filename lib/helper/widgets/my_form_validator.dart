@@ -95,12 +95,12 @@ class MyFormValidator {
     var map = {
       ..._data,
     };
+
     for (var key in _controllers.keys) {
       if (_controllers[key]?.text != null) {
         map[key] = _controllers[key]!.text;
       }
     }
-
     return map;
   }
 
