@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/order_service.dart';
 import 'package:webui/helper/storage/local_storage.dart';
@@ -8,11 +9,20 @@ import 'package:webui/models/inputan_data.dart';
 import 'package:webui/widgets/custom_alert.dart';
 
 class InputanController extends MyController {
-  bool isLoading = false;
-  List semuaInputan = [];
-  Map<String, dynamic> inputan = {};
   MyFormValidator inputValidator = MyFormValidator();
   MyFormValidator editValidator = MyFormValidator();
+  GlobalKey<FormFieldState> filterMonthKey = GlobalKey<FormFieldState>();
+  GlobalKey<FormFieldState> filterYearKey = GlobalKey<FormFieldState>();
+  bool isLoading = true;
+
+  List semuaInputan = [];
+  List filteredInputan = [];
+  Map<String, dynamic> inputan = {};
+
+  String selectedYear = '';
+  String selectedMonth = '';
+  List monthList = [DateFormat('MMMM').format(DateTime.now())];
+  List yearList = [DateTime.now().year.toString()];
 
   @override
   void onInit() {
@@ -223,6 +233,24 @@ class InputanController extends MyController {
     editValidator.setControllerText('ket', inputan['ket']);
   }
 
+  Future<void> onFilter() async {
+    filteredInputan = semuaInputan
+        .where((inputan) =>
+            (DateFormat('yyyy').format(inputan.createdAt) == selectedYear) &&
+            (DateFormat('MMMM').format(inputan.createdAt) == selectedMonth))
+        .toList();
+    update();
+  }
+
+  Future<void> onResetFilter() async {
+    isLoading = true;
+    filteredInputan = semuaInputan;
+    filterMonthKey.currentState?.reset();
+    filterYearKey.currentState?.reset();
+    update();
+    isLoading = false;
+  }
+
   Future<void> getAllOrder() async {
     try {
       update();
@@ -245,7 +273,19 @@ class InputanController extends MyController {
         update();
       } else {
         semuaInputan = Inputan.listFromJSON(orders.body);
+        if (semuaInputan.isNotEmpty) {
+          yearList = semuaInputan
+              .map((item) => DateFormat.y().format(item.createdAt))
+              .toSet()
+              .toList();
+          monthList = semuaInputan
+              .map((item) => DateFormat.MMMM().format(item.createdAt))
+              .toSet()
+              .toList();
+        }
+        filteredInputan = semuaInputan;
         update();
+        isLoading = false;
       }
     } catch (e) {
       Get.dialog(CustomAlert(
@@ -279,7 +319,7 @@ class InputanController extends MyController {
         update();
       } else {
         inputan = order.body;
-        isLoading = false;
+        // isLoading = false;
         update();
       }
     } catch (e) {

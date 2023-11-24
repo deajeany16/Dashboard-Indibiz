@@ -5,17 +5,19 @@ import 'package:webui/helper/services/json_decoder.dart';
 import 'package:webui/models/identifier_model.dart';
 
 class User extends IdentifierModel {
-  final String nama, username;
+  final String nama, username, hak_akses, usid;
 
-  User(super.id, this.nama, this.username);
+  User(super.id, this.nama, this.username, this.hak_akses, this.usid);
 
   static User fromJSON(Map<String, dynamic> json) {
     JSONDecoder decoder = JSONDecoder(json);
 
     String nama = decoder.getString('nama');
     String username = decoder.getString('username');
+    String hak_akses = decoder.getString('hak_akses');
+    String usid = decoder.getString('usid');
 
-    return User(decoder.getId, nama, username);
+    return User(decoder.getId, nama, username, hak_akses, usid);
   }
 
   static List<User> listFromJSON(List<dynamic> list) {
