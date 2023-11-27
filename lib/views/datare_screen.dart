@@ -91,7 +91,7 @@ class _REScreenState extends State<REScreen>
                                       )),
                               elevation: 0,
                               padding: MySpacing.xy(20, 16),
-                              backgroundColor: contentTheme.primary,
+                              backgroundColor: Color(0xff009678),
                               borderRadiusAll: AppStyle.buttonRadius.medium,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -120,111 +120,112 @@ class _REScreenState extends State<REScreen>
                                   sortAscending: true,
                                   onSelectAll: (_) => {},
                                   headingRowColor: MaterialStatePropertyAll(
-                                      contentTheme.primary.withAlpha(40)),
+                                      Color(0xff009678)
+                                          .withAlpha(40)),
                                   dataRowMaxHeight: 60,
                                   showBottomBorder: false,
                                   columns: [
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'No'.tr(),
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Tanggal Input'.tr(),
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Inputer'.tr(),
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Nama SP/SA/CSR'.tr(),
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Kode SP/SA/CSR'.tr(),
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Datel'.tr(),
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'STO'.tr(),
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Nama Perusahaan'.tr(),
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Alamat Perusahaan'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Koordinat'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'ODP'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'No HP'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'No HP Alternatif'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Email'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Paket'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'No SC'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Status SC'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Keterangan'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
                                       'Keterangan Lain'.tr().capitalizeWords,
-                                      color: contentTheme.primary,
+                                      color: Color(0xff009678),
                                     )),
                                     if (hakAkses == 'admin' ||
                                         hakAkses == 'inputer')
                                       DataColumn(
                                           label: MyText.labelLarge(
                                         'Aksi'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
+                                        color: Color(0xff009678),
                                       )),
                                   ],
                                   rows: controller.re

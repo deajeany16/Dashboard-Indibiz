@@ -6,7 +6,6 @@ import 'package:webui/helper/widgets/my_text_style.dart';
 ThemeData get theme => AppTheme.theme;
 
 class AppTheme {
-
   static ThemeType themeType = ThemeType.light;
   static TextDirection textDirection = TextDirection.rtl;
 
@@ -53,10 +52,8 @@ class AppTheme {
 
   static ThemeData getTheme([ThemeType? themeType]) {
     themeType = themeType ?? AppTheme.themeType;
-    if (themeType == ThemeType.light) return lightTheme;
-    return darkTheme;
+    return lightTheme;
   }
-
 
   /// -------------------------- Light Theme  -------------------------------------------- ///
   static final ThemeData lightTheme = ThemeData(
@@ -78,7 +75,8 @@ class AppTheme {
     cardTheme: CardTheme(color: Color(0xffffffff)),
     cardColor: Color(0xffffffff),
 
-    textTheme: TextTheme(titleLarge: GoogleFonts.aBeeZee(), bodyLarge: GoogleFonts.abel()),
+    textTheme: TextTheme(
+        titleLarge: GoogleFonts.aBeeZee(), bodyLarge: GoogleFonts.abel()),
 
     /// Floating Action Theme
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -95,7 +93,8 @@ class AppTheme {
     dividerColor: Color(0xffe8e8e8),
 
     /// Bottom AppBar Theme
-    bottomAppBarTheme: BottomAppBarTheme(color: Color(0xffeeeeee), elevation: 2),
+    bottomAppBarTheme:
+        BottomAppBarTheme(color: Color(0xffeeeeee), elevation: 2),
 
     /// Tab bar Theme
     tabBarTheme: TabBarTheme(
@@ -115,7 +114,9 @@ class AppTheme {
 
     /// Radio theme
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(Color(0xff009678)),
+      fillColor: MaterialStateProperty.all(
+        Color(0xff009678),
+      ),
     ),
 
     ///Switch Theme
@@ -167,158 +168,27 @@ class AppTheme {
     splashColor: Colors.white.withAlpha(100),
     indicatorColor: Color(0xffeeeeee),
     highlightColor: Color(0xffeeeeee),
-    colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff009678), brightness: Brightness.light)
+    colorScheme: ColorScheme.fromSeed(
+            seedColor: Color(0xff009678), brightness: Brightness.light)
         .copyWith(background: Color(0xffffffff))
         .copyWith(error: Color(0xfff0323c)),
   );
 
-  /// -------------------------- Dark Theme  -------------------------------------------- ///
-  static final ThemeData darkTheme = ThemeData(
-    /// Brightness
-    brightness: Brightness.dark,
-
-    /// Primary Color
-    primaryColor: Color(0xff009678),
-
-    /// Scaffold and Background color
-    scaffoldBackgroundColor: Color(0xff161616),
-    canvasColor: Colors.transparent,
-
-    /// AppBar Theme
-    appBarTheme: AppBarTheme(backgroundColor: Color(0xff161616)),
-
-    /// Card Theme
-    cardTheme: CardTheme(color: Color(0xff222327)),
-    cardColor: Color(0xff222327),
-
-    /// Input (Text-Field) Theme
-    inputDecorationTheme: InputDecorationTheme(
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-        borderSide: BorderSide(width: 1, color: Color(0xff009678)),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-        borderSide: BorderSide(width: 1, color: Colors.white70),
-      ),
-      border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-          borderSide: BorderSide(width: 1, color: Colors.white70)),
-    ),
-
-    /// Divider Color
-    dividerTheme: DividerThemeData(color: Color(0xff363636), thickness: 1),
-    dividerColor: Color(0xff363636),
-
-    /// Floating Action Theme
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Color(0xff009678),
-        splashColor: Colors.white.withAlpha(100),
-        highlightElevation: 8,
-        elevation: 4,
-        focusColor: Color(0xff009678),
-        hoverColor: Color(0xff009678),
-        foregroundColor: Colors.white),
-
-    /// Bottom AppBar Theme
-    bottomAppBarTheme: BottomAppBarTheme(color: Color(0xff464c52), elevation: 2),
-
-    /// Tab bar Theme
-    tabBarTheme: TabBarTheme(
-      unselectedLabelColor: Color(0xff495057),
-      labelColor: Color(0xff009678),
-      indicatorSize: TabBarIndicatorSize.label,
-      indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(color: Color(0xff009678), width: 2.0),
-      ),
-    ),
-
-    ///Switch Theme
-    switchTheme: SwitchThemeData(
-      trackColor: MaterialStateProperty.resolveWith((state) {
-        const Set<MaterialState> interactiveStates = <MaterialState>{
-          MaterialState.pressed,
-          MaterialState.hovered,
-          MaterialState.focused,
-          MaterialState.selected,
-        };
-        if (state.any(interactiveStates.contains)) {
-          return Color(0xffabb3ea);
-        }
-        return null;
-      }),
-      thumbColor: MaterialStateProperty.resolveWith((state) {
-        const Set<MaterialState> interactiveStates = <MaterialState>{
-          MaterialState.pressed,
-          MaterialState.hovered,
-          MaterialState.focused,
-          MaterialState.selected,
-        };
-        if (state.any(interactiveStates.contains)) {
-          return Color(0xff009678);
-        }
-        return null;
-      }),
-    ),
-
-    /// Slider Theme
-    sliderTheme: SliderThemeData(
-      activeTrackColor: Color(0xff009678),
-      inactiveTrackColor: Color(0xff009678).withAlpha(100),
-      trackShape: RoundedRectSliderTrackShape(),
-      trackHeight: 4.0,
-      thumbColor: Color(0xff009678),
-      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
-      overlayShape: RoundSliderOverlayShape(overlayRadius: 24.0),
-      tickMarkShape: RoundSliderTickMarkShape(),
-      inactiveTickMarkColor: Colors.red[100],
-      valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-      valueIndicatorTextStyle: TextStyle(
-        color: Colors.white,
-      ),
-    ),
-
-    ///Other Color
-    indicatorColor: Colors.white,
-    disabledColor: Color(0xffa3a3a3),
-    highlightColor: Colors.white.withAlpha(28),
-    splashColor: Colors.white.withAlpha(56),
-    colorScheme: ColorScheme.fromSeed(seedColor: Color(0xff009678), brightness: Brightness.dark)
-        .copyWith(background: Color(0xff161616))
-        .copyWith(error: Colors.orange),
-  );
-
   static ThemeData createThemeM3(ThemeType themeType, Color seedColor) {
-    if (themeType == ThemeType.light) {
-      return lightTheme.copyWith(
-          colorScheme: ColorScheme.fromSeed(seedColor: seedColor, brightness: Brightness.light));
-    }
-    return darkTheme.copyWith(
+    return lightTheme.copyWith(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: seedColor, brightness: Brightness.dark, onBackground: Color(0xFFDAD9CA)));
+            seedColor: seedColor, brightness: Brightness.light));
   }
 
   static ThemeData createTheme(ColorScheme colorScheme) {
-    if (themeType != ThemeType.light) {
-      return darkTheme.copyWith(
-        colorScheme: colorScheme,
-      );
-    }
     return lightTheme.copyWith(colorScheme: colorScheme);
   }
 
   static ThemeData getNFTTheme() {
-    if (themeType == ThemeType.light) {
-      return lightTheme.copyWith(
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: Color(0xff232245), brightness: Brightness.light));
-    } else {
-      return darkTheme.copyWith(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: Color(0xff232245),
-              brightness: Brightness.dark,
-              onBackground: Color(0xFFDAD9CA)));
-    }
+    return lightTheme.copyWith(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Color(0xff232245), brightness: Brightness.light));
+
     // return createTheme(ColorScheme.fromSeed(seedColor: Color(0xff232245)));
   }
 

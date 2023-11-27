@@ -45,13 +45,8 @@ class _LoginScreenState extends State<LoginScreen>
                     padding: MySpacing.all(30),
                     child: Row(
                       children: [
-                        Image.asset(
-                          Images.logoIcon,
-                          height: 32,
-                          alignment: Alignment.center,
-                        ),
                         MyText.bodyLarge(
-                          'INDIBIZ KALTENG',
+                          'Dashboard BS Kalteng',
                           fontSize: 30,
                           textAlign: TextAlign.center,
                           fontWeight: 600,
@@ -154,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen>
                             onPressed: () => controller.onLogin(),
                             elevation: 0,
                             padding: MySpacing.xy(40, 20),
-                            backgroundColor: contentTheme.primary,
+                            backgroundColor: Color(0xff009678),
                             child: MyText.bodyMedium(
                               'login'.tr(),
                               color: contentTheme.onPrimary,

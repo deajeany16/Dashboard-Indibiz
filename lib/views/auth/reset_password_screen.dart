@@ -42,13 +42,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                   padding: MySpacing.all(40),
                   child: Row(
                     children: [
-                      Image.asset(
-                        Images.logoIcon,
-                        height: 32,
-                        alignment: Alignment.center,
-                      ),
+                      
                       MyText.bodyLarge(
-                        'WEBUI',
+                        'Dashboard BS Kalteng',
                         fontSize: 30,
                         textAlign: TextAlign.center,
                         fontWeight: 600,
@@ -130,7 +126,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                           onPressed: controller.onLogin,
                           elevation: 0,
                           padding: MySpacing.xy(40, 20),
-                          backgroundColor: contentTheme.primary,
+                          backgroundColor: Color(0xff009678),
                           child: MyText.bodySmall(
                             'confirm'.tr(),
                             color: contentTheme.onPrimary,
