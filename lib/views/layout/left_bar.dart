@@ -10,7 +10,6 @@ import 'package:webui/helper/widgets/my_card.dart';
 import 'package:webui/helper/widgets/my_container.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/images.dart';
 import 'package:webui/widgets/custom_pop_menu.dart';
 
 typedef LeftbarMenuFunction = void Function(String key);
@@ -74,30 +73,20 @@ class _LeftBarState extends State<LeftBar>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                      onTap: () {
-                        Get.toNamed('/dashboard');
-                      },
-                      child: Image.asset(Images.logoIcon,
-                          height: widget.isCondensed ? 24 : 32)),
-                  if (!widget.isCondensed)
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: MySpacing.width(16),
-                    ),
-                  if (!widget.isCondensed)
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: MyText.labelLarge(
-                        "INDIBIZ",
-                        style: GoogleFonts.raleway(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w800,
-                          color: contentTheme.primary,
-                          letterSpacing: 1,
-                        ),
-                        maxLines: 1,
+                    onTap: () {
+                      Get.toNamed('/dashboard');
+                    },
+                    child: MyText.labelLarge(
+                      "INDIBIZ",
+                      style: GoogleFonts.raleway(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xff009678),
+                        letterSpacing: 1,
                       ),
-                    )
+                      maxLines: 1,
+                    ),
+                  )
                 ],
               ),
             ),

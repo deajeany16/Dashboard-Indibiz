@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
           scrollBehavior: MyCustomScrollBehavior(),
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
           themeMode: ThemeCustomizer.instance.theme,
           navigatorKey: NavigationService.navigatorKey,
           unknownRoute: GetPage(

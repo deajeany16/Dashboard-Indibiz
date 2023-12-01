@@ -36,7 +36,7 @@ class AppStyle {
       cardRadius: AppStyle.cardRadius.medium,
       buttonRadius: AppStyle.buttonRadius.medium,
       defaultBreadCrumbItem:
-          MyBreadcrumbItem(name: 'WebUi', route: '/dashboard'),
+          MyBreadcrumbItem(name: 'Dashboard BS', route: '/dashboard'),
     ));
     bool isMobile = true;
     try {

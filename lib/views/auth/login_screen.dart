@@ -7,7 +7,6 @@ import 'package:webui/helper/utils/ui_mixins.dart';
 import 'package:webui/helper/widgets/my_button.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/images.dart';
 import 'package:webui/views/layout/auth_layout.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,13 +44,8 @@ class _LoginScreenState extends State<LoginScreen>
                     padding: MySpacing.all(30),
                     child: Row(
                       children: [
-                        Image.asset(
-                          Images.logoIcon,
-                          height: 32,
-                          alignment: Alignment.center,
-                        ),
                         MyText.bodyLarge(
-                          'INDIBIZ KALTENG',
+                          'Dashboard BS Kalteng',
                           fontSize: 30,
                           textAlign: TextAlign.center,
                           fontWeight: 600,
@@ -154,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen>
                             onPressed: () => controller.onLogin(),
                             elevation: 0,
                             padding: MySpacing.xy(40, 20),
-                            backgroundColor: contentTheme.primary,
+                            backgroundColor: Color(0xff009678),
                             child: MyText.bodyMedium(
                               'login'.tr(),
                               color: contentTheme.onPrimary,

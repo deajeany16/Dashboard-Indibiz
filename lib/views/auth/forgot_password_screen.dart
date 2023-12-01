@@ -7,7 +7,6 @@ import 'package:webui/helper/utils/ui_mixins.dart';
 import 'package:webui/helper/widgets/my_button.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/images.dart';
 import 'package:webui/views/layout/auth_layout.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -43,13 +42,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                     padding: MySpacing.all(40),
                     child: Row(
                       children: [
-                        Image.asset(
-                          Images.logoIcon,
-                          height: 32,
-                          alignment: Alignment.center,
-                        ),
+                        
                         MyText.bodyLarge(
-                          'WEBUI',
+                          'Dashboard BS Kalteng',
                           fontSize: 30,
                           textAlign: TextAlign.center,
                           fontWeight: 600,
@@ -96,7 +91,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                             elevation: 0,
                             borderRadiusAll: 4,
                             padding: MySpacing.xy(16, 16),
-                            backgroundColor: contentTheme.primary,
+                            backgroundColor: Color.fromRGBO(78, 24, 27, 1.0),
                             child: MyText.bodySmall(
                               'forgot_password'.tr().capitalizeWords,
                               color: contentTheme.onPrimary,
