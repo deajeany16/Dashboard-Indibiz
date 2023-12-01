@@ -7,7 +7,6 @@ import 'package:webui/helper/utils/ui_mixins.dart';
 import 'package:webui/helper/widgets/my_button.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/images.dart';
 import 'package:webui/views/layout/auth_layout.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
