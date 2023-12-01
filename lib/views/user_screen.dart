@@ -147,51 +147,56 @@ class _UserListState extends State<UserList>
                         ? Center(
                             child: CircularProgressIndicator(),
                           )
-                        : SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: MyContainer.none(
-                              borderRadiusAll: 4,
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              child: DataTable(
-                                  showCheckboxColumn: false,
-                                  sortAscending: true,
-                                  onSelectAll: (_) => {},
-                                  headingRowColor: MaterialStatePropertyAll(
-                                      contentTheme.primary.withAlpha(40)),
-                                  dataRowMaxHeight: 60,
-                                  showBottomBorder: false,
-                                  columns: [
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'No'.tr(),
-                                      color: contentTheme.primary,
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Nama'.tr(),
-                                      color: contentTheme.primary,
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Username'.tr(),
-                                      color: contentTheme.primary,
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Hak Akses'.tr(),
-                                      color: contentTheme.primary,
-                                    )),
-                                    if (hakAkses == 'admin' ||
-                                        hakAkses == 'inputer')
-                                      DataColumn(
-                                          label: MyText.labelLarge(
-                                        'Aksi'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                  ],
-                                  rows: controller.semuaUser
-                                      .mapIndexed(
-                                          (index, data) => DataRow(
+                        : MyContainer.none(
+                            borderRadiusAll: 4,
+                            width: double.infinity,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            child:
+                                LayoutBuilder(builder: (context, constraints) {
+                              return SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                      minWidth: constraints.minWidth),
+                                  child: DataTable(
+                                      showCheckboxColumn: false,
+                                      sortAscending: true,
+                                      onSelectAll: (_) => {},
+                                      headingRowColor: MaterialStatePropertyAll(
+                                          contentTheme.primary.withAlpha(40)),
+                                      dataRowMaxHeight: 60,
+                                      showBottomBorder: false,
+                                      columns: [
+                                        DataColumn(
+                                            label: MyText.labelLarge(
+                                          'No'.tr(),
+                                          color: contentTheme.primary,
+                                        )),
+                                        DataColumn(
+                                            label: MyText.labelLarge(
+                                          'Nama'.tr(),
+                                          color: contentTheme.primary,
+                                        )),
+                                        DataColumn(
+                                            label: MyText.labelLarge(
+                                          'Username'.tr(),
+                                          color: contentTheme.primary,
+                                        )),
+                                        DataColumn(
+                                            label: MyText.labelLarge(
+                                          'Hak Akses'.tr(),
+                                          color: contentTheme.primary,
+                                        )),
+                                        if (hakAkses == 'admin' ||
+                                            hakAkses == 'inputer')
+                                          DataColumn(
+                                              label: MyText.labelLarge(
+                                            'Aksi'.tr().capitalizeWords,
+                                            color: contentTheme.primary,
+                                          )),
+                                      ],
+                                      rows: controller.semuaUser
+                                          .mapIndexed((index, data) => DataRow(
                                                   onSelectChanged: (_) {},
                                                   cells: [
                                                     DataCell(MyText.bodyMedium(
@@ -260,8 +265,10 @@ class _UserListState extends State<UserList>
                                                         ],
                                                       )),
                                                   ]))
-                                      .toList()),
-                            ),
+                                          .toList()),
+                                ),
+                              );
+                            }),
                           ),
                   ],
                 ),
