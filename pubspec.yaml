@@ -60,6 +60,8 @@ dependencies:
   intl: ^0.18.1
   flutter_native_splash: ^2.3.5
   lucide_icons: ^0.257.0
+  data_table_2: ^2.5.9
+  horizontal_data_table: ^4.3.1
 
 
 
