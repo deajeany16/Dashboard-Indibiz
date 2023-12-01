@@ -5,7 +5,7 @@ class ApiClient extends GetConnect {
   @override
   void onInit() {
     //1.base_url
-    httpClient.baseUrl = "https://backendbskalteng.biz.id/";
+    httpClient.baseUrl = "https://bskaltengapi.xyz/";
     //2.
     httpClient.defaultContentType = "application/json";
     httpClient.timeout = Duration(seconds: 8);

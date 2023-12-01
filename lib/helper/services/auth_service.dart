@@ -39,45 +39,9 @@ class AuthService extends ApiClient {
     }
   }
 
-  Future<Response> getAllUsersByAdmin() async {
+  Future<Response> register(dynamic body) async {
     try {
-      var token = LocalStorage.getToken();
-      var response = await get(
-        "users/admin",
-        headers: {
-          'Authorization': 'Bearer $token', //carrier
-        },
-      );
-      return response;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<Response> getAllUsersBySales() async {
-    try {
-      var token = LocalStorage.getToken();
-      var response = await get(
-        "users/sales",
-        headers: {
-          'Authorization': 'Bearer $token', //carrier
-        },
-      );
-      return response;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<Response> getAllUsersByInputer() async {
-    try {
-      var token = LocalStorage.getToken();
-      var response = await get(
-        "users/inputer",
-        headers: {
-          'Authorization': 'Bearer $token', //carrier
-        },
-      );
+      var response = await post("users/register", body);
       return response;
     } catch (e) {
       rethrow;
