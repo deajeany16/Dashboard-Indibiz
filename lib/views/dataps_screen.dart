@@ -20,6 +20,7 @@ import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
+import 'package:webui/widgets/custom_detail_dialog.dart';
 import 'package:webui/widgets/custom_input_dialog.dart';
 
 class PSScreen extends StatefulWidget {
@@ -120,8 +121,7 @@ class _PSScreenState extends State<PSScreen>
                                   sortAscending: true,
                                   onSelectAll: (_) => {},
                                   headingRowColor: MaterialStatePropertyAll(
-                                      Color(0xff009678)
-                                          .withAlpha(40)),
+                                      Color(0xff009678).withAlpha(40)),
                                   dataRowMaxHeight: 60,
                                   showBottomBorder: false,
                                   columns: [
@@ -137,27 +137,7 @@ class _PSScreenState extends State<PSScreen>
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
-                                      'Inputer'.tr(),
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Nama SP/SA/CSR'.tr(),
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Kode SP/SA/CSR'.tr(),
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Datel'.tr(),
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'STO'.tr(),
+                                      'No SC'.tr().capitalizeWords,
                                       color: Color(0xff009678),
                                     )),
                                     DataColumn(
@@ -167,42 +147,7 @@ class _PSScreenState extends State<PSScreen>
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
-                                      'Alamat Perusahaan'.tr().capitalizeWords,
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Koordinat'.tr().capitalizeWords,
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'ODP'.tr().capitalizeWords,
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'No HP'.tr().capitalizeWords,
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'No HP Alternatif'.tr().capitalizeWords,
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'Email'.tr().capitalizeWords,
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
                                       'Paket'.tr().capitalizeWords,
-                                      color: Color(0xff009678),
-                                    )),
-                                    DataColumn(
-                                        label: MyText.labelLarge(
-                                      'No SC'.tr().capitalizeWords,
                                       color: Color(0xff009678),
                                     )),
                                     DataColumn(
@@ -212,13 +157,18 @@ class _PSScreenState extends State<PSScreen>
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
-                                      'Keterangan'.tr().capitalizeWords,
+                                      'Datel'.tr(),
                                       color: Color(0xff009678),
                                     )),
                                     DataColumn(
                                         label: MyText.labelLarge(
-                                      'Keterangan Lain'.tr().capitalizeWords,
+                                      'Nama SP/SA/CSR'.tr(),
                                       color: Color(0xff009678),
+                                    )),
+                                    DataColumn(
+                                      label: MyText.labelLarge(
+                                      'Detail'.tr(),
+                                      color: contentTheme.primary,
                                     )),
                                     if (hakAkses == 'admin' ||
                                         hakAkses == 'inputer')
@@ -239,15 +189,7 @@ class _PSScreenState extends State<PSScreen>
                                                         dateFormatter.format(
                                                             data.createdAt))),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.nama)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.namasales)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.kodesales)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.datel)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.sto)),
+                                                        data.nosc)),
                                                     DataCell(SizedBox(
                                                       width: 200,
                                                       child: MyText.bodyMedium(
@@ -256,34 +198,45 @@ class _PSScreenState extends State<PSScreen>
                                                     DataCell(SizedBox(
                                                       width: 200,
                                                       child: MyText.bodyMedium(
-                                                          data.alamat),
-                                                    )),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.koordinat)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.odp)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.nohp)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.nohp2)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.email)),
-                                                    DataCell(SizedBox(
-                                                      width: 200,
-                                                      child: MyText.bodyMedium(
                                                           data.paket),
                                                     )),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.nosc)),
                                                     DataCell(SizedBox(
                                                       width: 200,
                                                       child: MyText.bodyMedium(
                                                           data.status),
                                                     )),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.ketstat)),
+                                                        data.datel)),
                                                     DataCell(MyText.bodyMedium(
-                                                        data.ket)),
+                                                        data.namasales)),DataCell(Row(
+                                                    children: [
+                                                      IconButton(
+                                                          splashRadius: 30,
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .getOrder(data
+                                                                    .orderid);
+                                                            if (mounted) {
+                                                              await showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) =>
+                                                                          CustomDetailDialog(
+                                                                            title:
+                                                                                "Detail Order",
+                                                                            contentTheme:
+                                                                                contentTheme,
+                                                                          ));
+                                                            }
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.info_outline,
+                                                            color: theme
+                                                                .primaryColor,
+                                                          ))
+                                                    ],
+                                                  )),
                                                     if (hakAkses == 'admin' ||
                                                         hakAkses == 'inputer')
                                                       DataCell(Row(

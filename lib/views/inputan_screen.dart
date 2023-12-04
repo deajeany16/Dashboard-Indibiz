@@ -22,6 +22,7 @@ import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
+import 'package:webui/widgets/custom_detail_dialog.dart';
 import 'package:webui/widgets/custom_input_dialog.dart';
 
 class InputanScreen extends StatefulWidget {
@@ -277,6 +278,13 @@ class _InputanScreenState extends State<InputanScreen>
                                           ),
                                         ),
                                       ),
+                                      if (hakAkses == 'admin' ||
+                                          hakAkses == 'inputer')
+                                        DataColumn(
+                                            label: MyText.labelMedium(
+                                          'Aksi'.tr().capitalizeWords,
+                                          color: contentTheme.primary,
+                                        )),
                                       DataColumn(
                                           label: Skeleton.keep(
                                         child: MyText.labelMedium(
@@ -287,35 +295,7 @@ class _InputanScreenState extends State<InputanScreen>
                                       DataColumn(
                                           label: Skeleton.keep(
                                         child: MyText.labelMedium(
-                                          'Inputer'.tr(),
-                                          color: contentTheme.primary,
-                                        ),
-                                      )),
-                                      DataColumn(
-                                          label: Skeleton.keep(
-                                        child: MyText.labelMedium(
-                                          'Nama SP/SA/CSR'.tr(),
-                                          color: contentTheme.primary,
-                                        ),
-                                      )),
-                                      DataColumn(
-                                          label: Skeleton.keep(
-                                        child: MyText.labelMedium(
-                                          'Kode SP/SA/CSR'.tr(),
-                                          color: contentTheme.primary,
-                                        ),
-                                      )),
-                                      DataColumn(
-                                          label: Skeleton.keep(
-                                        child: MyText.labelMedium(
-                                          'Datel'.tr(),
-                                          color: contentTheme.primary,
-                                        ),
-                                      )),
-                                      DataColumn(
-                                          label: Skeleton.keep(
-                                        child: MyText.labelMedium(
-                                          'STO'.tr(),
+                                          'No SC'.tr().capitalizeWords,
                                           color: contentTheme.primary,
                                         ),
                                       )),
@@ -329,145 +309,64 @@ class _InputanScreenState extends State<InputanScreen>
                                       DataColumn(
                                           label: Skeleton.keep(
                                         child: MyText.labelMedium(
-                                          'Alamat Perusahaan'
-                                              .tr()
-                                              .capitalizeWords,
+                                          'Paket'.tr().capitalizeWords,
                                           color: contentTheme.primary,
                                         ),
                                       )),
                                       DataColumn(
-                                          label: MyText.labelMedium(
-                                        'Koordinat'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'ODP'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'No HP'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'No HP Alternatif'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'Email'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'Paket'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'No SC'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'Status SC'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'Keterangan'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      DataColumn(
-                                          label: MyText.labelMedium(
-                                        'Keterangan Lain'.tr().capitalizeWords,
-                                        color: contentTheme.primary,
-                                      )),
-                                      if (hakAkses == 'admin' ||
-                                          hakAkses == 'inputer')
-                                        DataColumn(
-                                            label: MyText.labelMedium(
-                                          'Aksi'.tr().capitalizeWords,
+                                          label: Skeleton.keep(
+                                        child: MyText.labelMedium(
+                                          'Status SC'.tr().capitalizeWords,
                                           color: contentTheme.primary,
-                                        )),
+                                        ),
+                                      )),
+                                      DataColumn(
+                                          label: Skeleton.keep(
+                                        child: MyText.labelMedium(
+                                          'Datel'.tr(),
+                                          color: contentTheme.primary,
+                                        ),
+                                      )),
+                                      DataColumn(
+                                          label: Skeleton.keep(
+                                        child: MyText.labelMedium(
+                                          'Nama SP/SA/CSR'.tr(),
+                                          color: contentTheme.primary,
+                                        ),
+                                      )),
+                                      DataColumn(
+                                          label: Skeleton.keep(
+                                        child: MyText.labelMedium(
+                                          'Detail'.tr(),
+                                          color: contentTheme.primary,
+                                        ),
+                                      )),
                                     ],
                                     rows: controller.filteredInputan
-                                        .mapIndexed(
-                                            (index, data) => DataRow(
-                                                    onSelectChanged: (_) {},
-                                                    cells: [
-                                                      DataCell(MyText.bodySmall(
-                                                          '${index + 1}')),
-                                                      DataCell(MyText.bodySmall(
-                                                          dateFormatter.format(
-                                                              data.createdAt))),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.nama)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.namasales)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.kodesales)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.datel)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.sto)),
-                                                      DataCell(SizedBox(
-                                                        width: 200,
-                                                        child: MyText.bodySmall(
-                                                            data.namaperusahaan),
-                                                      )),
-                                                      DataCell(SizedBox(
-                                                        width: 200,
-                                                        child: MyText.bodySmall(
-                                                            data.alamat),
-                                                      )),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.koordinat)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.odp)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.nohp)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.nohp2)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.email)),
-                                                      DataCell(SizedBox(
-                                                        width: 200,
-                                                        child: MyText.bodySmall(
-                                                            data.paket),
-                                                      )),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.nosc)),
-                                                      DataCell(SizedBox(
-                                                        width: 200,
-                                                        child: MyText.bodySmall(
-                                                            data.status),
-                                                      )),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.ketstat)),
-                                                      DataCell(MyText.bodySmall(
-                                                          data.ket)),
-                                                      if (hakAkses == 'admin' ||
-                                                          hakAkses == 'inputer')
-                                                        DataCell(Row(
-                                                          children: [
-                                                            IconButton(
-                                                                splashRadius:
-                                                                    30,
-                                                                onPressed:
-                                                                    () async {
-                                                                  await controller
-                                                                      .getOrder(
-                                                                          data.orderid);
-                                                                  await controller
-                                                                      .onEdit();
-                                                                  if (mounted) {
-                                                                    await showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder: (context) =>
+                                        .mapIndexed((index, data) => DataRow(
+                                                onSelectChanged: (_) {},
+                                                cells: [
+                                                  DataCell(MyText.bodySmall(
+                                                      '${index + 1}')),
+                                                  if (hakAkses == 'admin' ||
+                                                      hakAkses == 'inputer')
+                                                    DataCell(Row(
+                                                      children: [
+                                                        IconButton(
+                                                            splashRadius: 30,
+                                                            onPressed:
+                                                                () async {
+                                                              await controller
+                                                                  .getOrder(data
+                                                                      .orderid);
+                                                              await controller
+                                                                  .onEdit();
+                                                              if (mounted) {
+                                                                await showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) =>
                                                                             CustomInputDialog(
                                                                               title: "Edit Order",
                                                                               outlineInputBorder: outlineInputBorder,
@@ -476,40 +375,97 @@ class _InputanScreenState extends State<InputanScreen>
                                                                               validator: controller.editValidator,
                                                                               submit: () => controller.editOrder(),
                                                                             ));
-                                                                  }
-                                                                },
-                                                                icon: Icon(
-                                                                  Icons
-                                                                      .edit_document,
-                                                                  color: theme
-                                                                      .primaryColor,
-                                                                )),
-                                                            IconButton(
-                                                                splashRadius:
-                                                                    30,
-                                                                onPressed: () {
-                                                                  showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (context) =>
-                                                                              CustomAlert(
-                                                                                context: context,
-                                                                                title: 'Hapus Data?',
-                                                                                text: 'Anda Yakin Ingin Menghapus Data?',
-                                                                                confirmBtnColor: theme.colorScheme.error,
-                                                                                showCancelText: true,
-                                                                                onConfirmBtnTap: () => controller.deleteOrder(data.orderid),
-                                                                              ));
-                                                                },
-                                                                icon: Icon(
-                                                                    Icons
-                                                                        .delete,
-                                                                    color: Colors
-                                                                        .red))
-                                                          ],
-                                                        )),
-                                                    ]))
+                                                              }
+                                                            },
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .edit_document,
+                                                              color: theme
+                                                                  .primaryColor,
+                                                            )),
+                                                        IconButton(
+                                                            splashRadius: 30,
+                                                            onPressed: () {
+                                                              showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) =>
+                                                                          CustomAlert(
+                                                                            context:
+                                                                                context,
+                                                                            title:
+                                                                                'Hapus Data?',
+                                                                            text:
+                                                                                'Anda Yakin Ingin Menghapus Data?',
+                                                                            confirmBtnColor:
+                                                                                theme.colorScheme.error,
+                                                                            showCancelText:
+                                                                                true,
+                                                                            onConfirmBtnTap: () =>
+                                                                                controller.deleteOrder(data.orderid),
+                                                                          ));
+                                                            },
+                                                            icon: Icon(
+                                                                Icons.delete,
+                                                                color:
+                                                                    Colors.red))
+                                                      ],
+                                                    )),
+                                                  DataCell(MyText.bodyMedium(
+                                                      dateFormatter.format(
+                                                          data.createdAt))),
+                                                  DataCell(MyText.bodyMedium(
+                                                      data.nosc)),
+                                                  DataCell(SizedBox(
+                                                    width: 200,
+                                                    child: MyText.bodyMedium(
+                                                        data.namaperusahaan),
+                                                  )),
+                                                  DataCell(SizedBox(
+                                                    width: 200,
+                                                    child: MyText.bodyMedium(
+                                                        data.paket),
+                                                  )),
+                                                  DataCell(SizedBox(
+                                                    width: 200,
+                                                    child: MyText.bodyMedium(
+                                                        data.status),
+                                                  )),
+                                                  DataCell(MyText.bodyMedium(
+                                                      data.datel)),
+                                                  DataCell(MyText.bodyMedium(
+                                                      data.namasales)),
+                                                  DataCell(Row(
+                                                    children: [
+                                                      IconButton(
+                                                          splashRadius: 30,
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .getOrder(data
+                                                                    .orderid);
+                                                            if (mounted) {
+                                                              await showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) =>
+                                                                          CustomDetailDialog(
+                                                                            title:
+                                                                                "Detail Order",
+                                                                            contentTheme:
+                                                                                contentTheme,
+                                                                          ));
+                                                            }
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.info_outline,
+                                                            color: theme
+                                                                .primaryColor,
+                                                          ))
+                                                    ],
+                                                  )),
+                                                ]))
                                         .toList()),
                               ),
                             ),
