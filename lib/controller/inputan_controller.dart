@@ -12,22 +12,27 @@ class InputanController extends MyController {
   MyFormValidator inputValidator = MyFormValidator();
   MyFormValidator editValidator = MyFormValidator();
   GlobalKey<FormFieldState> filterMonthKey = GlobalKey<FormFieldState>();
-  GlobalKey<FormFieldState> filterYearKey = GlobalKey<FormFieldState>();
+  GlobalKey<FormFieldState> filterSTOKey = GlobalKey<FormFieldState>();
+  GlobalKey<FormFieldState> filterDatelKey = GlobalKey<FormFieldState>();
+  TextEditingController dateController = TextEditingController();
   bool isLoading = true;
 
   List semuaInputan = [];
   List filteredInputan = [];
   Map<String, dynamic> inputan = {};
 
-  String selectedYear = '';
-  String selectedMonth = '';
-  List monthList = [DateFormat('MMMM').format(DateTime.now())];
-  List yearList = [DateTime.now().year.toString()];
+  DateTime selectedDate = DateTime.now();
+  bool isDatePickerUsed = false;
+  String selectedSTO = '';
+  String selectedDatel = '';
+  List stoList = ['PLK', 'PBU', 'SAI'];
+  List datelList = ['Palangka Raya'];
 
   @override
   void onInit() {
-    super.onInit();
+    filteredInputan = _placeholderData();
     getAllOrder();
+    super.onInit();
   }
 
   InputanController() {
@@ -233,27 +238,90 @@ class InputanController extends MyController {
     editValidator.setControllerText('ket', inputan['ket']);
   }
 
-  Future<void> onFilter() async {
-    filteredInputan = semuaInputan
-        .where((inputan) =>
-            (DateFormat('yyyy').format(inputan.createdAt) == selectedYear) &&
-            (DateFormat('MMMM').format(inputan.createdAt) == selectedMonth))
-        .toList();
+  List<Inputan> _placeholderData() {
+    return List.generate(
+        10,
+        (index) => Inputan(
+            '0',
+            'nama',
+            'nama sales',
+            'kode',
+            'datel inputan',
+            'sto',
+            'nama perusahaan inputan',
+            'alamat',
+            'koordinat',
+            'odp',
+            'nohp',
+            'nohp2',
+            'email',
+            'paket',
+            'nosc',
+            'status',
+            'ketstat',
+            'ket',
+            DateTime.now()));
+  }
+
+  Future<void> selectDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: Get.context!,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      selectedDate = picked;
+      dateController.text = DateFormat('dd-MM-yyyy').format(picked);
+      isDatePickerUsed = true;
+      onFilter();
+    }
+  }
+
+  void onFilter() {
+    filteredInputan = semuaInputan;
+    if (isDatePickerUsed) {
+      onDateFilter();
+    }
+    if (selectedSTO != '') {
+      onSTOFilter();
+    }
+    if (selectedDatel != '') {
+      onDatelFilter();
+    }
     update();
+  }
+
+  void onDateFilter() {
+    filteredInputan = filteredInputan.where((inputan) {
+      return (DateFormat('dd-MM-yyyy').format(inputan.createdAt) ==
+          DateFormat('dd-MM-yyyy').format(selectedDate));
+    }).toList();
+  }
+
+  void onSTOFilter() {
+    filteredInputan =
+        filteredInputan.where((inputan) => inputan.sto == selectedSTO).toList();
+  }
+
+  void onDatelFilter() {
+    filteredInputan = filteredInputan
+        .where((inputan) => inputan.datel == selectedDatel)
+        .toList();
   }
 
   Future<void> onResetFilter() async {
     isLoading = true;
     filteredInputan = semuaInputan;
     filterMonthKey.currentState?.reset();
-    filterYearKey.currentState?.reset();
+    filterSTOKey.currentState?.reset();
     update();
     isLoading = false;
   }
 
   Future<void> getAllOrder() async {
     try {
-      update();
       var orderService = Get.put(OrderService());
       String? hakAkses = LocalStorage.getHakAkses();
       late dynamic orders;
@@ -274,18 +342,11 @@ class InputanController extends MyController {
       } else {
         semuaInputan = Inputan.listFromJSON(orders.body);
         if (semuaInputan.isNotEmpty) {
-          yearList = semuaInputan
-              .map((item) => DateFormat.y().format(item.createdAt))
-              .toSet()
-              .toList();
-          monthList = semuaInputan
-              .map((item) => DateFormat.MMMM().format(item.createdAt))
-              .toSet()
-              .toList();
+          stoList = semuaInputan.map((item) => item.sto).toSet().toList();
+          datelList = semuaInputan.map((item) => item.datel).toSet().toList();
         }
         filteredInputan = semuaInputan;
         update();
-        isLoading = false;
       }
     } catch (e) {
       Get.dialog(CustomAlert(
@@ -294,6 +355,8 @@ class InputanController extends MyController {
         text: e.toString(),
         confirmBtnText: 'Okay',
       ));
+    } finally {
+      isLoading = false;
     }
   }
 
