@@ -291,27 +291,7 @@ class _InputanScreenState extends State<InputanScreen>
                                           )),
                                           DataColumn(
                                               label: MyText.labelLarge(
-                                            'Inputer'.tr(),
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'Nama SP/SA/CSR'.tr(),
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'Kode SP/SA/CSR'.tr(),
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'Datel'.tr(),
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'STO'.tr(),
+                                            'No SC'.tr().capitalizeWords,
                                             color: contentTheme.primary,
                                           )),
                                           DataColumn(
@@ -321,46 +301,7 @@ class _InputanScreenState extends State<InputanScreen>
                                           )),
                                           DataColumn(
                                               label: MyText.labelLarge(
-                                            'Alamat Perusahaan'
-                                                .tr()
-                                                .capitalizeWords,
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'Koordinat'.tr().capitalizeWords,
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'ODP'.tr().capitalizeWords,
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'No HP'.tr().capitalizeWords,
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'No HP Alternatif'
-                                                .tr()
-                                                .capitalizeWords,
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'Email'.tr().capitalizeWords,
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
                                             'Paket'.tr().capitalizeWords,
-                                            color: contentTheme.primary,
-                                          )),
-                                          DataColumn(
-                                              label: MyText.labelLarge(
-                                            'No SC'.tr().capitalizeWords,
                                             color: contentTheme.primary,
                                           )),
                                           DataColumn(
@@ -370,14 +311,12 @@ class _InputanScreenState extends State<InputanScreen>
                                           )),
                                           DataColumn(
                                               label: MyText.labelLarge(
-                                            'Keterangan'.tr().capitalizeWords,
+                                            'Datel'.tr(),
                                             color: contentTheme.primary,
                                           )),
                                           DataColumn(
                                               label: MyText.labelLarge(
-                                            'Keterangan Lain'
-                                                .tr()
-                                                .capitalizeWords,
+                                            'Nama SP/SA/CSR'.tr(),
                                             color: contentTheme.primary,
                                           )),
                                           if (hakAkses == 'admin' ||
@@ -397,15 +336,7 @@ class _InputanScreenState extends State<InputanScreen>
                                                       dateFormatter.format(
                                                           data.createdAt))),
                                                   DataCell(MyText.bodyMedium(
-                                                      data.nama)),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.namasales)),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.kodesales)),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.datel)),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.sto)),
+                                                      data.nosc)),
                                                   DataCell(SizedBox(
                                                     width: 200,
                                                     child: MyText.bodyMedium(
@@ -414,34 +345,17 @@ class _InputanScreenState extends State<InputanScreen>
                                                   DataCell(SizedBox(
                                                     width: 200,
                                                     child: MyText.bodyMedium(
-                                                        data.alamat),
-                                                  )),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.koordinat)),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.odp)),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.nohp)),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.nohp2)),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.email)),
-                                                  DataCell(SizedBox(
-                                                    width: 200,
-                                                    child: MyText.bodyMedium(
                                                         data.paket),
                                                   )),
-                                                  DataCell(MyText.bodyMedium(
-                                                      data.nosc)),
                                                   DataCell(SizedBox(
                                                     width: 200,
                                                     child: MyText.bodyMedium(
                                                         data.status),
                                                   )),
                                                   DataCell(MyText.bodyMedium(
-                                                      data.ketstat)),
+                                                      data.datel)),
                                                   DataCell(MyText.bodyMedium(
-                                                      data.ket)),
+                                                      data.namasales)),
                                                   if (hakAkses == 'admin' ||
                                                       hakAkses == 'inputer')
                                                     DataCell(Row(
