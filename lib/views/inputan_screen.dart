@@ -21,6 +21,7 @@ import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
+import 'package:webui/widgets/custom_detail_dialog.dart';
 import 'package:webui/widgets/custom_input_dialog.dart';
 
 class InputanScreen extends StatefulWidget {
@@ -319,6 +320,11 @@ class _InputanScreenState extends State<InputanScreen>
                                             'Nama SP/SA/CSR'.tr(),
                                             color: contentTheme.primary,
                                           )),
+                                          DataColumn(
+                                              label: MyText.labelLarge(
+                                            'Detail'.tr(),
+                                            color: contentTheme.primary,
+                                          )),
                                           if (hakAkses == 'admin' ||
                                               hakAkses == 'inputer')
                                             DataColumn(
@@ -356,6 +362,37 @@ class _InputanScreenState extends State<InputanScreen>
                                                       data.datel)),
                                                   DataCell(MyText.bodyMedium(
                                                       data.namasales)),
+                                                  DataCell(Row(
+                                                    children: [
+                                                      IconButton(
+                                                          splashRadius: 30,
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .getOrder(data
+                                                                    .orderid);
+                                                            if (mounted) {
+                                                              await showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) =>
+                                                                          CustomDetailDialog(
+                                                                            title:
+                                                                                "Detail Order",
+                                                                            contentTheme:
+                                                                                contentTheme,
+                                                                            validator:
+                                                                                controller.editValidator,
+                                                                          ));
+                                                            }
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.info_outline,
+                                                            color: theme
+                                                                .primaryColor,
+                                                          ))
+                                                    ],
+                                                  )),
                                                   if (hakAkses == 'admin' ||
                                                       hakAkses == 'inputer')
                                                     DataCell(Row(

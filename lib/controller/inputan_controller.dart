@@ -56,12 +56,6 @@ class InputanController extends MyController {
       controller: TextEditingController(),
     );
     inputValidator.addField(
-      'sto',
-      label: "sto",
-      required: false,
-      controller: TextEditingController(),
-    );
-    inputValidator.addField(
       'namaperusahaan',
       label: "Nama Perusahaan",
       required: true,
@@ -104,12 +98,6 @@ class InputanController extends MyController {
       controller: TextEditingController(),
     );
     inputValidator.addField(
-      'paket',
-      label: "paket",
-      required: true,
-      controller: TextEditingController(),
-    );
-    inputValidator.addField(
       'nosc',
       label: "nosc",
       required: true,
@@ -144,12 +132,6 @@ class InputanController extends MyController {
       label: "datel",
       required: false,
       controller: TextEditingController(text: inputan['datel']),
-    );
-    editValidator.addField(
-      'sto',
-      label: "sto",
-      required: false,
-      controller: TextEditingController(text: inputan['sto']),
     );
     editValidator.addField(
       'namaperusahaan',
@@ -194,12 +176,6 @@ class InputanController extends MyController {
       controller: TextEditingController(text: inputan['email']),
     );
     editValidator.addField(
-      'paket',
-      label: "paket",
-      required: true,
-      controller: TextEditingController(text: inputan['paket']),
-    );
-    editValidator.addField(
       'nosc',
       label: "nosc",
       required: true,
@@ -218,7 +194,6 @@ class InputanController extends MyController {
     editValidator.setControllerText('namasales', inputan['namasales']);
     editValidator.setControllerText('kodesales', inputan['kodesales']);
     editValidator.setControllerText('datel', inputan['datel']);
-    editValidator.setControllerText('sto', inputan['sto']);
     editValidator.setControllerText(
         'namaperusahaan', inputan['namaperusahaan']);
     editValidator.setControllerText('alamat', inputan['alamat']);
@@ -228,7 +203,6 @@ class InputanController extends MyController {
     editValidator.setControllerText('nohp', inputan['nohp']);
     editValidator.setControllerText('nohp2', inputan['nohp2']);
     editValidator.setControllerText('email', inputan['email']);
-    editValidator.setControllerText('paket', inputan['paket']);
     editValidator.setControllerText('nosc', inputan['nosc']);
     editValidator.setControllerText('ket', inputan['ket']);
   }

@@ -33,7 +33,7 @@ class CustomInputDialog extends StatelessWidget {
         // actionsAlignment: MainAxisAlignment.end,
         // actionsPadding: MySpacing.xy(250, 16),
         // contentPadding: MySpacing.x(16),
-        child: Container(
+        child: SizedBox(
           width: 500,
           height: 500,
           child: SingleChildScrollView(

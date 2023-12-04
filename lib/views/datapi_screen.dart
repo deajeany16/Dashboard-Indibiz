@@ -20,6 +20,7 @@ import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
+import 'package:webui/widgets/custom_detail_dialog.dart';
 import 'package:webui/widgets/custom_input_dialog.dart';
 
 class PIScreen extends StatefulWidget {
@@ -120,8 +121,7 @@ class _PIScreenState extends State<PIScreen>
                                   sortAscending: true,
                                   onSelectAll: (_) => {},
                                   headingRowColor: MaterialStatePropertyAll(
-                                      Color(0xff009678)
-                                          .withAlpha(40)),
+                                      Color(0xff009678).withAlpha(40)),
                                   dataRowMaxHeight: 60,
                                   showBottomBorder: false,
                                   columns: [
@@ -165,6 +165,11 @@ class _PIScreenState extends State<PIScreen>
                                       'Nama SP/SA/CSR'.tr(),
                                       color: Color(0xff009678),
                                     )),
+                                    DataColumn(
+                                        label: MyText.labelLarge(
+                                      'Detail'.tr(),
+                                      color: contentTheme.primary,
+                                    )),
                                     if (hakAkses == 'admin' ||
                                         hakAkses == 'inputer')
                                       DataColumn(
@@ -204,6 +209,36 @@ class _PIScreenState extends State<PIScreen>
                                                         data.datel)),
                                                     DataCell(MyText.bodyMedium(
                                                         data.namasales)),
+                                                    DataCell(Row(
+                                                      children: [
+                                                        IconButton(
+                                                            splashRadius: 30,
+                                                            onPressed:
+                                                                () async {
+                                                              await controller
+                                                                  .getOrder(data
+                                                                      .orderid);
+                                                              if (mounted) {
+                                                                await showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder:
+                                                                        (context) =>
+                                                                            CustomDetailDialog(
+                                                                              title: "Detail Order",
+                                                                              contentTheme: contentTheme,
+                                                                              validator: controller.editValidator,
+                                                                            ));
+                                                              }
+                                                            },
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .info_outline,
+                                                              color: theme
+                                                                  .primaryColor,
+                                                            ))
+                                                      ],
+                                                    )),
                                                     if (hakAkses == 'admin' ||
                                                         hakAkses == 'inputer')
                                                       DataCell(Row(
