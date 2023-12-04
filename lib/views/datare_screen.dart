@@ -227,7 +227,6 @@ class _REScreenState extends State<REScreen>
                                                                             CustomDetailDialog(
                                                                               title: "Detail Order",
                                                                               contentTheme: contentTheme,
-                                                                              validator: controller.editValidator,
                                                                             ));
                                                               }
                                                             },

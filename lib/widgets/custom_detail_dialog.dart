@@ -11,12 +11,10 @@ class CustomDetailDialog extends StatelessWidget {
     super.key,
     required this.contentTheme,
     required this.title,
-    required this.validator,
   });
 
   final ContentTheme contentTheme;
   final String title;
-  final MyFormValidator validator;
 
   @override
   Widget build(BuildContext context) {

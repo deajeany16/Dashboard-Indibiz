@@ -227,8 +227,6 @@ class _PSScreenState extends State<PSScreen>
                                                                                 "Detail Order",
                                                                             contentTheme:
                                                                                 contentTheme,
-                                                                            validator:
-                                                                                controller.editValidator,
                                                                           ));
                                                             }
                                                           },

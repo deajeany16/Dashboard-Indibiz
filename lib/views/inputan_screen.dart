@@ -381,8 +381,6 @@ class _InputanScreenState extends State<InputanScreen>
                                                                                 "Detail Order",
                                                                             contentTheme:
                                                                                 contentTheme,
-                                                                            validator:
-                                                                                controller.editValidator,
                                                                           ));
                                                             }
                                                           },

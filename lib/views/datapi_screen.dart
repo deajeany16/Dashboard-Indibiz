@@ -227,7 +227,6 @@ class _PIScreenState extends State<PIScreen>
                                                                             CustomDetailDialog(
                                                                               title: "Detail Order",
                                                                               contentTheme: contentTheme,
-                                                                              validator: controller.editValidator,
                                                                             ));
                                                               }
                                                             },
