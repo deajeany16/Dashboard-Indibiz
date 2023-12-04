@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:webui/helper/extensions/extensions.dart';
 import 'package:webui/helper/theme/admin_theme.dart';
 import 'package:webui/helper/widgets/my_button.dart';
-import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
 
@@ -43,7 +42,6 @@ class CustomDetailDialog extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    MySpacing.width(16),
                     MyButton.rounded(
                       onPressed: () {
                         Navigator.pop(context);
