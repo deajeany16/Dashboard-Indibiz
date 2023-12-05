@@ -65,6 +65,7 @@ dependencies:
   data_table_2: ^2.5.9
   horizontal_data_table: ^4.3.1
   skeletonizer: ^0.8.0
+  excel: ^4.0.0
 
 
 

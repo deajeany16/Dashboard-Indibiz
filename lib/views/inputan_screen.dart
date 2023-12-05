@@ -214,41 +214,59 @@ class _InputanScreenState extends State<InputanScreen>
                                   ],
                                 ),
                               ),
-                              if (hakAkses == 'admin' || hakAkses == 'inputer')
-                                MyButton(
-                                  onPressed: () => showDialog(
-                                      context: context,
-                                      builder: (context) => CustomInputDialog(
-                                            title: "Tambah Order",
-                                            outlineInputBorder:
-                                                outlineInputBorder,
-                                            focusedInputBorder:
-                                                focusedInputBorder,
-                                            contentTheme: contentTheme,
-                                            validator:
-                                                controller.inputValidator,
-                                            submit: () => controller.addOrder(),
-                                          )),
-                                  elevation: 0,
-                                  padding: MySpacing.xy(20, 16),
-                                  backgroundColor: contentTheme.primary,
-                                  borderRadiusAll: AppStyle.buttonRadius.medium,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.add_outlined,
-                                        size: 20,
-                                        color: contentTheme.onPrimary,
-                                      ),
-                                      MySpacing.width(8),
-                                      MyText.labelSmall(
-                                        'Tambah Data'.tr().capitalizeWords,
-                                        color: contentTheme.onPrimary,
-                                      ),
-                                    ],
+                              Row(
+                                children: [
+                                  IconButton(
+                                    splashRadius: 20,
+                                    onPressed: () =>
+                                        controller.createExcelFile(),
+                                    icon: Icon(
+                                      Icons.text_snippet_outlined,
+                                      color: Colors.green,
+                                    ),
                                   ),
-                                ),
+                                  MySpacing.width(8),
+                                  if (hakAkses == 'admin' ||
+                                      hakAkses == 'inputer')
+                                    MyButton(
+                                      onPressed: () => showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              CustomInputDialog(
+                                                title: "Tambah Order",
+                                                outlineInputBorder:
+                                                    outlineInputBorder,
+                                                focusedInputBorder:
+                                                    focusedInputBorder,
+                                                contentTheme: contentTheme,
+                                                validator:
+                                                    controller.inputValidator,
+                                                submit: () =>
+                                                    controller.addOrder(),
+                                              )),
+                                      elevation: 0,
+                                      padding: MySpacing.xy(20, 16),
+                                      backgroundColor: contentTheme.primary,
+                                      borderRadiusAll:
+                                          AppStyle.buttonRadius.medium,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.add_outlined,
+                                            size: 20,
+                                            color: contentTheme.onPrimary,
+                                          ),
+                                          MySpacing.width(8),
+                                          MyText.labelSmall(
+                                            'Tambah Data'.tr().capitalizeWords,
+                                            color: contentTheme.onPrimary,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ],
+                              )
                             ],
                           ),
                           MySpacing.height(16),
