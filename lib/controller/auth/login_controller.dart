@@ -8,8 +8,6 @@ import 'package:webui/widgets/custom_alert.dart';
 
 class LoginController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
-  // List<String> dummyTexts =
-  //     List.generate(12, (index) => MyTextUtils.getDummyText(60));
   int selectTime = 1;
 
   bool showPassword = false, isChecked = false;
@@ -52,6 +50,7 @@ class LoginController extends MyController {
         var authService = Get.put(AuthService());
         var login = await authService.login(basicValidator.getData());
         if (login.statusCode == 200) {
+          basicValidator.resetForm();
           String nextUrl =
               Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
                       .queryParameters['next'] ??

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:webui/controller/user_controller.dart';
 import 'package:webui/helper/extensions/extensions.dart';
 import 'package:webui/helper/storage/local_storage.dart';
@@ -143,187 +144,167 @@ class _UserListState extends State<UserList>
                       ),
                     ),
                     MySpacing.height(14),
-                    controller.isLoading
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : MyContainer.none(
-                            borderRadiusAll: 4,
-                            width: double.infinity,
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            child:
-                                LayoutBuilder(builder: (context, constraints) {
-                              return SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: ConstrainedBox(
-                                  constraints: BoxConstraints(
-                                      minWidth: constraints.minWidth),
-                                  child: DataTable(
-                                      showCheckboxColumn: false,
-                                      sortAscending: true,
-                                      onSelectAll: (_) => {},
-                                      headingRowColor: MaterialStatePropertyAll(
-                                          contentTheme.primary.withAlpha(40)),
-                                      dataRowMaxHeight: 60,
-                                      showBottomBorder: false,
-                                      columns: [
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'No'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Nama'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Username'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        DataColumn(
-                                            label: MyText.labelLarge(
-                                          'Hak Akses'.tr(),
-                                          color: contentTheme.primary,
-                                        )),
-                                        if (hakAkses == 'admin' ||
-                                            hakAkses == 'inputer')
-                                          DataColumn(
-                                              label: MyText.labelLarge(
+                    MyContainer.none(
+                      borderRadiusAll: 4,
+                      width: double.infinity,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: LayoutBuilder(builder: (
+                        context,
+                        constraints,
+                      ) {
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Skeletonizer(
+                            enabled: controller.isLoading,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: constraints.minWidth,
+                              ),
+                              child: DataTable(
+                                  showCheckboxColumn: false,
+                                  sortAscending: true,
+                                  onSelectAll: (_) => {},
+                                  headingRowColor: MaterialStatePropertyAll(
+                                      contentTheme.primary.withAlpha(40)),
+                                  dataRowMaxHeight: 40,
+                                  dataRowMinHeight: 20,
+                                  headingRowHeight: 45,
+                                  columnSpacing: 20,
+                                  showBottomBorder: false,
+                                  columns: [
+                                    DataColumn(
+                                        label: Skeleton.keep(
+                                      child: MyText.labelMedium(
+                                        'No'.tr(),
+                                        color: contentTheme.primary,
+                                      ),
+                                    )),
+                                    DataColumn(
+                                        label: Skeleton.keep(
+                                      child: MyText.labelMedium(
+                                        'Nama'.tr(),
+                                        color: contentTheme.primary,
+                                      ),
+                                    )),
+                                    DataColumn(
+                                        label: Skeleton.keep(
+                                      child: MyText.labelMedium(
+                                        'Username'.tr(),
+                                        color: contentTheme.primary,
+                                      ),
+                                    )),
+                                    DataColumn(
+                                        label: Skeleton.keep(
+                                      child: MyText.labelMedium(
+                                        'Hak Akses'.tr(),
+                                        color: contentTheme.primary,
+                                      ),
+                                    )),
+                                    if (hakAkses == 'admin' ||
+                                        hakAkses == 'inputer')
+                                      DataColumn(
+                                        label: Skeleton.keep(
+                                          child: MyText.labelMedium(
                                             'Aksi'.tr().capitalizeWords,
                                             color: contentTheme.primary,
-                                          )),
-                                      ],
-                                      rows: controller.semuaUser
-                                          .mapIndexed((index, data) => DataRow(
-                                                  onSelectChanged: (_) {},
-                                                  cells: [
-                                                    DataCell(MyText.bodyMedium(
-                                                        '${index + 1}')),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.nama)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.username)),
-                                                    DataCell(MyText.bodyMedium(
-                                                        data.hak_akses)),
-                                                    if (hakAkses == 'admin' ||
-                                                        hakAkses == 'inputer')
-                                                      DataCell(Row(
-                                                        children: [
-                                                          IconButton(
-                                                              splashRadius: 30,
-                                                              onPressed:
-                                                                  () async {
-                                                                await controller
-                                                                    .getUser(data
-                                                                        .usid);
-                                                                await controller
-                                                                    .onEdit();
-                                                                if (mounted) {
-                                                                  await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (context) =>
-                                                                              CustomUserDialog(
-                                                                                title: "Edit User",
-                                                                                outlineInputBorder: outlineInputBorder,
-                                                                                focusedInputBorder: focusedInputBorder,
-                                                                                contentTheme: contentTheme,
-                                                                                validator: controller.editValidator,
-                                                                                submit: () => controller.editOrder(),
-                                                                              ));
-                                                                }
-                                                              },
-                                                              icon: Icon(
-                                                                  Icons
-                                                                      .edit_document,
-                                                                  color: contentTheme
-                                                                      .primary)),
-                                                          IconButton(
-                                                              splashRadius: 30,
-                                                              onPressed: () {
-                                                                showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (context) =>
-                                                                            CustomAlert(
-                                                                              context: context,
-                                                                              title: 'Hapus Data?',
-                                                                              text: 'Anda Yakin Ingin Menghapus Data?',
-                                                                              confirmBtnColor: contentTheme.red,
-                                                                              showCancelText: true,
-                                                                              onConfirmBtnTap: () => controller.deleteOrder(data.usid),
-                                                                            ));
-                                                              },
-                                                              icon: Icon(
-                                                                  Icons.delete,
-                                                                  color: Colors
-                                                                      .red))
-                                                        ],
-                                                      )),
-                                                  ]))
-                                          .toList()),
-                                ),
-                              );
-                            }),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                  rows: controller.semuaUser
+                                      .mapIndexed(
+                                        (index, data) => DataRow(
+                                            onSelectChanged: (_) {},
+                                            cells: [
+                                              DataCell(MyText.bodySmall(
+                                                  '${index + 1}')),
+                                              DataCell(
+                                                  MyText.bodySmall(data.nama)),
+                                              DataCell(MyText.bodySmall(
+                                                  data.username)),
+                                              DataCell(MyText.bodySmall(
+                                                  data.hak_akses)),
+                                              if (hakAkses == 'admin' ||
+                                                  hakAkses == 'inputer')
+                                                DataCell(
+                                                  Row(
+                                                    children: [
+                                                      IconButton(
+                                                          splashRadius: 20,
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .getUser(
+                                                                    data.usid);
+                                                            await controller
+                                                                .onEdit();
+                                                            if (mounted) {
+                                                              await showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) =>
+                                                                          CustomUserDialog(
+                                                                            title:
+                                                                                "Edit User",
+                                                                            outlineInputBorder:
+                                                                                outlineInputBorder,
+                                                                            focusedInputBorder:
+                                                                                focusedInputBorder,
+                                                                            contentTheme:
+                                                                                contentTheme,
+                                                                            validator:
+                                                                                controller.editValidator,
+                                                                            submit: () =>
+                                                                                controller.editOrder(),
+                                                                          ));
+                                                            }
+                                                          },
+                                                          icon: Icon(
+                                                              Icons
+                                                                  .edit_document,
+                                                              color: contentTheme
+                                                                  .primary)),
+                                                      IconButton(
+                                                          splashRadius: 20,
+                                                          onPressed: () {
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) =>
+                                                                        CustomAlert(
+                                                                          context:
+                                                                              context,
+                                                                          title:
+                                                                              'Hapus Data?',
+                                                                          text:
+                                                                              'Anda Yakin Ingin Menghapus Data?',
+                                                                          confirmBtnColor:
+                                                                              contentTheme.red,
+                                                                          showCancelText:
+                                                                              true,
+                                                                          onConfirmBtnTap: () =>
+                                                                              controller.deleteOrder(data.usid),
+                                                                        ));
+                                                          },
+                                                          icon: Icon(
+                                                              Icons.delete,
+                                                              color:
+                                                                  Colors.red))
+                                                    ],
+                                                  ),
+                                                ),
+                                            ]),
+                                      )
+                                      .toList()),
+                            ),
                           ),
+                        );
+                      }),
+                    ),
                   ],
                 ),
               ),
-              // GridView.builder(
-              //     padding: MySpacing.x(20),
-              //     shrinkWrap: true,
-              //     itemCount: controller.semuaUser.length,
-              //     gridDelegate:
-              //         const SliverGridDelegateWithMaxCrossAxisExtent(
-              //       maxCrossAxisExtent: 400,
-              //       childAspectRatio: 2.5,
-              //       crossAxisSpacing: 16,
-              //       mainAxisSpacing: 16,
-              //       // mainAxisExtent: 150,
-              //     ),
-              //     itemBuilder: (context, index) {
-              //       return MyCard(
-              //         paddingAll: 0,
-              //         borderRadiusAll: 12,
-              //         shadow: MyShadow(elevation: 0.5),
-              //         child: Row(
-              //           children: [
-              //             Expanded(
-              //               child: Padding(
-              //                 padding: MySpacing.xy(16, 12),
-              //                 child: Column(
-              //                   crossAxisAlignment:
-              //                       CrossAxisAlignment.start,
-              //                   mainAxisAlignment:
-              //                       MainAxisAlignment.spaceAround,
-              //                   children: [
-              //                     MyText.titleMedium(
-              //                       controller.semuaUser[index].nama,
-              //                       fontWeight: 600,
-              //                       overflow: TextOverflow.ellipsis,
-              //                     ),
-              //                     // MySpacing.height(8),
-              //                     MyText.bodyMedium(
-              //                       controller.semuaUser[index].username,
-              //                       fontSize: 16,
-              //                       fontWeight: 500,
-              //                       muted: true,
-              //                       overflow: TextOverflow.ellipsis,
-              //                     ),
-              //                     MySpacing.height(8),
-              //                   ],
-              //                 ),
-              //               ),
-              //             )
-              //           ],
-              //         ),
-              //       );
-              //     },
-              //   ),
             ],
           );
         },

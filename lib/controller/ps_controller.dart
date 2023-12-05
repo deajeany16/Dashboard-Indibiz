@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/order_service.dart';
 import 'package:webui/helper/storage/local_storage.dart';
@@ -8,16 +9,30 @@ import 'package:webui/models/inputan_data.dart';
 import 'package:webui/widgets/custom_alert.dart';
 
 class PSScreenController extends MyController {
-  bool isLoading = false;
-  List ps = [];
-  Map<String, dynamic> inputan = {};
   MyFormValidator inputValidator = MyFormValidator();
   MyFormValidator editValidator = MyFormValidator();
+  GlobalKey<FormFieldState> filterDateKey = GlobalKey<FormFieldState>();
+  GlobalKey<FormFieldState> filterSTOKey = GlobalKey<FormFieldState>();
+  GlobalKey<FormFieldState> filterDatelKey = GlobalKey<FormFieldState>();
+  TextEditingController dateController = TextEditingController();
+  bool isLoading = true;
+
+  List semuaPS = [];
+  List filteredPS = [];
+  Map<String, dynamic> inputan = {};
+
+  DateTime selectedDate = DateTime.now();
+  bool isDatePickerUsed = false;
+  String selectedSTO = '';
+  String selectedDatel = '';
+  List stoList = ['PLK', 'PBU', 'SAI'];
+  List datelList = ['Palangka Raya'];
 
   @override
   void onInit() {
-    super.onInit();
+    filteredPS = _placeholderData();
     getAllOrder();
+    super.onInit();
   }
 
   PSScreenController() {
@@ -223,6 +238,88 @@ class PSScreenController extends MyController {
     editValidator.setControllerText('ket', inputan['ket']);
   }
 
+  List<Inputan> _placeholderData() {
+    return List.generate(
+        6,
+        (index) => Inputan(
+            '0',
+            'nama',
+            'nama sales',
+            'kode',
+            'datel inputan',
+            'sto',
+            'nama perusahaan inputan',
+            'alamat',
+            'koordinat',
+            'odp',
+            'nohp',
+            'nohp2',
+            'email',
+            'paket',
+            'nosc',
+            'status',
+            'ketstat',
+            'ket',
+            DateTime.now()));
+  }
+
+  Future<void> selectDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: Get.context!,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      selectedDate = picked;
+      dateController.text = DateFormat('dd-MM-yyyy').format(picked);
+      isDatePickerUsed = true;
+      onFilter();
+    }
+  }
+
+  void onFilter() {
+    filteredPS = semuaPS;
+    if (isDatePickerUsed) {
+      onDateFilter();
+    }
+    if (selectedSTO.isNotEmpty) {
+      onSTOFilter();
+    }
+    if (selectedDatel.isNotEmpty) {
+      onDatelFilter();
+    }
+    update();
+  }
+
+  void onDateFilter() {
+    filteredPS = filteredPS.where((inputan) {
+      return (DateFormat('dd-MM-yyyy').format(inputan.createdAt) ==
+          DateFormat('dd-MM-yyyy').format(selectedDate));
+    }).toList();
+  }
+
+  void onSTOFilter() {
+    filteredPS =
+        filteredPS.where((inputan) => inputan.sto == selectedSTO).toList();
+  }
+
+  void onDatelFilter() {
+    filteredPS =
+        filteredPS.where((inputan) => inputan.datel == selectedDatel).toList();
+  }
+
+  void onResetFilter() {
+    isLoading = true;
+    filteredPS = semuaPS;
+    dateController.clear();
+    filterSTOKey.currentState?.reset();
+    filterDatelKey.currentState?.reset();
+    isLoading = false;
+    update();
+  }
+
   Future<void> getAllOrder() async {
     try {
       update();
@@ -244,8 +341,12 @@ class PSScreenController extends MyController {
         LocalStorage.setLoggedInUser(false);
         update();
       } else {
-        ps = Inputan.listFromJSON(orders.body);
-        update();
+        semuaPS = Inputan.listFromJSON(orders.body);
+        if (semuaPS.isNotEmpty) {
+          stoList = semuaPS.map((item) => item.sto).toSet().toList();
+          datelList = semuaPS.map((item) => item.datel).toSet().toList();
+        }
+        filteredPS = semuaPS;
       }
     } catch (e) {
       Get.dialog(CustomAlert(
@@ -254,6 +355,9 @@ class PSScreenController extends MyController {
         text: e.toString(),
         confirmBtnText: 'Okay',
       ));
+    } finally {
+      isLoading = false;
+      update();
     }
   }
 

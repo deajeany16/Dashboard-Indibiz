@@ -11,7 +11,7 @@ import 'package:webui/widgets/custom_alert.dart';
 class InputanController extends MyController {
   MyFormValidator inputValidator = MyFormValidator();
   MyFormValidator editValidator = MyFormValidator();
-  GlobalKey<FormFieldState> filterMonthKey = GlobalKey<FormFieldState>();
+  GlobalKey<FormFieldState> filterDateKey = GlobalKey<FormFieldState>();
   GlobalKey<FormFieldState> filterSTOKey = GlobalKey<FormFieldState>();
   GlobalKey<FormFieldState> filterDatelKey = GlobalKey<FormFieldState>();
   TextEditingController dateController = TextEditingController();
@@ -214,7 +214,7 @@ class InputanController extends MyController {
 
   List<Inputan> _placeholderData() {
     return List.generate(
-        10,
+        6,
         (index) => Inputan(
             '0',
             'nama',
@@ -258,10 +258,10 @@ class InputanController extends MyController {
     if (isDatePickerUsed) {
       onDateFilter();
     }
-    if (selectedSTO != '') {
+    if (selectedSTO.isNotEmpty) {
       onSTOFilter();
     }
-    if (selectedDatel != '') {
+    if (selectedDatel.isNotEmpty) {
       onDatelFilter();
     }
     update();
@@ -285,13 +285,14 @@ class InputanController extends MyController {
         .toList();
   }
 
-  Future<void> onResetFilter() async {
+  void onResetFilter() {
     isLoading = true;
     filteredInputan = semuaInputan;
-    filterMonthKey.currentState?.reset();
+    dateController.clear();
     filterSTOKey.currentState?.reset();
-    update();
+    filterDatelKey.currentState?.reset();
     isLoading = false;
+    update();
   }
 
   Future<void> getAllOrder() async {
@@ -320,7 +321,6 @@ class InputanController extends MyController {
           datelList = semuaInputan.map((item) => item.datel).toSet().toList();
         }
         filteredInputan = semuaInputan;
-        update();
       }
     } catch (e) {
       Get.dialog(CustomAlert(
@@ -331,6 +331,7 @@ class InputanController extends MyController {
       ));
     } finally {
       isLoading = false;
+      update();
     }
   }
 

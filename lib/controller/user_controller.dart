@@ -19,8 +19,9 @@ class UserController extends MyController {
 
   @override
   void onInit() {
-    super.onInit();
+    semuaUser = _placeholderData();
     getAllUser();
+    super.onInit();
   }
 
   UserController() {
@@ -72,6 +73,18 @@ class UserController extends MyController {
       required: false,
       controller: TextEditingController(text: user['hak_akses']),
     );
+  }
+
+  List<User> _placeholderData() {
+    return List.generate(
+        5,
+        (index) => User(
+              0,
+              'nama',
+              'username',
+              'hak_akses',
+              'usid',
+            ));
   }
 
   Future<void> getAllUser() async {
