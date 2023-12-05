@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:provider/provider.dart';
 import 'package:webui/helper/localization/app_localization_delegate.dart';
 import 'package:webui/helper/localization/language.dart';
@@ -23,7 +24,7 @@ Future<void> main() async {
   await LocalStorage.init();
   AppStyle.init();
   await ThemeCustomizer.init();
-
+  usePathUrlStrategy();
   runApp(ChangeNotifierProvider<AppNotifier>(
     create: (context) => AppNotifier(),
     child: MyApp(),

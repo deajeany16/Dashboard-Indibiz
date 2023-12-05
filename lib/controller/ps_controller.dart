@@ -349,6 +349,7 @@ class PSScreenController extends MyController {
         filteredPS = semuaPS;
       }
     } catch (e) {
+      filteredPS = [];
       Get.dialog(CustomAlert(
         context: Get.context!,
         title: 'Error',

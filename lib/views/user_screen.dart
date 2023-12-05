@@ -136,7 +136,7 @@ class _UserListState extends State<UserList>
                             color: contentTheme.onPrimary,
                           ),
                           MySpacing.width(8),
-                          MyText.labelMedium(
+                          MyText.labelSmall(
                             'Tambah Data'.tr().capitalizeWords,
                             color: contentTheme.onPrimary,
                           ),

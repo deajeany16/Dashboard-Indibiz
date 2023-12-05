@@ -106,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen>
                               controller.basicValidator.getController('pass'),
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: !controller.showPassword,
+                          onFieldSubmitted: (_) => controller.onLogin(),
                           decoration: InputDecoration(
                               border: outlineInputBorder,
                               prefixIcon: const Icon(

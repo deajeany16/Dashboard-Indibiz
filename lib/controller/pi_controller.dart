@@ -349,6 +349,7 @@ class PIScreenController extends MyController {
         filteredPI = semuaPI;
       }
     } catch (e) {
+      filteredPI = [];
       Get.dialog(CustomAlert(
         context: Get.context!,
         title: 'Error',

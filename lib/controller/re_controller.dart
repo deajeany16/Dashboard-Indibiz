@@ -349,6 +349,7 @@ class REScreenController extends MyController {
         filteredRE = semuaRE;
       }
     } catch (e) {
+      filteredRE = [];
       Get.dialog(CustomAlert(
         context: Get.context!,
         title: 'Error',

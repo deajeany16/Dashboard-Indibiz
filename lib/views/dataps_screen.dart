@@ -242,7 +242,7 @@ class _PSScreenState extends State<PSScreen>
                                         color: contentTheme.onPrimary,
                                       ),
                                       MySpacing.width(8),
-                                      MyText.labelMedium(
+                                      MyText.labelSmall(
                                         'Tambah Data'.tr().capitalizeWords,
                                         color: contentTheme.onPrimary,
                                       ),
@@ -421,36 +421,30 @@ class _PSScreenState extends State<PSScreen>
                                                                         .red))
                                                           ],
                                                         )),
-                                                      DataCell(MyText.bodyMedium(
+                                                      DataCell(MyText.bodySmall(
                                                           dateFormatter.format(
                                                               data.createdAt))),
-                                                      DataCell(
-                                                          MyText.bodyMedium(
-                                                              data.nosc)),
+                                                      DataCell(MyText.bodySmall(
+                                                          data.nosc)),
                                                       DataCell(SizedBox(
                                                         width: 200,
-                                                        child: MyText
-                                                            .bodyMedium(data
-                                                                .namaperusahaan),
+                                                        child: MyText.bodySmall(
+                                                            data.namaperusahaan),
                                                       )),
                                                       DataCell(SizedBox(
                                                         width: 200,
-                                                        child:
-                                                            MyText.bodyMedium(
-                                                                data.paket),
+                                                        child: MyText.bodySmall(
+                                                            data.paket),
                                                       )),
                                                       DataCell(SizedBox(
                                                         width: 200,
-                                                        child:
-                                                            MyText.bodyMedium(
-                                                                data.status),
+                                                        child: MyText.bodySmall(
+                                                            data.status),
                                                       )),
-                                                      DataCell(
-                                                          MyText.bodyMedium(
-                                                              data.datel)),
-                                                      DataCell(
-                                                          MyText.bodyMedium(
-                                                              data.namasales)),
+                                                      DataCell(MyText.bodySmall(
+                                                          data.datel)),
+                                                      DataCell(MyText.bodySmall(
+                                                          data.namasales)),
                                                       DataCell(Row(
                                                         children: [
                                                           IconButton(

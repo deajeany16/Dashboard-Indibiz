@@ -323,6 +323,7 @@ class InputanController extends MyController {
         filteredInputan = semuaInputan;
       }
     } catch (e) {
+      filteredInputan = [];
       Get.dialog(CustomAlert(
         context: Get.context!,
         title: 'Error',
