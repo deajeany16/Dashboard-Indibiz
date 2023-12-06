@@ -1,13 +1,19 @@
+import 'package:excel/excel.dart';
+import 'package:webui/app_constant.dart';
 import 'package:webui/helper/extensions/extensions.dart';
 
 class Utils {
-  static getDateStringFromDateTime(DateTime dateTime, {bool showMonthShort = false}) {
-    String date = dateTime.day < 10 ? "0${dateTime.day}" : dateTime.day.toString();
+  static getDateStringFromDateTime(DateTime dateTime,
+      {bool showMonthShort = false}) {
+    String date =
+        dateTime.day < 10 ? "0${dateTime.day}" : dateTime.day.toString();
     late String month;
     if (showMonthShort) {
       month = dateTime.getMonthName();
     } else {
-      month = dateTime.month < 10 ? "0${dateTime.month}" : dateTime.month.toString();
+      month = dateTime.month < 10
+          ? "0${dateTime.month}"
+          : dateTime.month.toString();
     }
 
     String year = dateTime.year.toString();
@@ -24,11 +30,15 @@ class Utils {
       hour = (dateTime.hour - 12).toString();
     }
 
-    String minute = dateTime.minute < 10 ? "0${dateTime.minute}" : dateTime.minute.toString();
+    String minute = dateTime.minute < 10
+        ? "0${dateTime.minute}"
+        : dateTime.minute.toString();
     String second = "";
 
     if (showSecond) {
-      second = dateTime.second < 10 ? "0${dateTime.second}" : dateTime.second.toString();
+      second = dateTime.second < 10
+          ? "0${dateTime.second}"
+          : dateTime.second.toString();
     }
     String meridian = "";
     meridian = dateTime.hour < 12 ? " AM" : " PM";
@@ -67,5 +77,60 @@ class Utils {
     } else {
       return "${b.toStringAsFixed(2)} Bytes";
     }
+  }
+
+  static Future<void> createExcelFile(semuaInputan) async {
+    var excel = Excel.createExcel();
+    var sheet = excel[excel.getDefaultSheet()!];
+
+    // Add headers
+    sheet.appendRow([
+      "orderid",
+      "nama",
+      "namasales",
+      "kodesales",
+      "datel",
+      "sto",
+      "namaperusahaan",
+      "alamat",
+      "odp",
+      "koordinat",
+      "nohp",
+      "nohp2",
+      "email",
+      "paket",
+      "nosc",
+      "ket",
+      "status",
+      "ketstat",
+      "createdAt",
+    ]);
+
+    // Add data
+    for (var i = 0; i < semuaInputan.length; i++) {
+      sheet.appendRow([
+        i + 1,
+        semuaInputan[i].nama,
+        semuaInputan[i].namasales,
+        semuaInputan[i].kodesales,
+        semuaInputan[i].datel,
+        semuaInputan[i].sto,
+        semuaInputan[i].namaperusahaan,
+        semuaInputan[i].alamat,
+        semuaInputan[i].odp,
+        semuaInputan[i].koordinat,
+        semuaInputan[i].nohp,
+        semuaInputan[i].nohp2,
+        semuaInputan[i].email,
+        semuaInputan[i].paket,
+        semuaInputan[i].nosc,
+        semuaInputan[i].ket,
+        semuaInputan[i].status,
+        semuaInputan[i].ketstat,
+        dateFormatter.format(semuaInputan[i].createdAt),
+      ]);
+    }
+
+    excel.save(fileName: "inputan.xlsx");
   }
 }
