@@ -12,6 +12,7 @@ import 'package:webui/views/datare_screen.dart';
 import 'package:webui/views/dataps_screen.dart';
 import 'package:webui/views/inputan_screen.dart';
 import 'package:webui/views/project_screen.dart';
+import 'package:webui/views/salesorder_screen.dart';
 
 class AuthMiddleware extends GetMiddleware {
   @override
@@ -43,6 +44,10 @@ getPageRoute() {
     GetPage(
         name: '/data-inputan',
         page: () => InputanScreen(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: '/inputan-sales',
+        page: () => SalesOrderScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: '/user', page: () => UserList(), middlewares: [AuthMiddleware()]),

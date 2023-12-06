@@ -127,7 +127,13 @@ class _LeftBarState extends State<LeftBar>
                     route: '/data-ps',
                     isCondensed: isCondensed,
                   ),
-                  // labelWidget('Inputan'),
+                  labelWidget('Sales Order'),
+                  NavigationItem(
+                    iconData: Icons.analytics,
+                    title: "Inputan Sales",
+                    route: '/inputan-sales',
+                    isCondensed: isCondensed,
+                  ),
                   labelWidget('User'),
                   NavigationItem(
                     iconData: Icons.group,
