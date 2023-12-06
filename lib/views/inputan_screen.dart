@@ -217,13 +217,16 @@ class _InputanScreenState extends State<InputanScreen>
                               ),
                               Row(
                                 children: [
-                                  IconButton(
-                                    splashRadius: 20,
-                                    onPressed: () => Utils.createExcelFile(
-                                        controller.semuaInputan),
-                                    icon: Icon(
-                                      Icons.text_snippet_outlined,
-                                      color: Colors.green,
+                                  Tooltip(
+                                    message: "Download File Excel",
+                                    child: IconButton(
+                                      splashRadius: 20,
+                                      onPressed: () => Utils.createExcelFile(
+                                          controller.semuaInputan),
+                                      icon: Icon(
+                                        Icons.text_snippet_outlined,
+                                        color: Colors.green,
+                                      ),
                                     ),
                                   ),
                                   MySpacing.width(8),
