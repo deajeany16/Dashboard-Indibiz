@@ -284,7 +284,7 @@ class _TopBarState extends State<TopBar>
               borderRadiusAll: AppStyle.buttonRadius.medium,
               padding: MySpacing.xy(8, 4),
               splashColor: contentTheme.danger.withAlpha(28),
-              backgroundColor: Colors.transparent,
+              // backgroundColor: Colors.transparent,
               child: Row(
                 children: [
                   Icon(
