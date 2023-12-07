@@ -40,12 +40,17 @@ class _SignUpScreenState extends State<SignUpScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: MySpacing.all(15),
+                  padding: MySpacing.all(20),
                   child: Row(
                     children: [
+                      // Image.asset(
+                      //   Images.logoIcon,
+                      //   height: 32,
+                      //   alignment: Alignment.center,
+                      // ),
                       MyText.bodyLarge(
                         'Dashboard BS Kalteng',
-                        fontSize: 24,
+                        fontSize: 22,
                         textAlign: TextAlign.center,
                         fontWeight: 600,
                       ),

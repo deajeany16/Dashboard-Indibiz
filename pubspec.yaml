@@ -96,6 +96,7 @@ flutter:
   assets:
     - assets/images/auth/
     - assets/images/logo/
+    - assets/images/logo/logo.png
     - assets/images/dummy/
     - assets/lang/
     - assets/data/
