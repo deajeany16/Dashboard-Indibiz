@@ -121,6 +121,12 @@ class SalesOrderController extends MyController {
       controller: TextEditingController(text: salesorderinputan['emaill']),
     );
     editValidator.addField(
+      'pakett',
+      label: "Email",
+      required: false,
+      controller: TextEditingController(text: salesorderinputan['pakett']),
+    );
+    editValidator.addField(
       'maps',
       label: "Link Maps",
       required: false,
@@ -145,8 +151,17 @@ class SalesOrderController extends MyController {
   List<SalesOrderInputan> _placeholderData() {
     return List.generate(
         10,
-        (index) => SalesOrderInputan('0', 'namasaless', 'kodesaless', 'namausaha',
-            'alamatt', 'cp', 'emaill', 'pakett', 'maps', DateTime.now()));
+        (index) => SalesOrderInputan(
+            '0',
+            'namasaless',
+            'kodesaless',
+            'namausaha',
+            'alamatt',
+            'cp',
+            'emaill',
+            'pakett',
+            'maps',
+            DateTime.now()));
   }
 
   Future<void> selectDate() async {

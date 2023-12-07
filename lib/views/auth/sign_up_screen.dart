@@ -43,14 +43,14 @@ class _SignUpScreenState extends State<SignUpScreen>
                   padding: MySpacing.all(20),
                   child: Row(
                     children: [
-                      Image.asset(
-                        Images.logoIcon,
-                        height: 32,
-                        alignment: Alignment.center,
-                      ),
+                      // Image.asset(
+                      //   Images.logoIcon,
+                      //   height: 32,
+                      //   alignment: Alignment.center,
+                      // ),
                       MyText.bodyLarge(
-                        'INDIBIZ KALTENG',
-                        fontSize: 20,
+                        'Dashboard BS Kalteng',
+                        fontSize: 22,
                         textAlign: TextAlign.center,
                         fontWeight: 600,
                       ),
@@ -166,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                       Center(
                         child: MyButton.block(
                             elevation: 0,
-                            backgroundColor: Color.fromRGBO(78, 24, 27, 1.0),
+                            backgroundColor: Color.fromRGBO(0, 169, 255, 1),
                             padding: MySpacing.xy(40, 20),
                             onPressed: () {},
                             child: MyText.bodyMedium(
@@ -186,7 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   TextSpan(
                                     text: 'Sign in',
                                     style: MyTextStyle.bodyMedium(
-                                        color: Color(0xff009678)),
+                                        color: Color.fromRGBO(0, 169, 255, 1)),
                                   ),
                                 ]),
                           ),

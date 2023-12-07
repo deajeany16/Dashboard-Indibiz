@@ -10,6 +10,7 @@ import 'package:webui/helper/widgets/my_card.dart';
 import 'package:webui/helper/widgets/my_container.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
+import 'package:webui/images.dart';
 import 'package:webui/widgets/custom_pop_menu.dart';
 
 typedef LeftbarMenuFunction = void Function(String key);
@@ -76,15 +77,11 @@ class _LeftBarState extends State<LeftBar>
                     onTap: () {
                       Get.toNamed('/dashboard');
                     },
-                    child: MyText.labelLarge(
-                      "INDIBIZ",
-                      style: GoogleFonts.raleway(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w800,
-                        color: Color(0xff009678),
-                        letterSpacing: 1,
-                      ),
-                      maxLines: 1,
+                    child: Image.asset(
+                      'assets/images/logo/logo.png',
+                      height: 80,
+                      width: 140,
+                      alignment: Alignment.center,
                     ),
                   )
                 ],

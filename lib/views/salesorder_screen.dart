@@ -121,13 +121,15 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                       },
                                       elevation: 0,
                                       padding: MySpacing.xy(10, 8),
-                                      borderColor: contentTheme.primary,
+                                      borderColor:
+                                          Color.fromRGBO(0, 169, 255, 1),
                                       splashColor:
-                                          contentTheme.primary.withOpacity(0.1),
+                                          Color.fromRGBO(0, 169, 255, 1)
+                                              .withOpacity(0.1),
                                       borderRadiusAll: 20,
                                       child: MyText.bodySmall(
                                         'Reset',
-                                        color: contentTheme.primary,
+                                        color: Color.fromRGBO(0, 169, 255, 1),
                                       ),
                                     ),
                                   ],
@@ -141,7 +143,7 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                         controller.semuaSalesOrder),
                                     icon: Icon(
                                       Icons.text_snippet_outlined,
-                                      color: Colors.green,
+                                      color: Color.fromRGBO(0, 169, 255, 1),
                                     ),
                                   ),
                                   MySpacing.width(8),
@@ -166,7 +168,8 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                               )),
                                       elevation: 0,
                                       padding: MySpacing.xy(20, 16),
-                                      backgroundColor: contentTheme.primary,
+                                      backgroundColor:
+                                          Color.fromRGBO(0, 169, 255, 1),
                                       borderRadiusAll:
                                           AppStyle.buttonRadius.medium,
                                       child: Row(
@@ -210,7 +213,7 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                         onSelectAll: (_) => {},
                                         headingRowColor:
                                             MaterialStatePropertyAll(
-                                                contentTheme.primary
+                                                Color.fromRGBO(0, 169, 255, 1)
                                                     .withAlpha(40)),
                                         dataRowMaxHeight: 40,
                                         dataRowMinHeight: 20,
@@ -222,7 +225,8 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                             label: Skeleton.keep(
                                               child: MyText.labelMedium(
                                                 'No'.tr(),
-                                                color: contentTheme.primary,
+                                                color: Color.fromRGBO(
+                                                    0, 169, 255, 1),
                                               ),
                                             ),
                                           ),
@@ -233,35 +237,40 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                                 label: Skeleton.keep(
                                               child: MyText.labelMedium(
                                                 'Aksi'.tr().capitalizeWords,
-                                                color: contentTheme.primary,
+                                                color: Color.fromRGBO(
+                                                    0, 169, 255, 1),
                                               ),
                                             )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Tanggal Input'.tr(),
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Kode Sales'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Nama Sales'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Nama Perusahaan'.tr(),
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                           DataColumn(
@@ -270,35 +279,40 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                               'Alamat Perusahaan'
                                                   .tr()
                                                   .capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'No HP'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Email'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Paket'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Maps'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  0, 169, 255, 1),
                                             ),
                                           )),
                                         ],
@@ -343,8 +357,7 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                                                 icon: Icon(
                                                                   Icons
                                                                       .edit_document,
-                                                                  color: theme
-                                                                      .primaryColor,
+                                                                  color: Color.fromRGBO(0, 169, 255, 1),
                                                                 )),
                                                             IconButton(
                                                                 splashRadius:

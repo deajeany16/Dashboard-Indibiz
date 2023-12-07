@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen>
                             onPressed: () => controller.onLogin(),
                             elevation: 0,
                             padding: MySpacing.xy(40, 20),
-                            backgroundColor: Color(0xff009678),
+                            backgroundColor: Color.fromRGBO(0, 169, 255, 1),
                             child: MyText.bodyMedium(
                               'login'.tr(),
                               color: contentTheme.onPrimary,
