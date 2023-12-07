@@ -203,13 +203,14 @@ class _InputanScreenState extends State<InputanScreen>
                                       },
                                       elevation: 0,
                                       padding: MySpacing.xy(10, 8),
-                                      borderColor: contentTheme.primary,
+                                      borderColor:
+                                          Color.fromRGBO(137, 207, 243, 1),
                                       splashColor:
                                           contentTheme.primary.withOpacity(0.1),
                                       borderRadiusAll: 20,
                                       child: MyText.bodySmall(
                                         'Reset',
-                                        color: contentTheme.primary,
+                                        color: Color.fromRGBO(137, 207, 243, 1),
                                       ),
                                     ),
                                   ],
@@ -225,7 +226,7 @@ class _InputanScreenState extends State<InputanScreen>
                                           controller.semuaInputan),
                                       icon: Icon(
                                         Icons.text_snippet_outlined,
-                                        color: Colors.green,
+                                        color: Color.fromRGBO(137, 207, 243, 1),
                                       ),
                                     ),
                                   ),
@@ -250,7 +251,8 @@ class _InputanScreenState extends State<InputanScreen>
                                               )),
                                       elevation: 0,
                                       padding: MySpacing.xy(20, 16),
-                                      backgroundColor: contentTheme.primary,
+                                      backgroundColor:
+                                          Color.fromRGBO(137, 207, 243, 1),
                                       borderRadiusAll:
                                           AppStyle.buttonRadius.medium,
                                       child: Row(
@@ -294,7 +296,7 @@ class _InputanScreenState extends State<InputanScreen>
                                         onSelectAll: (_) => {},
                                         headingRowColor:
                                             MaterialStatePropertyAll(
-                                                contentTheme.primary
+                                                Color.fromRGBO(137, 207, 243, 1)
                                                     .withAlpha(40)),
                                         dataRowMaxHeight: 40,
                                         dataRowMinHeight: 20,
@@ -306,7 +308,8 @@ class _InputanScreenState extends State<InputanScreen>
                                             label: Skeleton.keep(
                                               child: MyText.labelMedium(
                                                 'No'.tr(),
-                                                color: contentTheme.primary,
+                                                color: Color.fromRGBO(
+                                                    137, 207, 243, 1),
                                               ),
                                             ),
                                           ),
@@ -316,63 +319,72 @@ class _InputanScreenState extends State<InputanScreen>
                                                 label: Skeleton.keep(
                                               child: MyText.labelMedium(
                                                 'Aksi'.tr().capitalizeWords,
-                                                color: contentTheme.primary,
+                                                color: Color.fromRGBO(
+                                                    137, 207, 243, 1),
                                               ),
                                             )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Tanggal Input'.tr(),
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  137, 207, 243, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'No SC'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  137, 207, 243, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Nama Perusahaan'.tr(),
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  137, 207, 243, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Paket'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  137, 207, 243, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Status SC'.tr().capitalizeWords,
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  137, 207, 243, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Datel'.tr(),
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  137, 207, 243, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Nama SP/SA/CSR'.tr(),
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  137, 207, 243, 1),
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Detail'.tr(),
-                                              color: contentTheme.primary,
+                                              color: Color.fromRGBO(
+                                                  137, 207, 243, 1),
                                             ),
                                           )),
                                         ],
@@ -415,8 +427,12 @@ class _InputanScreenState extends State<InputanScreen>
                                                                 icon: Icon(
                                                                   Icons
                                                                       .edit_document,
-                                                                  color: theme
-                                                                      .primaryColor,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          169,
+                                                                          255,
+                                                                          1),
                                                                 )),
                                                             IconButton(
                                                                 splashRadius:
@@ -491,8 +507,12 @@ class _InputanScreenState extends State<InputanScreen>
                                                               icon: Icon(
                                                                 Icons
                                                                     .info_outline,
-                                                                color: theme
-                                                                    .primaryColor,
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        0,
+                                                                        169,
+                                                                        255,
+                                                                        1),
                                                               ))
                                                         ],
                                                       )),

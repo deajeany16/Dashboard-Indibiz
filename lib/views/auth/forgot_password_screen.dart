@@ -42,7 +42,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                     padding: MySpacing.all(40),
                     child: Row(
                       children: [
-                        
                         MyText.bodyLarge(
                           'Dashboard BS Kalteng',
                           fontSize: 30,
@@ -91,7 +90,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                             elevation: 0,
                             borderRadiusAll: 4,
                             padding: MySpacing.xy(16, 16),
-                            backgroundColor: Color.fromRGBO(78, 24, 27, 1.0),
+                            backgroundColor: Color.fromRGBO(0, 169, 255, 1),
                             child: MyText.bodySmall(
                               'forgot_password'.tr().capitalizeWords,
                               color: contentTheme.onPrimary,

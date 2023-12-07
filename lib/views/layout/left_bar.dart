@@ -81,7 +81,7 @@ class _LeftBarState extends State<LeftBar>
                       style: GoogleFonts.raleway(
                         fontSize: 22,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xff009678),
+                        color: Color.fromRGBO(0, 169, 255, 1),
                         letterSpacing: 1,
                       ),
                       maxLines: 1,

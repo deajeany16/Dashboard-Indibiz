@@ -125,7 +125,7 @@ class _UserListState extends State<UserList>
                               )),
                       elevation: 0,
                       padding: MySpacing.xy(20, 16),
-                      backgroundColor: contentTheme.primary,
+                      backgroundColor: Color.fromRGBO(0, 169, 255, 1),
                       borderRadiusAll: AppStyle.buttonRadius.medium,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -165,7 +165,8 @@ class _UserListState extends State<UserList>
                                   sortAscending: true,
                                   onSelectAll: (_) => {},
                                   headingRowColor: MaterialStatePropertyAll(
-                                      contentTheme.primary.withAlpha(40)),
+                                      Color.fromRGBO(0, 169, 255, 1)
+                                          .withAlpha(40)),
                                   dataRowMaxHeight: 40,
                                   dataRowMinHeight: 20,
                                   headingRowHeight: 45,
@@ -176,28 +177,28 @@ class _UserListState extends State<UserList>
                                         label: Skeleton.keep(
                                       child: MyText.labelMedium(
                                         'No'.tr(),
-                                        color: contentTheme.primary,
+                                        color: Color.fromRGBO(0, 169, 255, 1),
                                       ),
                                     )),
                                     DataColumn(
                                         label: Skeleton.keep(
                                       child: MyText.labelMedium(
                                         'Nama'.tr(),
-                                        color: contentTheme.primary,
+                                        color: Color.fromRGBO(0, 169, 255, 1),
                                       ),
                                     )),
                                     DataColumn(
                                         label: Skeleton.keep(
                                       child: MyText.labelMedium(
                                         'Username'.tr(),
-                                        color: contentTheme.primary,
+                                        color: Color.fromRGBO(0, 169, 255, 1),
                                       ),
                                     )),
                                     DataColumn(
                                         label: Skeleton.keep(
                                       child: MyText.labelMedium(
                                         'Hak Akses'.tr(),
-                                        color: contentTheme.primary,
+                                        color: Color.fromRGBO(0, 169, 255, 1),
                                       ),
                                     )),
                                     if (hakAkses == 'admin' ||
@@ -206,7 +207,8 @@ class _UserListState extends State<UserList>
                                         label: Skeleton.keep(
                                           child: MyText.labelMedium(
                                             'Aksi'.tr().capitalizeWords,
-                                            color: contentTheme.primary,
+                                            color:
+                                                Color.fromRGBO(0, 169, 255, 1),
                                           ),
                                         ),
                                       ),
@@ -262,8 +264,12 @@ class _UserListState extends State<UserList>
                                                           icon: Icon(
                                                               Icons
                                                                   .edit_document,
-                                                              color: contentTheme
-                                                                  .primary)),
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      0,
+                                                                      169,
+                                                                      255,
+                                                                      1))),
                                                       IconButton(
                                                           splashRadius: 20,
                                                           onPressed: () {

@@ -61,7 +61,7 @@ class AppTheme {
     brightness: Brightness.light,
 
     /// Primary Color
-    primaryColor: Color(0xff009678),
+    primaryColor: Color.fromRGBO(0, 169, 255, 1),
     scaffoldBackgroundColor: Color(0xfff0f0f0),
     canvasColor: Colors.transparent,
 
@@ -80,12 +80,12 @@ class AppTheme {
 
     /// Floating Action Theme
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Color(0xff009678),
+        backgroundColor: Color.fromRGBO(0, 169, 255, 1),
         splashColor: Color(0xffeeeeee).withAlpha(100),
         highlightElevation: 8,
         elevation: 4,
-        focusColor: Color(0xff009678),
-        hoverColor: Color(0xff009678),
+        focusColor: Color.fromRGBO(0, 169, 255, 1),
+        hoverColor: Color.fromRGBO(0, 169, 255, 1),
         foregroundColor: Color(0xffeeeeee)),
 
     /// Divider Theme
@@ -99,23 +99,23 @@ class AppTheme {
     /// Tab bar Theme
     tabBarTheme: TabBarTheme(
       unselectedLabelColor: Color(0xff495057),
-      labelColor: Color(0xff009678),
+      labelColor: Color.fromRGBO(0, 169, 255, 1),
       indicatorSize: TabBarIndicatorSize.label,
       indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(color: Color(0xff009678), width: 2.0),
+        borderSide: BorderSide(color: Color.fromRGBO(0, 169, 255, 1), width: 2.0),
       ),
     ),
 
     /// CheckBox theme
     checkboxTheme: CheckboxThemeData(
       checkColor: MaterialStateProperty.all(Color(0xffeeeeee)),
-      fillColor: MaterialStateProperty.all(Color(0xff009678)),
+      fillColor: MaterialStateProperty.all(Color.fromRGBO(0, 169, 255, 1)),
     ),
 
     /// Radio theme
     radioTheme: RadioThemeData(
       fillColor: MaterialStateProperty.all(
-        Color(0xff009678),
+        Color.fromRGBO(0, 169, 255, 1),
       ),
     ),
 
@@ -141,7 +141,7 @@ class AppTheme {
           MaterialState.selected,
         };
         if (state.any(interactiveStates.contains)) {
-          return Color(0xff009678);
+          return Color.fromRGBO(0, 169, 255, 1);
         }
         return null;
       }),
@@ -149,11 +149,11 @@ class AppTheme {
 
     /// Slider Theme
     sliderTheme: SliderThemeData(
-      activeTrackColor: Color(0xff009678),
-      inactiveTrackColor: Color(0xff009678).withAlpha(140),
+      activeTrackColor: Color.fromRGBO(0, 169, 255, 1),
+      inactiveTrackColor: Color.fromRGBO(0, 169, 255, 1).withAlpha(140),
       trackShape: RoundedRectSliderTrackShape(),
       trackHeight: 4.0,
-      thumbColor: Color(0xff009678),
+      thumbColor: Color.fromRGBO(0, 169, 255, 1),
       thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
       overlayShape: RoundSliderOverlayShape(overlayRadius: 24.0),
       tickMarkShape: RoundSliderTickMarkShape(),
@@ -169,7 +169,7 @@ class AppTheme {
     indicatorColor: Color(0xffeeeeee),
     highlightColor: Color(0xffeeeeee),
     colorScheme: ColorScheme.fromSeed(
-            seedColor: Color(0xff009678), brightness: Brightness.light)
+            seedColor: Color.fromRGBO(0, 169, 255, 1), brightness: Brightness.light)
         .copyWith(background: Color(0xffffffff))
         .copyWith(error: Color(0xfff0323c)),
   );
