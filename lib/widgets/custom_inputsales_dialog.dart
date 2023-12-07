@@ -126,6 +126,26 @@ class CustomInputSalesDialog extends StatelessWidget {
                   ),
                   MySpacing.height(25),
                   MyText.labelMedium(
+                    "No HP".tr().capitalizeWords,
+                  ),
+                  MySpacing.height(8),
+                  TextFormField(
+                    validator: validator.getValidation('cp'),
+                    controller: validator.getController('cp'),
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      labelText: "eg: 081111111111",
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      border: outlineInputBorder,
+                      enabledBorder: outlineInputBorder,
+                      focusedBorder: focusedInputBorder,
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                    ),
+                  ),
+                  MySpacing.height(25),
+                  MyText.labelMedium(
                     "Email".tr().capitalizeWords,
                   ),
                   MySpacing.height(8),
