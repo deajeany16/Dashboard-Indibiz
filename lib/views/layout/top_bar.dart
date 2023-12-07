@@ -222,6 +222,7 @@ class _TopBarState extends State<TopBar>
                   padding: MySpacing.xy(8, 4),
                   splashColor: theme.colorScheme.onBackground.withAlpha(20),
                   backgroundColor: Colors.transparent,
+                  elevation: 0,
                   child: Row(
                     children: [
                       Icon(
@@ -248,6 +249,7 @@ class _TopBarState extends State<TopBar>
                   padding: MySpacing.xy(8, 4),
                   splashColor: theme.colorScheme.onBackground.withAlpha(20),
                   backgroundColor: Colors.transparent,
+                  elevation: 0,
                   child: Row(
                     children: [
                       Icon(
@@ -285,6 +287,7 @@ class _TopBarState extends State<TopBar>
               padding: MySpacing.xy(8, 4),
               splashColor: contentTheme.danger.withAlpha(28),
               backgroundColor: Colors.transparent,
+              elevation: 0,
               child: Row(
                 children: [
                   Icon(

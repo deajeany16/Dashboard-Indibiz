@@ -16,15 +16,16 @@ class InputanController extends MyController {
   GlobalKey<FormFieldState> filterDatelKey = GlobalKey<FormFieldState>();
   TextEditingController dateController = TextEditingController();
   bool isLoading = true;
+  bool isFiltered = false;
 
   List semuaInputan = [];
   List filteredInputan = [];
   Map<String, dynamic> inputan = {};
 
-  DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate;
   bool isDatePickerUsed = false;
-  String selectedSTO = '';
-  String selectedDatel = '';
+  String selectedSTO = 'STO';
+  String selectedDatel = 'Datel';
   List stoList = ['PLK', 'PBU', 'SAI'];
   List datelList = ['Palangka Raya'];
 
@@ -240,7 +241,7 @@ class InputanController extends MyController {
   Future<void> selectDate() async {
     final DateTime? picked = await showDatePicker(
       context: Get.context!,
-      initialDate: selectedDate,
+      initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
@@ -253,16 +254,29 @@ class InputanController extends MyController {
     }
   }
 
+  void onSelectedSize(String size) {
+    selectedDatel = size;
+    update();
+  }
+
   void onFilter() {
     filteredInputan = semuaInputan;
+    isFiltered = true;
+
     if (isDatePickerUsed) {
       onDateFilter();
     }
-    if (selectedSTO.isNotEmpty) {
+    // if (selectedSTO.isNotEmpty) {
+    if (selectedSTO != "STO" && selectedSTO.isNotEmpty) {
       onSTOFilter();
+    } else {
+      selectedSTO = "STO";
     }
-    if (selectedDatel.isNotEmpty) {
+    // if (selectedDatel.isNotEmpty) {
+    if (selectedDatel != "Datel" && selectedDatel.isNotEmpty) {
       onDatelFilter();
+    } else {
+      selectedDatel = "Datel";
     }
     update();
   }
@@ -270,7 +284,7 @@ class InputanController extends MyController {
   void onDateFilter() {
     filteredInputan = filteredInputan.where((inputan) {
       return (DateFormat('dd-MM-yyyy').format(inputan.createdAt) ==
-          DateFormat('dd-MM-yyyy').format(selectedDate));
+          DateFormat('dd-MM-yyyy').format(selectedDate!));
     }).toList();
   }
 
@@ -287,10 +301,13 @@ class InputanController extends MyController {
 
   void onResetFilter() {
     isLoading = true;
+    isFiltered = false;
     filteredInputan = semuaInputan;
     dateController.clear();
-    filterSTOKey.currentState?.reset();
-    filterDatelKey.currentState?.reset();
+    selectedSTO = "STO";
+    selectedDatel = "Datel";
+    // filterSTOKey.currentState?.reset();
+    // filterDatelKey.currentState?.reset();
     isLoading = false;
     update();
   }

@@ -19,7 +19,6 @@ import 'package:webui/helper/widgets/my_container.dart';
 import 'package:webui/helper/widgets/my_list_extension.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
@@ -84,7 +83,7 @@ class _InputanScreenState extends State<InputanScreen>
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Form(
                                 key: _formKey,
@@ -93,125 +92,248 @@ class _InputanScreenState extends State<InputanScreen>
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     MySpacing.width(8),
-                                    SizedBox(
-                                      width: 120,
-                                      child: DropdownButtonFormField<String>(
-                                        key: controller.filterSTOKey,
-                                        dropdownColor: contentTheme.background,
-                                        menuMaxHeight: 200,
-                                        isDense: true,
-                                        items: controller.stoList.map((year) {
-                                          return DropdownMenuItem<String>(
-                                            value: year,
-                                            child: MyText.labelMedium(
-                                              year.toString(),
+                                    Icon(
+                                      Icons.filter_list_outlined,
+                                      color: theme.colorScheme.primary,
+                                      size: 24,
+                                    ),
+                                    MySpacing.width(12),
+                                    PopupMenuButton(
+                                      tooltip: "Pilih STO",
+                                      itemBuilder: (BuildContext context) {
+                                        return controller.stoList.map((item) {
+                                          return PopupMenuItem(
+                                            value: item,
+                                            height: 32,
+                                            child: MyText.bodySmall(
+                                              item.toString(),
+                                              color: theme
+                                                  .colorScheme.onBackground,
+                                              fontWeight: 600,
                                             ),
                                           );
-                                        }).toList(),
-                                        icon: Icon(
-                                          Icons.expand_more,
-                                          size: 20,
+                                        }).toList();
+                                      },
+                                      offset: const Offset(0, 32),
+                                      onSelected: (value) {
+                                        controller.selectedSTO =
+                                            value.toString();
+                                        controller.onFilter();
+                                      },
+                                      color: theme.cardTheme.color,
+                                      child: MyContainer.bordered(
+                                        borderColor: contentTheme.primary,
+                                        padding: MySpacing.xy(8, 4),
+                                        child: Row(
+                                          children: <Widget>[
+                                            MyText.labelMedium(
+                                                controller.selectedSTO,
+                                                fontWeight: 600,
+                                                color: contentTheme.primary),
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                  left: 4),
+                                              child: Icon(Icons.expand_more,
+                                                  size: 22,
+                                                  color: contentTheme.primary),
+                                            )
+                                          ],
                                         ),
-                                        decoration: InputDecoration(
-                                          hintText: "STO",
-                                          hintStyle: MyTextStyle.bodySmall(
-                                              xMuted: true),
-                                          border: outlineInputBorder,
-                                          enabledBorder: outlineInputBorder,
-                                          focusedBorder: focusedInputBorder,
-                                          contentPadding: MySpacing.all(8),
-                                          isCollapsed: true,
-                                          floatingLabelBehavior:
-                                              FloatingLabelBehavior.never,
-                                        ),
-                                        onChanged: (value) {
-                                          if (value != null) {
-                                            controller.selectedSTO = value;
-                                            controller.onFilter();
-                                          }
-                                        },
                                       ),
                                     ),
                                     MySpacing.width(8),
-                                    SizedBox(
-                                      width: 150,
-                                      child: DropdownButtonFormField<String>(
-                                        isExpanded: true,
-                                        key: controller.filterDatelKey,
-                                        dropdownColor: contentTheme.background,
-                                        menuMaxHeight: 200,
-                                        isDense: true,
-                                        items: controller.datelList.map((year) {
-                                          return DropdownMenuItem<String>(
-                                            value: year,
-                                            child: MyText.labelMedium(
-                                              year.toString(),
+                                    PopupMenuButton(
+                                      tooltip: "Pilih Datel",
+                                      itemBuilder: (BuildContext context) {
+                                        return controller.datelList.map((item) {
+                                          return PopupMenuItem(
+                                            value: item,
+                                            height: 32,
+                                            child: MyText.bodySmall(
+                                              item.toString(),
+                                              color: theme
+                                                  .colorScheme.onBackground,
+                                              fontWeight: 600,
                                             ),
                                           );
-                                        }).toList(),
-                                        icon: Icon(
-                                          Icons.expand_more,
-                                          size: 20,
-                                        ),
-                                        decoration: InputDecoration(
-                                          hintText: "Datel",
-                                          hintStyle: MyTextStyle.bodySmall(
-                                              xMuted: true),
-                                          border: outlineInputBorder,
-                                          enabledBorder: outlineInputBorder,
-                                          focusedBorder: focusedInputBorder,
-                                          contentPadding: MySpacing.all(8),
-                                          isCollapsed: true,
-                                          floatingLabelBehavior:
-                                              FloatingLabelBehavior.never,
-                                        ),
-                                        onChanged: (value) {
-                                          if (value != null) {
-                                            controller.selectedDatel = value;
-                                            controller.onFilter();
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    MySpacing.width(8),
-                                    SizedBox(
-                                      width: 120,
-                                      child: TextFormField(
-                                        key: controller.filterDateKey,
-                                        style: MyTextStyle.labelMedium(),
-                                        controller: controller.dateController,
-                                        readOnly: true,
-                                        onTap: () => controller.selectDate(),
-                                        decoration: InputDecoration(
-                                          hintText: "Pilih Tanggal",
-                                          hintStyle: MyTextStyle.bodySmall(
-                                              xMuted: true),
-                                          border: outlineInputBorder,
-                                          enabledBorder: outlineInputBorder,
-                                          focusedBorder: focusedInputBorder,
-                                          contentPadding: MySpacing.all(11),
-                                          isCollapsed: true,
-                                          floatingLabelBehavior:
-                                              FloatingLabelBehavior.never,
+                                        }).toList();
+                                      },
+                                      offset: const Offset(0, 32),
+                                      onSelected: (value) {
+                                        controller.selectedDatel =
+                                            value.toString();
+                                        controller.onFilter();
+                                      },
+                                      color: theme.cardTheme.color,
+                                      child: MyContainer.bordered(
+                                        borderColor: contentTheme.primary,
+                                        padding: MySpacing.xy(8, 4),
+                                        child: Row(
+                                          children: <Widget>[
+                                            MyText.labelMedium(
+                                                controller.selectedDatel,
+                                                fontWeight: 600,
+                                                color: contentTheme.primary),
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                  left: 4),
+                                              child: Icon(Icons.expand_more,
+                                                  size: 22,
+                                                  color: contentTheme.primary),
+                                            )
+                                          ],
                                         ),
                                       ),
                                     ),
+                                    // MySpacing.width(8),
+                                    // SizedBox(
+                                    //   width: 120,
+                                    //   child: DropdownButtonFormField<String>(
+                                    //     key: controller.filterSTOKey,
+                                    //     dropdownColor: contentTheme.background,
+                                    //     menuMaxHeight: 200,
+                                    //     isDense: true,
+                                    //     items: controller.stoList.map((year) {
+                                    //       return DropdownMenuItem<String>(
+                                    //         value: year,
+                                    //         child: MyText.labelMedium(
+                                    //           year.toString(),
+                                    //         ),
+                                    //       );
+                                    //     }).toList(),
+                                    //     icon: Icon(
+                                    //       Icons.expand_more,
+                                    //       size: 20,
+                                    //     ),
+                                    //     decoration: InputDecoration(
+                                    //       hintText: "STO",
+                                    //       hintStyle: MyTextStyle.bodySmall(
+                                    //           xMuted: true),
+                                    //       border: outlineInputBorder,
+                                    //       enabledBorder: outlineInputBorder,
+                                    //       focusedBorder: focusedInputBorder,
+                                    //       contentPadding: MySpacing.all(8),
+                                    //       isCollapsed: true,
+                                    //       floatingLabelBehavior:
+                                    //           FloatingLabelBehavior.never,
+                                    //     ),
+                                    //     onChanged: (value) {
+                                    //       if (value != null) {
+                                    //         controller.selectedSTO = value;
+                                    //         controller.onFilter();
+                                    //       }
+                                    //     },
+                                    //   ),
+                                    // ),
+                                    // MySpacing.width(8),
+                                    // SizedBox(
+                                    //   width: 150,
+                                    //   child: DropdownButtonFormField<String>(
+                                    //     isExpanded: true,
+                                    //     key: controller.filterDatelKey,
+                                    //     dropdownColor: contentTheme.background,
+                                    //     menuMaxHeight: 200,
+                                    //     isDense: true,
+                                    //     items: controller.datelList.map((year) {
+                                    //       return DropdownMenuItem<String>(
+                                    //         value: year,
+                                    //         child: MyText.labelMedium(
+                                    //           year.toString(),
+                                    //         ),
+                                    //       );
+                                    //     }).toList(),
+                                    //     icon: Icon(
+                                    //       Icons.expand_more,
+                                    //       size: 20,
+                                    //     ),
+                                    //     decoration: InputDecoration(
+                                    //       hintText: "Datel",
+                                    //       hintStyle: MyTextStyle.bodySmall(
+                                    //           xMuted: true),
+                                    //       border: outlineInputBorder,
+                                    //       enabledBorder: outlineInputBorder,
+                                    //       focusedBorder: focusedInputBorder,
+                                    //       contentPadding: MySpacing.all(8),
+                                    //       isCollapsed: true,
+                                    //       floatingLabelBehavior:
+                                    //           FloatingLabelBehavior.never,
+                                    //     ),
+                                    //     onChanged: (value) {
+                                    //       if (value != null) {
+                                    //         controller.selectedDatel = value;
+                                    //         controller.onFilter();
+                                    //       }
+                                    //     },
+                                    //   ),
+                                    // ),
+                                    // MySpacing.width(8),
+                                    // SizedBox(
+                                    //   width: 120,
+                                    //   child: TextFormField(
+                                    //     key: controller.filterDateKey,
+                                    //     style: MyTextStyle.labelMedium(),
+                                    //     controller: controller.dateController,
+                                    //     readOnly: true,
+                                    //     onTap: () => controller.selectDate(),
+                                    //     decoration: InputDecoration(
+                                    //       hintText: "Pilih Tanggal",
+                                    //       hintStyle: MyTextStyle.bodySmall(
+                                    //           xMuted: true),
+                                    //       border: outlineInputBorder,
+                                    //       enabledBorder: outlineInputBorder,
+                                    //       focusedBorder: focusedInputBorder,
+                                    //       contentPadding: MySpacing.all(11),
+                                    //       isCollapsed: true,
+                                    //       floatingLabelBehavior:
+                                    //           FloatingLabelBehavior.never,
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     MySpacing.width(8),
                                     MyButton.outlined(
                                       onPressed: () {
-                                        controller.onResetFilter();
+                                        controller.selectDate();
                                       },
-                                      elevation: 0,
-                                      padding: MySpacing.xy(10, 8),
                                       borderColor: contentTheme.primary,
-                                      splashColor:
-                                          contentTheme.primary.withOpacity(0.1),
-                                      borderRadiusAll: 20,
-                                      child: MyText.bodySmall(
-                                        'Reset',
-                                        color: contentTheme.primary,
+                                      padding: MySpacing.xy(15, 15),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.calendar_today_outlined,
+                                            color: contentTheme.primary,
+                                            size: 16,
+                                          ),
+                                          MySpacing.width(10),
+                                          MyText.labelMedium(
+                                              controller.selectedDate != null
+                                                  ? dateFormatter.format(
+                                                      controller.selectedDate!)
+                                                  : "Pilih Tanggal"
+                                                      .tr()
+                                                      .capitalizeWords,
+                                              fontWeight: 600,
+                                              color: contentTheme.primary),
+                                        ],
                                       ),
                                     ),
+                                    MySpacing.width(8),
+                                    if (controller.isFiltered)
+                                      MyButton.outlined(
+                                        onPressed: () {
+                                          controller.onResetFilter();
+                                        },
+                                        elevation: 0,
+                                        padding: MySpacing.xy(10, 8),
+                                        borderColor: contentTheme.primary,
+                                        splashColor: contentTheme.primary
+                                            .withOpacity(0.1),
+                                        borderRadiusAll: 20,
+                                        child: MyText.bodySmall(
+                                          'Reset',
+                                          color: contentTheme.primary,
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ),
@@ -219,11 +341,13 @@ class _InputanScreenState extends State<InputanScreen>
                                 children: [
                                   Tooltip(
                                     message: "Download File Excel",
-                                    child: IconButton(
-                                      splashRadius: 20,
+                                    child: MyButton.outlined(
                                       onPressed: () => Utils.createExcelFile(
                                           controller.semuaInputan),
-                                      icon: Icon(
+                                      padding: MySpacing.xy(16, 16),
+                                      borderColor:
+                                          contentTheme.primary.withAlpha(40),
+                                      child: Icon(
                                         Icons.text_snippet_outlined,
                                         color: Colors.green,
                                       ),
@@ -470,7 +594,7 @@ class _InputanScreenState extends State<InputanScreen>
                                                       DataCell(Row(
                                                         children: [
                                                           IconButton(
-                                                              splashRadius: 30,
+                                                              splashRadius: 20,
                                                               onPressed:
                                                                   () async {
                                                                 await controller
@@ -483,6 +607,7 @@ class _InputanScreenState extends State<InputanScreen>
                                                                       builder:
                                                                           (context) =>
                                                                               CustomDetailDialog(
+                                                                                inputan: controller.inputan,
                                                                                 title: "Detail Order",
                                                                                 contentTheme: contentTheme,
                                                                               ));

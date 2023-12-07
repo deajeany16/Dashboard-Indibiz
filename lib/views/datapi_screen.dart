@@ -461,6 +461,7 @@ class _PIScreenState extends State<PIScreen>
                                                                       builder:
                                                                           (context) =>
                                                                               CustomDetailDialog(
+                                                                                inputan: controller.inputan,
                                                                                 title: "Detail Order",
                                                                                 contentTheme: contentTheme,
                                                                               ));

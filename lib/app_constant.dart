@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
-final DateFormat dateFormatter = DateFormat('dd/MM/yyyy hh:mm aaa');
+final DateFormat dateFormatter = DateFormat('dd/MM/yyyy');
+final DateFormat dateTimeFormatter = DateFormat('dd/MM/yyyy hh:mm aaa');
 final DateFormat timeFormatter = DateFormat('jms');
 
 class AppConstant {

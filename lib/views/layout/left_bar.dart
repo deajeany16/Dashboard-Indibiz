@@ -102,7 +102,7 @@ class _LeftBarState extends State<LeftBar>
                     isCondensed: isCondensed,
                     route: '/dashboard',
                   ),
-                  labelWidget('Data Inputan'),
+                  labelWidget('Data Order'),
                   NavigationItem(
                     iconData: Icons.analytics,
                     title: "Semua Data",

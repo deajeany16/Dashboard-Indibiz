@@ -461,6 +461,7 @@ class _PSScreenState extends State<PSScreen>
                                                                       builder:
                                                                           (context) =>
                                                                               CustomDetailDialog(
+                                                                                inputan: controller.inputan,
                                                                                 title: "Detail Order",
                                                                                 contentTheme: contentTheme,
                                                                               ));
