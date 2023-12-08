@@ -202,13 +202,13 @@ class _REScreenState extends State<REScreen>
                                       },
                                       elevation: 0,
                                       padding: MySpacing.xy(10, 8),
-                                      borderColor: Color.fromRGBO(0, 169, 255, 1),
+                                      borderColor: contentTheme.primary,
                                       splashColor:
                                           contentTheme.primary.withOpacity(0.1),
                                       borderRadiusAll: 20,
                                       child: MyText.bodySmall(
                                         'Reset',
-                                        color: Color.fromRGBO(0, 169, 255, 1),
+                                        color: contentTheme.primary,
                                       ),
                                     ),
                                   ],
@@ -231,7 +231,7 @@ class _REScreenState extends State<REScreen>
                                           )),
                                   elevation: 0,
                                   padding: MySpacing.xy(20, 16),
-                                  backgroundColor: Color.fromRGBO(0, 169, 255, 1),
+                                  backgroundColor: contentTheme.primary,
                                   borderRadiusAll: AppStyle.buttonRadius.medium,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -272,7 +272,7 @@ class _REScreenState extends State<REScreen>
                                         onSelectAll: (_) => {},
                                         headingRowColor:
                                             MaterialStatePropertyAll(
-                                                Color.fromRGBO(0, 169, 255, 1)
+                                                contentTheme.primary
                                                     .withAlpha(40)),
                                         dataRowMaxHeight: 40,
                                         dataRowMinHeight: 20,
@@ -284,7 +284,7 @@ class _REScreenState extends State<REScreen>
                                             label: Skeleton.keep(
                                               child: MyText.labelMedium(
                                                 'No'.tr(),
-                                                color: Color.fromRGBO(0, 169, 255, 1),
+                                                color: contentTheme.primary,
                                               ),
                                             ),
                                           ),
@@ -294,63 +294,63 @@ class _REScreenState extends State<REScreen>
                                                 label: Skeleton.keep(
                                               child: MyText.labelMedium(
                                                 'Aksi'.tr().capitalizeWords,
-                                                color: Color.fromRGBO(0, 169, 255, 1),
+                                                color: contentTheme.primary,
                                               ),
                                             )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Tanggal Input'.tr(),
-                                              color: Color.fromRGBO(0, 169, 255, 1),
+                                              color: contentTheme.primary,
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'No SC'.tr().capitalizeWords,
-                                              color: Color.fromRGBO(0, 169, 255, 1),
+                                              color: contentTheme.primary,
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Nama Perusahaan'.tr(),
-                                              color: Color.fromRGBO(0, 169, 255, 1),
+                                              color: contentTheme.primary,
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Paket'.tr().capitalizeWords,
-                                              color: Color.fromRGBO(0, 169, 255, 1),
+                                              color: contentTheme.primary,
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Status SC'.tr().capitalizeWords,
-                                              color: Color.fromRGBO(0, 169, 255, 1),
+                                              color: contentTheme.primary,
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Datel'.tr(),
-                                              color: Color.fromRGBO(0, 169, 255, 1),
+                                              color: contentTheme.primary,
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Nama SP/SA/CSR'.tr(),
-                                              color: Color.fromRGBO(0, 169, 255, 1),
+                                              color: contentTheme.primary,
                                             ),
                                           )),
                                           DataColumn(
                                               label: Skeleton.keep(
                                             child: MyText.labelMedium(
                                               'Detail'.tr(),
-                                              color: Color.fromRGBO(0, 169, 255, 1),
+                                              color: contentTheme.primary,
                                             ),
                                           )),
                                         ],
@@ -393,7 +393,8 @@ class _REScreenState extends State<REScreen>
                                                                 icon: Icon(
                                                                   Icons
                                                                       .edit_document,
-                                                                  color: Color.fromRGBO(0, 169, 255, 1),
+                                                                  color: contentTheme
+                                                                      .primary,
                                                                 )),
                                                             IconButton(
                                                                 splashRadius:
@@ -469,7 +470,9 @@ class _REScreenState extends State<REScreen>
                                                               icon: Icon(
                                                                 Icons
                                                                     .info_outline,
-                                                                color: Color.fromRGBO(0, 169, 255, 1),
+                                                                color:
+                                                                    contentTheme
+                                                                        .primary,
                                                               ))
                                                         ],
                                                       )),

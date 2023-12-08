@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webui/controller/layout/layout_controller.dart';
 import 'package:webui/helper/theme/admin_theme.dart';
 import 'package:webui/helper/theme/app_style.dart';
@@ -53,8 +52,8 @@ class Layout extends StatelessWidget {
             },
             child: Icon(
               ThemeCustomizer.instance.theme == ThemeMode.dark
-                  ? LucideIcons.sun
-                  : LucideIcons.moon,
+                  ? Icons.sunny
+                  : Icons.nightlight_outlined,
               size: 18,
               color: topBarTheme.onBackground,
             ),
@@ -68,7 +67,7 @@ class Layout extends StatelessWidget {
               padding: MySpacing.xy(8, 8),
               child: Center(
                 child: Icon(
-                  LucideIcons.bell,
+                  Icons.notifications,
                   size: 18,
                 ),
               ),
@@ -224,7 +223,7 @@ class Layout extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(
-                        LucideIcons.user,
+                        Icons.person_2_outlined,
                         size: 14,
                         color: contentTheme.onBackground,
                       ),
@@ -247,7 +246,7 @@ class Layout extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(
-                        LucideIcons.settings,
+                        Icons.settings_outlined,
                         size: 14,
                         color: contentTheme.onBackground,
                       ),
@@ -278,7 +277,7 @@ class Layout extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(
-                    LucideIcons.logOut,
+                    Icons.logout,
                     size: 14,
                     color: contentTheme.danger,
                   ),

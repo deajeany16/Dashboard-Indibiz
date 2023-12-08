@@ -8,7 +8,6 @@ import 'package:webui/helper/widgets/my_button.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/my_text_style.dart';
-import 'package:webui/images.dart';
 import 'package:webui/views/layout/auth_layout.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -166,7 +165,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                       Center(
                         child: MyButton.block(
                             elevation: 0,
-                            backgroundColor: Color.fromRGBO(0, 169, 255, 1),
+                            backgroundColor: contentTheme.primary,
                             padding: MySpacing.xy(40, 20),
                             onPressed: () {},
                             child: MyText.bodyMedium(

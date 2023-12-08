@@ -46,10 +46,9 @@ class LeftBarTheme {
     this.background = const Color(0xffffffff),
     this.onBackground = const Color(0xff313a46),
     this.labelColor = const Color(0xff6c757d),
-    this.activeItemColor = const Color(0xff009678),
+    this.activeItemColor = const Color(0xff004466),
     // this.activeItemColor = const Color(0xff006784),
     this.activeItemBackground = const Color(0x14009678),
-
 
     // this.activeItemBackground = const Color(0x14006784),
   });
@@ -99,7 +98,7 @@ class RightBarTheme {
 
   RightBarTheme({
     this.disabled = const Color(0xffffffff),
-    this.activeSwitchBorderColor = const Color(0xff009678),
+    this.activeSwitchBorderColor = const Color(0xff004466),
     this.inactiveSwitchBorderColor = const Color(0xffdee2e6),
     this.onDisabled = const Color(0xff313a46),
   });
@@ -109,12 +108,12 @@ class RightBarTheme {
   static final RightBarTheme lightRightBarTheme = RightBarTheme(
       disabled: const Color(0xffffffff),
       onDisabled: const Color(0xffdee2e6),
-      activeSwitchBorderColor: const Color(0xff009678),
+      activeSwitchBorderColor: const Color(0xff004466),
       inactiveSwitchBorderColor: const Color(0xffdee2e6));
 
   static final RightBarTheme darkRightBarTheme = RightBarTheme(
       disabled: const Color(0xff444d57),
-      activeSwitchBorderColor: const Color(0xff009678),
+      activeSwitchBorderColor: const Color(0xff004466),
       inactiveSwitchBorderColor: const Color(0xffdee2e6),
       onDisabled: const Color(0xff515a65));
 }
@@ -170,20 +169,11 @@ class ContentTheme {
 
   ContentTheme({
     this.background = const Color(0xfff0f0f0),
-
-
-
     this.onBackground = const Color(0xffF1F1F2),
-    this.primary = const Color(0xff009678),
-
-
-
-
-
+    this.primary = const Color(0xff004466),
 
     // this.primary = const Color(0xff006784),
     this.onPrimary = const Color(0xffffffff),
-
     this.disabled = const Color(0xffffffff),
     this.onDisabled = const Color(0xffffffff),
     this.secondary = const Color(0xff6c757d),
@@ -284,8 +274,9 @@ class AdminTheme {
             ? ContentTheme.darkContentTheme
             : ContentTheme.lightContentTheme);
 
-    AppTheme.themeType = ThemeCustomizer.instance.theme==ThemeMode.light?ThemeType.light:ThemeType.dark;
+    AppTheme.themeType = ThemeCustomizer.instance.theme == ThemeMode.light
+        ? ThemeType.light
+        : ThemeType.dark;
     AppTheme.theme = AppTheme.getTheme();
-
   }
 }

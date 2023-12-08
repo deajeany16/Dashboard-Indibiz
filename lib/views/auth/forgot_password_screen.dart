@@ -90,7 +90,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                             elevation: 0,
                             borderRadiusAll: 4,
                             padding: MySpacing.xy(16, 16),
-                            backgroundColor: Color.fromRGBO(0, 169, 255, 1),
+                            backgroundColor: contentTheme.primary,
                             child: MyText.bodySmall(
                               'forgot_password'.tr().capitalizeWords,
                               color: contentTheme.onPrimary,
