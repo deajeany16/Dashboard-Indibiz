@@ -611,12 +611,9 @@ class _InputanScreenState extends State<InputanScreen>
                                                               icon: Icon(
                                                                 Icons
                                                                     .info_outline,
-                                                                color: Color
-                                                                    .fromRGBO(
-                                                                        0,
-                                                                        169,
-                                                                        255,
-                                                                        1),
+                                                                color:
+                                                                    contentTheme
+                                                                        .primary,
                                                               ))
                                                         ],
                                                       )),
