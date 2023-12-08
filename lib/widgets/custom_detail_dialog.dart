@@ -5,7 +5,6 @@ import 'package:webui/helper/theme/admin_theme.dart';
 import 'package:webui/helper/widgets/my_button.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/models/inputan_data.dart';
 
 class CustomDetailDialog extends StatelessWidget {
   const CustomDetailDialog({
@@ -29,7 +28,7 @@ class CustomDetailDialog extends StatelessWidget {
       // actionsPadding: MySpacing.xy(250, 16),
       // contentPadding: MySpacing.x(16),
       child: SizedBox(
-        width: 500,
+        width: 600,
         height: 500,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,14 +66,6 @@ class CustomDetailDialog extends StatelessWidget {
                       DataRow(
                         cells: [
                           DataCell(
-                            MyText.labelMedium('Nama Inputer'),
-                          ),
-                          DataCell(MyText.bodyMedium(inputan['nama']))
-                        ],
-                      ),
-                      DataRow(
-                        cells: [
-                          DataCell(
                             MyText.labelMedium('Tanggal Input'),
                           ),
                           DataCell(MyText.bodyMedium(dateTimeFormatter
@@ -84,17 +75,41 @@ class CustomDetailDialog extends StatelessWidget {
                       DataRow(
                         cells: [
                           DataCell(
-                            MyText.labelMedium('No SC'),
+                            MyText.labelMedium('Nama Inputer'),
                           ),
-                          DataCell(MyText.bodyMedium(inputan['nosc']))
+                          DataCell(MyText.bodyMedium(inputan['nama']))
                         ],
                       ),
                       DataRow(
                         cells: [
                           DataCell(
-                            MyText.labelMedium('Status SC'),
+                            MyText.labelMedium('Nama Sales'),
                           ),
-                          DataCell(MyText.bodyMedium(inputan['paket']))
+                          DataCell(MyText.bodyMedium(inputan['namasales']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('Kode Sales'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['kodesales']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('Datel'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['datel']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('STO'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['sto']))
                         ],
                       ),
                       DataRow(
@@ -108,6 +123,62 @@ class CustomDetailDialog extends StatelessWidget {
                       DataRow(
                         cells: [
                           DataCell(
+                            MyText.labelMedium('Alamat Perusahaan'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['alamat']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('ODP'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['odp']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('Koordinat'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['koordinat']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('No HP'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['nohp']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('No HP Alternatif'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['nohp2']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('Email'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['email']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('No SC'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['nosc']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
                             MyText.labelMedium('Paket'),
                           ),
                           DataCell(MyText.bodyMedium(inputan['paket']))
@@ -116,9 +187,25 @@ class CustomDetailDialog extends StatelessWidget {
                       DataRow(
                         cells: [
                           DataCell(
-                            MyText.labelMedium('Datel'),
+                            MyText.labelMedium('Status SC'),
                           ),
-                          DataCell(MyText.bodyMedium(inputan['datel']))
+                          DataCell(MyText.bodyMedium(inputan['status']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('Keterangan'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['ketstat']))
+                        ],
+                      ),
+                      DataRow(
+                        cells: [
+                          DataCell(
+                            MyText.labelMedium('Keterangan Lain'),
+                          ),
+                          DataCell(MyText.bodyMedium(inputan['ket']))
                         ],
                       ),
                     ],
