@@ -38,18 +38,30 @@ class CustomDetailDialog extends StatelessWidget {
               color: contentTheme.primary.withOpacity(0.08),
               padding: MySpacing.xy(16, 12),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.description_outlined,
-                    color: contentTheme.primary,
-                    size: 16,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.description_outlined,
+                        color: contentTheme.primary,
+                        size: 16,
+                      ),
+                      MySpacing.width(12),
+                      MyText.titleMedium(
+                        "Detail Order".tr(),
+                        fontWeight: 600,
+                        color: contentTheme.primary,
+                      ),
+                    ],
                   ),
-                  MySpacing.width(12),
-                  MyText.titleMedium(
-                    "Detail Order".tr(),
-                    fontWeight: 600,
-                    color: contentTheme.primary,
-                  ),
+                  InkWell(
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(
+                        Icons.close_outlined,
+                        size: 20,
+                        color: contentTheme.onBackground.withOpacity(0.5),
+                      ))
                 ],
               ),
             ),
