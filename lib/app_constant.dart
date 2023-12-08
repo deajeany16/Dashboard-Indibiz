@@ -9,5 +9,5 @@ class AppConstant {
   static int iOSAppVersion = 2;
   static String version = "1.0.0";
 
-  static String get appName => 'Dashboard';
+  static String get appName => 'Dashboard BS Kalteng';
 }

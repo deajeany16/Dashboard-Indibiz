@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
     return Consumer<AppNotifier>(
       builder: (_, notifier, ___) {
         return GetMaterialApp(
+          title: "Dashboard BS Kalteng",
           scrollBehavior: MyCustomScrollBehavior(),
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
