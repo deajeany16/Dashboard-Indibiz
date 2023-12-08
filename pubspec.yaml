@@ -97,6 +97,7 @@ flutter:
     - assets/images/auth/
     - assets/images/logo/
     - assets/images/logo/logo.png
+    - assets/images/logo/logo-indibiz.png
     - assets/images/dummy/
     - assets/lang/
     - assets/data/
