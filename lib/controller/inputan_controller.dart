@@ -303,9 +303,10 @@ class InputanController extends MyController {
     isLoading = true;
     isFiltered = false;
     filteredInputan = semuaInputan;
-    dateController.clear();
+    selectedDate = null;
     selectedSTO = "STO";
     selectedDatel = "Datel";
+    // dateController.clear();
     // filterSTOKey.currentState?.reset();
     // filterDatelKey.currentState?.reset();
     isLoading = false;

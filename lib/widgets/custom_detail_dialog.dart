@@ -57,6 +57,7 @@ class CustomDetailDialog extends StatelessWidget {
               child: SingleChildScrollView(
                   padding: MySpacing.y(24),
                   child: DataTable(
+                    dataRowMaxHeight: double.infinity,
                     showBottomBorder: true,
                     headingRowHeight: 0,
                     columns: const [

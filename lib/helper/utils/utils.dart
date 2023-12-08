@@ -85,52 +85,55 @@ class Utils {
 
     // Add headers
     sheet.appendRow([
-      "orderid",
-      "nama",
-      "namasales",
-      "kodesales",
-      "datel",
-      "sto",
-      "namaperusahaan",
-      "alamat",
-      "odp",
-      "koordinat",
-      "nohp",
-      "nohp2",
-      "email",
-      "paket",
-      "nosc",
-      "ket",
-      "status",
-      "ketstat",
-      "createdAt",
+      "Tanggal Input",
+      "Inputer",
+      "Nama SP/SA/CSR",
+      "Kode SP/SA/CSR",
+      "STO",
+      "Datel",
+      "Nama Perusahaan",
+      "Alamat Perusahaan",
+      "Koordinat",
+      "ODP",
+      "No HP",
+      "No HP Alternatif",
+      "Email",
+      "Paket Yg Diinginkan",
+      "NO SC",
+      "Status SC",
+      "Keterangan Status",
+      "Keterangan Tambahan",
     ]);
 
     // Add data
     for (var i = 0; i < semuaInputan.length; i++) {
       sheet.appendRow([
-        i + 1,
+        dateFormatter.format(semuaInputan[i].createdAt),
         semuaInputan[i].nama,
         semuaInputan[i].namasales,
         semuaInputan[i].kodesales,
-        semuaInputan[i].datel,
         semuaInputan[i].sto,
+        semuaInputan[i].datel,
         semuaInputan[i].namaperusahaan,
         semuaInputan[i].alamat,
-        semuaInputan[i].odp,
         semuaInputan[i].koordinat,
+        semuaInputan[i].odp,
         semuaInputan[i].nohp,
         semuaInputan[i].nohp2,
         semuaInputan[i].email,
         semuaInputan[i].paket,
         semuaInputan[i].nosc,
-        semuaInputan[i].ket,
         semuaInputan[i].status,
         semuaInputan[i].ketstat,
-        dateFormatter.format(semuaInputan[i].createdAt),
+        semuaInputan[i].ket,
       ]);
     }
 
-    excel.save(fileName: "inputan.xlsx");
+    for (var i = 0; i < 18; i++) {
+      sheet.setColumnAutoFit(i);
+    }
+
+    excel.save(
+        fileName: "Inputan_${dateTimeFormatter.format(DateTime.now())}.xlsx");
   }
 }

@@ -420,7 +420,7 @@ class _InputanScreenState extends State<InputanScreen>
                                             MaterialStatePropertyAll(
                                                 Color.fromRGBO(137, 207, 243, 1)
                                                     .withAlpha(40)),
-                                        dataRowMaxHeight: 40,
+                                        dataRowMaxHeight: double.infinity,
                                         dataRowMinHeight: 20,
                                         headingRowHeight: 45,
                                         columnSpacing: 20,
