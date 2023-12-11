@@ -115,7 +115,8 @@ class _TopBarState extends State<TopBar>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         MyContainer.rounded(
-                            paddingAll: 0, child: Icon(Icons.person)),
+                            paddingAll: 0,
+                            child: Icon(Icons.account_circle_outlined)),
                         MySpacing.width(8),
                         MyText.labelLarge(nama ?? 'user')
                       ],

@@ -12,7 +12,6 @@ import 'package:webui/helper/widgets/my_responsiv.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
 import 'package:webui/helper/widgets/responsive.dart';
-import 'package:webui/images.dart';
 import 'package:webui/views/layout/left_bar.dart';
 import 'package:webui/views/layout/right_bar.dart';
 import 'package:webui/views/layout/top_bar.dart';
@@ -43,22 +42,6 @@ class Layout extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         actions: [
-          InkWell(
-            onTap: () {
-              ThemeCustomizer.setTheme(
-                  ThemeCustomizer.instance.theme == ThemeMode.dark
-                      ? ThemeMode.light
-                      : ThemeMode.dark);
-            },
-            child: Icon(
-              ThemeCustomizer.instance.theme == ThemeMode.dark
-                  ? Icons.sunny
-                  : Icons.nightlight_outlined,
-              size: 18,
-              color: topBarTheme.onBackground,
-            ),
-          ),
-          MySpacing.width(8),
           CustomPopupMenu(
             backdrop: true,
             onChange: (_) {},
@@ -83,13 +66,7 @@ class Layout extends StatelessWidget {
             menu: Padding(
               padding: MySpacing.xy(8, 8),
               child: MyContainer.rounded(
-                  paddingAll: 0,
-                  child: Image.asset(
-                    Images.avatars[0],
-                    height: 28,
-                    width: 28,
-                    fit: BoxFit.cover,
-                  )),
+                  paddingAll: 0, child: Icon(Icons.account_circle_outlined)),
             ),
             menuBuilder: (_) => buildAccountMenu(),
           ),
@@ -98,6 +75,7 @@ class Layout extends StatelessWidget {
       ),
       drawer: LeftBar(),
       body: SingleChildScrollView(
+        padding: MySpacing.top(16),
         key: controller.scrollKey,
         child: child,
       ),
@@ -214,6 +192,7 @@ class Layout extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MyButton(
+                  elevation: 0,
                   onPressed: () => {},
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   borderRadiusAll: AppStyle.buttonRadius.medium,
@@ -237,6 +216,7 @@ class Layout extends StatelessWidget {
                 ),
                 MySpacing.height(4),
                 MyButton(
+                  elevation: 0,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   onPressed: () => {},
                   borderRadiusAll: AppStyle.buttonRadius.medium,
@@ -268,6 +248,7 @@ class Layout extends StatelessWidget {
           Padding(
             padding: MySpacing.xy(8, 8),
             child: MyButton(
+              elevation: 0,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () => {},
               borderRadiusAll: AppStyle.buttonRadius.medium,
