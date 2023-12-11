@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:webui/helper/extensions/string.dart';
 import 'package:webui/helper/services/url_service.dart';
+import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/theme_customizer.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
 import 'package:webui/helper/utils/ui_mixins.dart';
@@ -54,6 +55,7 @@ class _LeftBarState extends State<LeftBar>
 
   @override
   Widget build(BuildContext context) {
+    String? hakAkses = LocalStorage.getHakAkses();
     isCondensed = widget.isCondensed;
     return MyCard(
       paddingAll: 0,
@@ -135,6 +137,14 @@ class _LeftBarState extends State<LeftBar>
                     title: "User List".tr(),
                     isCondensed: isCondensed,
                     route: '/user',
+                  ),
+                  if (hakAkses == 'admin')
+                  labelWidget('Sales'),
+                  NavigationItem(
+                    iconData: Icons.group,
+                    title: "Sales List".tr(),
+                    isCondensed: isCondensed,
+                    route: '/sales',
                   ),
                 ],
               ),

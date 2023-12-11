@@ -69,6 +69,7 @@ class CustomDetailDialog extends StatelessWidget {
                       dataRowMaxHeight: double.infinity,
                       showBottomBorder: true,
                       headingRowHeight: 0,
+                      dataRowMinHeight: 40,
                       columns: const [
                         DataColumn(label: Text("")),
                         DataColumn(label: Text("")),
@@ -137,7 +138,7 @@ class CustomDetailDialog extends StatelessWidget {
                             DataCell(
                               MyText.labelMedium('Alamat Perusahaan'),
                             ),
-                            DataCell(MyText.bodyMedium(inputan['alamat']))
+                            DataCell(MyText.bodyMedium(inputan['alamat'])),
                           ],
                         ),
                         DataRow(
