@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:webui/helper/services/auth_service.dart';
+import 'package:webui/views/sales_screen.dart';
 import 'package:webui/views/user_screen.dart';
 import 'package:webui/views/auth/forgot_password_screen.dart';
 import 'package:webui/views/auth/locked_screen.dart';
@@ -51,6 +52,10 @@ getPageRoute() {
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: '/user', page: () => UserList(), middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: '/sales',
+        page: () => SalesList(),
+        middlewares: [AuthMiddleware()]),
     //------------------Authentication Screens------------------
     GetPage(name: '/auth/login', page: () => const LoginScreen()),
     GetPage(name: '/auth/sign_up', page: () => const SignUpScreen()),

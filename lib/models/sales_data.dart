@@ -7,17 +7,19 @@ import 'package:webui/helper/services/json_decoder.dart';
 import 'package:webui/models/identifier_model.dart';
 
 class Sales extends IdentifierModel {
-  final String nama_sales, kode_sales;
+  final String namaa, kodee, usertele, said;
 
-  Sales(super.id, this.nama_sales, this.kode_sales);
+  Sales(super.id, this.namaa, this.kodee, this.usertele, this.said);
 
   static Sales fromJSON(Map<String, dynamic> json) {
     JSONDecoder decoder = JSONDecoder(json);
 
-    String namaSales = decoder.getString('nama_sales');
-    String kodeSales = decoder.getString('kode_sales');
+    String namaa = decoder.getString('namaa');
+    String kodee = decoder.getString('kodee');
+    String usertele = decoder.getString('usertele');
+    String said = decoder.getString('said');
 
-    return Sales(decoder.getId, namaSales, kodeSales);
+    return Sales(decoder.getId, namaa, kodee, usertele, said);
   }
 
   static List<Sales> listFromJSON(List<dynamic> list) {

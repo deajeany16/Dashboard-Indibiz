@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:webui/helper/extensions/string.dart';
 import 'package:webui/helper/services/url_service.dart';
+import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/theme_customizer.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
 import 'package:webui/helper/utils/ui_mixins.dart';
@@ -10,7 +10,6 @@ import 'package:webui/helper/widgets/my_card.dart';
 import 'package:webui/helper/widgets/my_container.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/images.dart';
 import 'package:webui/widgets/custom_pop_menu.dart';
 
 typedef LeftbarMenuFunction = void Function(String key);
@@ -56,6 +55,7 @@ class _LeftBarState extends State<LeftBar>
 
   @override
   Widget build(BuildContext context) {
+    String? hakAkses = LocalStorage.getHakAkses();
     isCondensed = widget.isCondensed;
     return MyCard(
       paddingAll: 0,
@@ -137,6 +137,14 @@ class _LeftBarState extends State<LeftBar>
                     title: "User List".tr(),
                     isCondensed: isCondensed,
                     route: '/user',
+                  ),
+                  if (hakAkses == 'admin')
+                  labelWidget('Sales'),
+                  NavigationItem(
+                    iconData: Icons.group,
+                    title: "Sales List".tr(),
+                    isCondensed: isCondensed,
+                    route: '/sales',
                   ),
                 ],
               ),
