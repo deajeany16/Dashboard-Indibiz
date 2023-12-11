@@ -35,7 +35,7 @@ class CustomSalesDialog extends StatelessWidget {
         // contentPadding: MySpacing.x(16),
         child: SizedBox(
           width: 500,
-          height: 500,
+          height: 450,
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(32.0),
             child: Form(
