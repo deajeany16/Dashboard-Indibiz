@@ -339,6 +339,7 @@ class REScreenController extends MyController {
       }
       if (orders.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        Get.offAllNamed('/auth/login');
         update();
       } else {
         semuaRE = Inputan.listFromJSON(orders.body);
@@ -381,6 +382,7 @@ class REScreenController extends MyController {
       }
       if (order.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        Get.offAllNamed('/auth/login');
         update();
       } else {
         inputan = order.body;

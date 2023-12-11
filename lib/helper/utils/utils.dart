@@ -102,7 +102,7 @@ class Utils {
       "NO SC",
       "Status SC",
       "Keterangan Status",
-      "Keterangan Tambahan",
+      "Keterangan Lain",
     ]);
 
     // Add data

@@ -106,6 +106,8 @@ class UserController extends MyController {
       }
       if (users.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        Get.offAllNamed('/auth/login');
+        update();
       } else {
         semuaUser = User.listFromJSON(users.body);
         update();
@@ -128,6 +130,7 @@ class UserController extends MyController {
       dynamic userData = await userService.getUserByAdmin(id);
       if (userData.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        Get.offAllNamed('/auth/login');
         update();
       } else {
         user = userData.body;

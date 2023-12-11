@@ -29,162 +29,166 @@ class CustomUserDialog extends StatelessWidget {
     return Dialog(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       insetPadding: MySpacing.xy(150, 100),
-      child: SizedBox(
-        width: 500,
-        height: 500,
-        child: Form(
-          key: validator.formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                color: contentTheme.primary.withOpacity(0.08),
-                padding: MySpacing.xy(16, 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.description_outlined,
-                          color: contentTheme.primary,
-                          size: 16,
-                        ),
-                        MySpacing.width(12),
-                        MyText.titleMedium(
-                          title.tr(),
-                          fontWeight: 600,
-                          color: contentTheme.primary,
-                        ),
-                      ],
-                    ),
-                    InkWell(
-                        onTap: () => Navigator.pop(context),
-                        child: Icon(
-                          Icons.close_outlined,
-                          size: 20,
-                          color: contentTheme.onBackground.withOpacity(0.5),
-                        ))
-                  ],
+      child: SelectionArea(
+        child: SizedBox(
+          width: 500,
+          height: 500,
+          child: Form(
+            key: validator.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  color: contentTheme.primary.withOpacity(0.08),
+                  padding: MySpacing.xy(16, 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            title == "Tambah User" ? Icons.add : Icons.edit,
+                            color: contentTheme.primary,
+                            size: 16,
+                          ),
+                          MySpacing.width(12),
+                          MyText.titleMedium(
+                            title.tr(),
+                            fontWeight: 600,
+                            color: contentTheme.primary,
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: Icon(
+                            Icons.close_outlined,
+                            size: 20,
+                            color: contentTheme.onBackground.withOpacity(0.5),
+                          ))
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: MySpacing.all(16),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          MyText.labelMedium("Nama"),
+                          MySpacing.height(8),
+                          TextFormField(
+                            validator: validator.getValidation('nama'),
+                            controller: validator.getController('nama'),
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                              labelText: "eg: Ciya",
+                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              enabledBorder: outlineInputBorder,
+                              focusedBorder: focusedInputBorder,
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                            ),
+                          ),
+                          MySpacing.height(25),
+                          MyText.labelMedium("Username"),
+                          MySpacing.height(8),
+                          TextFormField(
+                            validator: validator.getValidation('username'),
+                            controller: validator.getController('username'),
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                              labelText: "eg: user1111",
+                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              enabledBorder: outlineInputBorder,
+                              focusedBorder: focusedInputBorder,
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                            ),
+                          ),
+                          MySpacing.height(25),
+                          title == "Tambah User"
+                              ? MyText.labelMedium("Password")
+                              : MyText.labelMedium("Password Baru"),
+                          MySpacing.height(8),
+                          TextFormField(
+                            validator: validator.getValidation('pass'),
+                            controller: validator.getController('pass'),
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                              labelText: "eg: rahasia",
+                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              enabledBorder: outlineInputBorder,
+                              focusedBorder: focusedInputBorder,
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                            ),
+                          ),
+                          MySpacing.height(25),
+                          MyText.labelMedium("Hak Akses"),
+                          MySpacing.height(8),
+                          TextFormField(
+                            validator: validator.getValidation('hak_akses'),
+                            controller: validator.getController('hak_akses'),
+                            keyboardType: TextInputType.name,
+                            decoration: InputDecoration(
+                              labelText: "eg: admin/inputer/sales",
+                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              enabledBorder: outlineInputBorder,
+                              focusedBorder: focusedInputBorder,
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                            ),
+                          ),
+                        ]),
+                  ),
+                ),
+                Padding(
                   padding: MySpacing.all(16),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MyText.labelMedium("Nama"),
-                        MySpacing.height(8),
-                        TextFormField(
-                          validator: validator.getValidation('nama'),
-                          controller: validator.getController('nama'),
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            labelText: "eg: Ciya",
-                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                            border: outlineInputBorder,
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: focusedInputBorder,
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                          ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      MyButton.text(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        padding: MySpacing.xy(20, 16),
+                        splashColor: contentTheme.secondary.withOpacity(0.1),
+                        child: MyText.labelMedium(
+                          'cancel'.tr(),
                         ),
-                        MySpacing.height(25),
-                        MyText.labelMedium("Username"),
-                        MySpacing.height(8),
-                        TextFormField(
-                          validator: validator.getValidation('username'),
-                          controller: validator.getController('username'),
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            labelText: "eg: user1111",
-                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                            border: outlineInputBorder,
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: focusedInputBorder,
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                          ),
-                        ),
-                        MySpacing.height(25),
-                        title == "Tambah User"
-                            ? MyText.labelMedium("Password")
-                            : MyText.labelMedium("Password Baru"),
-                        MySpacing.height(8),
-                        TextFormField(
-                          validator: validator.getValidation('pass'),
-                          controller: validator.getController('pass'),
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            labelText: "eg: rahasia",
-                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                            border: outlineInputBorder,
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: focusedInputBorder,
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                          ),
-                        ),
-                        MySpacing.height(25),
-                        MyText.labelMedium("Hak Akses"),
-                        MySpacing.height(8),
-                        TextFormField(
-                          validator: validator.getValidation('hak_akses'),
-                          controller: validator.getController('hak_akses'),
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            labelText: "eg: admin/inputer/sales",
-                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                            border: outlineInputBorder,
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: focusedInputBorder,
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                          ),
-                        ),
-                      ]),
-                ),
-              ),
-              Padding(
-                padding: MySpacing.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    MyButton.rounded(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      elevation: 0,
-                      padding: MySpacing.xy(20, 16),
-                      backgroundColor: contentTheme.secondary,
-                      child: MyText.labelMedium(
-                        "close".tr(),
-                        color: contentTheme.onSecondary,
                       ),
-                    ),
-                    MySpacing.width(16),
-                    MyButton.rounded(
-                      onPressed: () async {
-                        submit();
-                      },
-                      elevation: 0,
-                      padding: MySpacing.xy(20, 16),
-                      backgroundColor: contentTheme.primary,
-                      child: MyText.labelMedium(
-                        "save".tr(),
-                        color: contentTheme.onPrimary,
+                      MySpacing.width(16),
+                      MyButton.rounded(
+                        onPressed: () async {
+                          submit();
+                        },
+                        elevation: 0,
+                        padding: MySpacing.xy(20, 16),
+                        backgroundColor: contentTheme.primary,
+                        child: MyText.labelMedium(
+                          "save".tr(),
+                          color: contentTheme.onPrimary,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

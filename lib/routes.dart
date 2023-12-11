@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:webui/helper/services/auth_service.dart';
+import 'package:webui/views/dashboard_screen.dart';
 import 'package:webui/views/user_screen.dart';
 import 'package:webui/views/auth/forgot_password_screen.dart';
 import 'package:webui/views/auth/locked_screen.dart';
@@ -39,7 +40,7 @@ getPageRoute() {
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: '/dashboard',
-        page: () => ProjectScreen(),
+        page: () => DashboardScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: '/data-inputan',

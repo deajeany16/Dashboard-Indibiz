@@ -331,6 +331,7 @@ class InputanController extends MyController {
       }
       if (orders.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        Get.offAllNamed('/auth/login');
         update();
       } else {
         semuaInputan = Inputan.listFromJSON(orders.body);
@@ -373,6 +374,7 @@ class InputanController extends MyController {
       }
       if (order.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        Get.offAllNamed('/auth/login');
         update();
       } else {
         inputan = order.body;
