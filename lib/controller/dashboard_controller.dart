@@ -3,7 +3,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/models/dashboard_data.dart';
 
-class EcommerceController extends MyController {
+class DashboardController extends MyController {
   String selectedTimeBySales = "Year";
   String selectedTimeByBalance = "Year";
   List<DashBoardData> dashboard = [];

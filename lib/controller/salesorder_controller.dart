@@ -240,6 +240,7 @@ class SalesOrderController extends MyController {
       }
       if (salesorders.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        Get.offAllNamed('/auth/login');
         update();
       } else {
         semuaSalesOrder = SalesOrderInputan.listFromJSON(salesorders.body);
@@ -282,6 +283,7 @@ class SalesOrderController extends MyController {
       }
       if (salesorder.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
+        Get.offAllNamed('/auth/login');
         update();
       } else {
         salesorderinputan = salesorder.body;

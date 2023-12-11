@@ -281,7 +281,7 @@ class _TopBarState extends State<TopBar>
                 AuthService.isLoggedIn = false;
                 LocalStorage.setLoggedInUser(false);
                 LocalStorage.setToken('');
-                Get.offNamed('/auth/login');
+                Get.offAllNamed('/auth/login');
                 accountHideFn?.call();
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,
