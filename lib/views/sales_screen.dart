@@ -3,9 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:webui/controller/sales_controller.dart';
-import 'package:webui/controller/user_controller.dart';
 import 'package:webui/helper/extensions/extensions.dart';
-import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/app_style.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
 import 'package:webui/helper/utils/ui_mixins.dart';
@@ -22,7 +20,6 @@ import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
 import 'package:webui/widgets/custom_sales_dialog.dart';
-import 'package:webui/widgets/custom_user_dialog.dart';
 
 class SalesList extends StatefulWidget {
   const SalesList({Key? key}) : super(key: key);

@@ -421,11 +421,7 @@ class _InputanScreenState extends State<InputanScreen>
                                                 Color.fromRGBO(137, 207, 243, 1)
                                                     .withAlpha(40)),
                                         dataRowMaxHeight: double.infinity,
-<<<<<<< HEAD
                                         dataRowMinHeight: 40,
-=======
-                                        dataRowMinHeight: 20,
->>>>>>> 1dbb30789103c40a307f139f25180e858ecd41bb
                                         headingRowHeight: 45,
                                         columnSpacing: 20,
                                         showBottomBorder: false,

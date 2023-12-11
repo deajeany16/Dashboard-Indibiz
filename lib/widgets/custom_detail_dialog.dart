@@ -72,7 +72,6 @@ class CustomDetailDialog extends StatelessWidget {
                     dataRowMaxHeight: double.infinity,
                     showBottomBorder: true,
                     headingRowHeight: 0,
-                    dataRowMaxHeight: double.infinity,
                     dataRowMinHeight: 40,
                     columns: const [
                       DataColumn(label: Text("")),

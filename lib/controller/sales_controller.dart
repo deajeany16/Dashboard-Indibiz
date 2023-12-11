@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:webui/controller/my_controller.dart';
-import 'package:webui/helper/services/auth_service.dart';
 import 'package:webui/helper/services/sales_service.dart';
 import 'package:webui/helper/storage/local_storage.dart';
 import 'package:get/get.dart';
@@ -28,37 +27,37 @@ class SalesController extends MyController {
     inputValidator.addField(
       'namaa',
       label: "Nama Sales",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
       'kodee',
       label: "Kode Sales",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     inputValidator.addField(
       'usertele',
       label: "Username Tele",
-      required: true,
+      required: false,
       controller: TextEditingController(),
     );
     editValidator.addField(
       'namaa',
       label: "Nama Sales",
-      required: true,
+      required: false,
       controller: TextEditingController(text: sales['namaa']),
     );
     editValidator.addField(
       'kodee',
       label: "Kode Sales",
-      required: true,
+      required: false,
       controller: TextEditingController(text: sales['kodee']),
     );
     editValidator.addField(
       'usertele',
       label: "Username Tele",
-      required: true,
+      required: false,
       controller: TextEditingController(text: sales['usertele']),
     );
   }
@@ -130,15 +129,15 @@ class SalesController extends MyController {
     try {
       if (inputValidator.validateForm()) {
         update();
-        var authService = Get.put(AuthService());
+        var salesService = Get.put(SalesService());
         dynamic salesData =
-            await authService.register(inputValidator.getData());
+            await salesService.addSalesByAdmin(inputValidator.getData());
         if (salesData.statusCode == 200) {
           Get.back();
           Get.dialog(CustomAlert(
             context: Get.context!,
             title: 'Berhasil',
-            text: 'User berhasil dibuat',
+            text: 'Sales berhasil dibuat',
             confirmBtnText: 'Okay',
           ));
           inputValidator.resetForm();
