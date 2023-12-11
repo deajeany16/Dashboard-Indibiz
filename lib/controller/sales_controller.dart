@@ -10,6 +10,7 @@ import 'package:webui/widgets/custom_alert.dart';
 
 class SalesController extends MyController {
   List<Sales> semuaSales = [];
+  List<Sales> filteredSales = [];
   Map<String, dynamic> sales = {};
   MyFormValidator inputValidator = MyFormValidator();
   MyFormValidator editValidator = MyFormValidator();
@@ -19,7 +20,7 @@ class SalesController extends MyController {
 
   @override
   void onInit() {
-    semuaSales = _placeholderData();
+    filteredSales = _placeholderData();
     getAllSales();
     super.onInit();
   }
@@ -75,6 +76,17 @@ class SalesController extends MyController {
             ));
   }
 
+  void onSearch(query) {
+    filteredSales = semuaSales;
+    filteredSales = filteredSales
+        .where((user) => user.namaa
+            .toString()
+            .toLowerCase()
+            .contains(query.toString().toLowerCase()))
+        .toList();
+    update();
+  }
+
   Future<void> getAllSales() async {
     try {
       update();
@@ -90,10 +102,12 @@ class SalesController extends MyController {
         LocalStorage.setLoggedInUser(false);
       } else {
         semuaSales = Sales.listFromJSON(sales.body);
+        filteredSales = semuaSales;
         update();
         isLoading = false;
       }
     } catch (e) {
+      filteredSales = [];
       Get.dialog(CustomAlert(
         context: Get.context!,
         title: 'Error',

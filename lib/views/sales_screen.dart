@@ -3,10 +3,9 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:webui/controller/sales_controller.dart';
-import 'package:webui/controller/user_controller.dart';
 import 'package:webui/helper/extensions/extensions.dart';
-import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/app_style.dart';
+import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
 import 'package:webui/helper/utils/ui_mixins.dart';
 import 'package:webui/helper/widgets/my_breadcrumb.dart';
@@ -17,12 +16,10 @@ import 'package:webui/helper/widgets/my_container.dart';
 import 'package:webui/helper/widgets/my_list_extension.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
 import 'package:webui/widgets/custom_sales_dialog.dart';
-import 'package:webui/widgets/custom_user_dialog.dart';
 
 class SalesList extends StatefulWidget {
   const SalesList({Key? key}) : super(key: key);
@@ -56,7 +53,8 @@ class _SalesListState extends State<SalesList>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     MyText.titleMedium(
-                      "Sales List",
+                      "Sales List".tr(),
+                      fontSize: 18,
                       fontWeight: 600,
                     ),
                     MyBreadcrumb(
@@ -67,43 +65,33 @@ class _SalesListState extends State<SalesList>
                   ],
                 ),
               ),
-              MySpacing.height(10),
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: MySpacing.xy(25, 16),
-                      child: SizedBox(
-                        width: 200,
-                        child: TextFormField(
-                          maxLines: 1,
-                          style: MyTextStyle.bodyMedium(),
-                          decoration: InputDecoration(
-                              hintText: "search",
-                              hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                              border: outlineInputBorder,
-                              enabledBorder: outlineInputBorder,
-                              focusedBorder: focusedInputBorder,
-                              prefixIcon: const Align(
-                                  alignment: Alignment.center,
-                                  child: Icon(
-                                    Icons.search,
-                                    size: 14,
-                                  )),
-                              prefixIconConstraints: const BoxConstraints(
-                                  minWidth: 36,
-                                  maxWidth: 36,
-                                  minHeight: 32,
-                                  maxHeight: 32),
-                              contentPadding: MySpacing.xy(16, 12),
-                              isCollapsed: true,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never),
-                        ),
-                      ),
+              Padding(
+                padding: MySpacing.xy(24, 16),
+                child: TextField(
+                  onSubmitted: (value) => controller.onSearch(value),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: theme.cardTheme.color,
+                    hoverColor: theme.cardTheme.color,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: 18,
                     ),
-                  )
-                ],
+                    isDense: true,
+                    labelText: "Cari Sales",
+                    labelStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: focusedInputBorder,
+                    contentPadding: MySpacing.horizontal(20),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                  ),
+                ),
               ),
               MyCard(
                 shadow:
@@ -210,7 +198,7 @@ class _SalesListState extends State<SalesList>
                                       ),
                                     ),
                                   ],
-                                  rows: controller.semuaSales
+                                  rows: controller.filteredSales
                                       .mapIndexed(
                                         (index, data) => DataRow(
                                             onSelectChanged: (_) {},

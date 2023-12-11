@@ -6,6 +6,7 @@ import 'package:webui/controller/user_controller.dart';
 import 'package:webui/helper/extensions/extensions.dart';
 import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/app_style.dart';
+import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
 import 'package:webui/helper/utils/ui_mixins.dart';
 import 'package:webui/helper/widgets/my_breadcrumb.dart';
@@ -16,7 +17,6 @@ import 'package:webui/helper/widgets/my_container.dart';
 import 'package:webui/helper/widgets/my_list_extension.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
@@ -55,7 +55,8 @@ class _UserListState extends State<UserList>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     MyText.titleMedium(
-                      "User List",
+                      "User List".tr(),
+                      fontSize: 18,
                       fontWeight: 600,
                     ),
                     MyBreadcrumb(
@@ -66,43 +67,33 @@ class _UserListState extends State<UserList>
                   ],
                 ),
               ),
-              MySpacing.height(10),
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: MySpacing.xy(25, 16),
-                      child: SizedBox(
-                        width: 200,
-                        child: TextFormField(
-                          maxLines: 1,
-                          style: MyTextStyle.bodyMedium(),
-                          decoration: InputDecoration(
-                              hintText: "search",
-                              hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                              border: outlineInputBorder,
-                              enabledBorder: outlineInputBorder,
-                              focusedBorder: focusedInputBorder,
-                              prefixIcon: const Align(
-                                  alignment: Alignment.center,
-                                  child: Icon(
-                                    Icons.search,
-                                    size: 14,
-                                  )),
-                              prefixIconConstraints: const BoxConstraints(
-                                  minWidth: 36,
-                                  maxWidth: 36,
-                                  minHeight: 32,
-                                  maxHeight: 32),
-                              contentPadding: MySpacing.xy(16, 12),
-                              isCollapsed: true,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never),
-                        ),
-                      ),
+              Padding(
+                padding: MySpacing.xy(24, 16),
+                child: TextField(
+                  onSubmitted: (value) => controller.onSearch(value),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: theme.cardTheme.color,
+                    hoverColor: theme.cardTheme.color,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: 18,
                     ),
-                  )
-                ],
+                    isDense: true,
+                    labelText: "Cari User",
+                    labelStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: focusedInputBorder,
+                    contentPadding: MySpacing.horizontal(20),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                  ),
+                ),
               ),
               MyCard(
                 shadow:
@@ -112,37 +103,38 @@ class _UserListState extends State<UserList>
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    MyButton(
-                      onPressed: () => showDialog(
-                          context: context,
-                          builder: (context) => CustomUserDialog(
-                                title: "Tambah User",
-                                outlineInputBorder: outlineInputBorder,
-                                focusedInputBorder: focusedInputBorder,
-                                contentTheme: contentTheme,
-                                validator: controller.inputValidator,
-                                submit: () => controller.addUser(),
-                              )),
-                      elevation: 0,
-                      padding: MySpacing.xy(20, 16),
-                      backgroundColor: contentTheme.primary,
-                      borderRadiusAll: AppStyle.buttonRadius.medium,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.add_outlined,
-                            size: 20,
-                            color: contentTheme.onPrimary,
-                          ),
-                          MySpacing.width(8),
-                          MyText.labelSmall(
-                            'Tambah Data'.tr().capitalizeWords,
-                            color: contentTheme.onPrimary,
-                          ),
-                        ],
+                    if (hakAkses == 'admin')
+                      MyButton(
+                        onPressed: () => showDialog(
+                            context: context,
+                            builder: (context) => CustomUserDialog(
+                                  title: "Tambah User",
+                                  outlineInputBorder: outlineInputBorder,
+                                  focusedInputBorder: focusedInputBorder,
+                                  contentTheme: contentTheme,
+                                  validator: controller.inputValidator,
+                                  submit: () => controller.addUser(),
+                                )),
+                        elevation: 0,
+                        padding: MySpacing.xy(20, 16),
+                        backgroundColor: contentTheme.primary,
+                        borderRadiusAll: AppStyle.buttonRadius.medium,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.add_outlined,
+                              size: 20,
+                              color: contentTheme.onPrimary,
+                            ),
+                            MySpacing.width(8),
+                            MyText.labelSmall(
+                              'Tambah Data'.tr().capitalizeWords,
+                              color: contentTheme.onPrimary,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                     MySpacing.height(14),
                     MyContainer.none(
                       borderRadiusAll: 4,
@@ -200,8 +192,7 @@ class _UserListState extends State<UserList>
                                         color: contentTheme.primary,
                                       ),
                                     )),
-                                    if (hakAkses == 'admin' ||
-                                        hakAkses == 'inputer')
+                                    if (hakAkses == 'admin')
                                       DataColumn(
                                         label: Skeleton.keep(
                                           child: MyText.labelMedium(
@@ -211,7 +202,7 @@ class _UserListState extends State<UserList>
                                         ),
                                       ),
                                   ],
-                                  rows: controller.semuaUser
+                                  rows: controller.filteredUser
                                       .mapIndexed(
                                         (index, data) => DataRow(
                                             onSelectChanged: (_) {},
@@ -224,8 +215,7 @@ class _UserListState extends State<UserList>
                                                   data.username)),
                                               DataCell(MyText.bodySmall(
                                                   data.hak_akses)),
-                                              if (hakAkses == 'admin' ||
-                                                  hakAkses == 'inputer')
+                                              if (hakAkses == 'admin')
                                                 DataCell(
                                                   Row(
                                                     children: [

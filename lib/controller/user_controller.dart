@@ -10,6 +10,7 @@ import 'package:webui/widgets/custom_alert.dart';
 
 class UserController extends MyController {
   List<User> semuaUser = [];
+  List<User> filteredUser = [];
   Map<String, dynamic> user = {};
   MyFormValidator inputValidator = MyFormValidator();
   MyFormValidator editValidator = MyFormValidator();
@@ -19,7 +20,7 @@ class UserController extends MyController {
 
   @override
   void onInit() {
-    semuaUser = _placeholderData();
+    filteredUser = _placeholderData();
     getAllUser();
     super.onInit();
   }
@@ -87,6 +88,17 @@ class UserController extends MyController {
             ));
   }
 
+  void onSearch(query) {
+    filteredUser = semuaUser;
+    filteredUser = filteredUser
+        .where((user) => user.nama
+            .toString()
+            .toLowerCase()
+            .contains(query.toString().toLowerCase()))
+        .toList();
+    update();
+  }
+
   Future<void> getAllUser() async {
     try {
       update();
@@ -110,10 +122,12 @@ class UserController extends MyController {
         update();
       } else {
         semuaUser = User.listFromJSON(users.body);
+        filteredUser = semuaUser;
         update();
         isLoading = false;
       }
     } catch (e) {
+      filteredUser = [];
       Get.dialog(CustomAlert(
         context: Get.context!,
         title: 'Error',

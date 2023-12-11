@@ -16,17 +16,14 @@ class SalesOrderController extends MyController {
   GlobalKey<FormFieldState> filterDatelKey = GlobalKey<FormFieldState>();
   TextEditingController dateController = TextEditingController();
   bool isLoading = true;
+  bool isFiltered = false;
 
   List semuaSalesOrder = [];
   List filteredSalesOrder = [];
   Map<String, dynamic> salesorderinputan = {};
 
-  DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate;
   bool isDatePickerUsed = false;
-  // String selectedSTO = '';
-  // String selectedDatel = '';
-  // List stoList = ['PLK', 'PBU', 'SAI'];
-  // List datelList = ['Palangka Raya'];
 
   @override
   void onInit() {
@@ -167,7 +164,7 @@ class SalesOrderController extends MyController {
   Future<void> selectDate() async {
     final DateTime? picked = await showDatePicker(
       context: Get.context!,
-      initialDate: selectedDate,
+      initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
@@ -182,22 +179,18 @@ class SalesOrderController extends MyController {
 
   void onFilter() {
     filteredSalesOrder = semuaSalesOrder;
+    isFiltered = true;
+
     if (isDatePickerUsed) {
       onDateFilter();
     }
-    // if (selectedSTO.isNotEmpty) {
-    //   onSTOFilter();
-    // }
-    // if (selectedDatel.isNotEmpty) {
-    //   onDatelFilter();
-    // }
     update();
   }
 
   void onDateFilter() {
     filteredSalesOrder = filteredSalesOrder.where((salesorderinputan) {
       return (DateFormat('dd-MM-yyyy').format(salesorderinputan.createdAt) ==
-          DateFormat('dd-MM-yyyy').format(selectedDate));
+          DateFormat('dd-MM-yyyy').format(selectedDate!));
     }).toList();
   }
 
@@ -214,11 +207,23 @@ class SalesOrderController extends MyController {
 
   void onResetFilter() {
     isLoading = true;
+    isFiltered = false;
     filteredSalesOrder = semuaSalesOrder;
-    dateController.clear();
-    filterSTOKey.currentState?.reset();
-    filterDatelKey.currentState?.reset();
+    selectedDate = null;
     isLoading = false;
+    update();
+  }
+
+  void onSearch(query) {
+    filteredSalesOrder = semuaSalesOrder;
+    onFilter();
+    isFiltered = false;
+    filteredSalesOrder = filteredSalesOrder
+        .where((inputan) => inputan.kodesaless
+            .toString()
+            .toLowerCase()
+            .contains(query.toString().toLowerCase()))
+        .toList();
     update();
   }
 

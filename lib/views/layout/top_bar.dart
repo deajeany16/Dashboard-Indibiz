@@ -13,7 +13,6 @@ import 'package:webui/helper/widgets/my_container.dart';
 import 'package:webui/helper/widgets/my_dashed_divider.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/widgets/custom_pop_menu.dart';
 
 class TopBar extends StatefulWidget {
@@ -53,33 +52,6 @@ class _TopBarState extends State<TopBar>
                     color: topBarTheme.onBackground,
                   )),
               MySpacing.width(24),
-              SizedBox(
-                width: 200,
-                child: TextFormField(
-                  maxLines: 1,
-                  style: MyTextStyle.bodyMedium(),
-                  decoration: InputDecoration(
-                      hintText: "search",
-                      hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                      border: outlineInputBorder,
-                      enabledBorder: outlineInputBorder,
-                      focusedBorder: focusedInputBorder,
-                      prefixIcon: const Align(
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.search,
-                            size: 16,
-                          )),
-                      prefixIconConstraints: const BoxConstraints(
-                          minWidth: 36,
-                          maxWidth: 36,
-                          minHeight: 32,
-                          maxHeight: 32),
-                      contentPadding: MySpacing.xy(16, 12),
-                      isCollapsed: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
-                ),
-              ),
             ],
           ),
           Expanded(

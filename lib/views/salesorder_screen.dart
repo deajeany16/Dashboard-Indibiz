@@ -19,7 +19,6 @@ import 'package:webui/helper/widgets/my_container.dart';
 import 'package:webui/helper/widgets/my_list_extension.dart';
 import 'package:webui/helper/widgets/my_spacing.dart';
 import 'package:webui/helper/widgets/my_text.dart';
-import 'package:webui/helper/widgets/my_text_style.dart';
 import 'package:webui/helper/widgets/responsive.dart';
 import 'package:webui/views/layout/layout.dart';
 import 'package:webui/widgets/custom_alert.dart';
@@ -73,7 +72,34 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                       ],
                     ),
                   ),
-                  MySpacing.height(flexSpacing),
+                  Padding(
+                    padding: MySpacing.xy(24, 16),
+                    child: TextField(
+                      onSubmitted: (value) => controller.onSearch(value),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: theme.cardTheme.color,
+                        hoverColor: theme.cardTheme.color,
+                        prefixIcon: Icon(
+                          Icons.search,
+                          size: 18,
+                        ),
+                        isDense: true,
+                        labelText: "Cari Order (berdasarkan Kode Sales)",
+                        labelStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: focusedInputBorder,
+                        contentPadding: MySpacing.horizontal(20),
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                      ),
+                    ),
+                  ),
                   MyCard(
                       shadow: MyShadow(
                           elevation: 0.5, position: MyShadowPosition.bottom),
@@ -83,7 +109,7 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Form(
                                 key: _formKey,
@@ -92,99 +118,113 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     MySpacing.width(8),
-                                    SizedBox(
-                                      width: 120,
-                                      child: TextFormField(
-                                        key: controller.filterDateKey,
-                                        style: MyTextStyle.labelMedium(),
-                                        controller: controller.dateController,
-                                        readOnly: true,
-                                        onTap: () => controller.selectDate(),
-                                        decoration: InputDecoration(
-                                          hintText: "Pilih Tanggal",
-                                          hintStyle: MyTextStyle.bodySmall(
-                                              xMuted: true),
-                                          border: outlineInputBorder,
-                                          enabledBorder: outlineInputBorder,
-                                          focusedBorder: focusedInputBorder,
-                                          contentPadding: MySpacing.all(11),
-                                          isCollapsed: true,
-                                          floatingLabelBehavior:
-                                              FloatingLabelBehavior.never,
-                                        ),
+                                    Icon(
+                                      Icons.filter_list_outlined,
+                                      color: contentTheme.primary,
+                                      size: 24,
+                                    ),
+                                    MySpacing.width(12),
+                                    MyButton.outlined(
+                                      onPressed: () {
+                                        controller.selectDate();
+                                      },
+                                      borderColor: contentTheme.primary,
+                                      padding: MySpacing.xy(15, 15),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.calendar_today_outlined,
+                                            color: contentTheme.primary,
+                                            size: 16,
+                                          ),
+                                          MySpacing.width(10),
+                                          MyText.labelMedium(
+                                              controller.selectedDate != null
+                                                  ? dateFormatter.format(
+                                                      controller.selectedDate!)
+                                                  : "Pilih Tanggal"
+                                                      .tr()
+                                                      .capitalizeWords,
+                                              fontWeight: 600,
+                                              color: contentTheme.primary),
+                                        ],
                                       ),
                                     ),
                                     MySpacing.width(8),
-                                    MyButton.outlined(
-                                      onPressed: () {
-                                        controller.onResetFilter();
-                                      },
-                                      elevation: 0,
-                                      padding: MySpacing.xy(10, 8),
-                                      borderColor: contentTheme.primary,
-                                      splashColor:
-                                          contentTheme.primary.withOpacity(0.1),
-                                      borderRadiusAll: 20,
-                                      child: MyText.bodySmall(
-                                        'Reset',
-                                        color: contentTheme.primary,
+                                    if (controller.isFiltered)
+                                      MyButton.outlined(
+                                        onPressed: () {
+                                          controller.onResetFilter();
+                                        },
+                                        elevation: 0,
+                                        padding: MySpacing.xy(10, 8),
+                                        borderColor: contentTheme.primary,
+                                        splashColor: contentTheme.primary
+                                            .withOpacity(0.1),
+                                        borderRadiusAll: 20,
+                                        child: MyText.bodySmall(
+                                          'Reset',
+                                          color: contentTheme.primary,
+                                        ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ),
                               Row(
                                 children: [
-                                  IconButton(
-                                    splashRadius: 20,
-                                    onPressed: () => Utils.createExcelFile(
-                                        controller.semuaSalesOrder),
-                                    icon: Icon(
-                                      Icons.text_snippet_outlined,
-                                      color: contentTheme.primary,
+                                  Tooltip(
+                                    message: "Download File Excel",
+                                    child: MyButton.outlined(
+                                      onPressed: () => Utils.createExcelFile(
+                                          controller.semuaSalesOrder),
+                                      padding: MySpacing.xy(16, 16),
+                                      borderColor:
+                                          contentTheme.primary.withAlpha(40),
+                                      child: Icon(
+                                        Icons.download,
+                                        color: contentTheme.primary,
+                                      ),
                                     ),
                                   ),
                                   MySpacing.width(8),
-                                  if (hakAkses == 'admin' ||
-                                      hakAkses == 'inputer' ||
-                                      hakAkses == 'sales')
-                                    MyButton(
-                                      onPressed: () => showDialog(
-                                          context: context,
-                                          builder: (context) =>
-                                              CustomInputSalesDialog(
-                                                title: "Tambah Order Sales",
-                                                outlineInputBorder:
-                                                    outlineInputBorder,
-                                                focusedInputBorder:
-                                                    focusedInputBorder,
-                                                contentTheme: contentTheme,
-                                                validator:
-                                                    controller.inputValidator,
-                                                submit: () =>
-                                                    controller.addSalesOrder(),
-                                              )),
-                                      elevation: 0,
-                                      padding: MySpacing.xy(20, 16),
-                                      backgroundColor: contentTheme.primary,
-                                      borderRadiusAll:
-                                          AppStyle.buttonRadius.medium,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(
-                                            Icons.add_outlined,
-                                            size: 20,
-                                            color: contentTheme.onPrimary,
-                                          ),
-                                          MySpacing.width(8),
-                                          MyText.labelSmall(
-                                            'Tambah Data'.tr().capitalizeWords,
-                                            color: contentTheme.onPrimary,
-                                          ),
-                                        ],
-                                      ),
+                                  MyButton(
+                                    onPressed: () => showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            CustomInputSalesDialog(
+                                              title: "Tambah Sales Order",
+                                              outlineInputBorder:
+                                                  outlineInputBorder,
+                                              focusedInputBorder:
+                                                  focusedInputBorder,
+                                              contentTheme: contentTheme,
+                                              validator:
+                                                  controller.inputValidator,
+                                              submit: () =>
+                                                  controller.addSalesOrder(),
+                                            )),
+                                    elevation: 0,
+                                    padding: MySpacing.xy(20, 16),
+                                    backgroundColor: contentTheme.primary,
+                                    borderRadiusAll:
+                                        AppStyle.buttonRadius.medium,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.add_outlined,
+                                          size: 20,
+                                          color: contentTheme.onPrimary,
+                                        ),
+                                        MySpacing.width(8),
+                                        MyText.labelSmall(
+                                          'Tambah Data'.tr().capitalizeWords,
+                                          color: contentTheme.onPrimary,
+                                        ),
+                                      ],
                                     ),
+                                  ),
                                 ],
                               )
                             ],

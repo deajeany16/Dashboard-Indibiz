@@ -254,10 +254,10 @@ class InputanController extends MyController {
     }
   }
 
-  void onSelectedSize(String size) {
-    selectedDatel = size;
-    update();
-  }
+  // void onSelectedDatel(String datel) {
+  //   selectedDatel = datel;
+  //   update();
+  // }
 
   void onFilter() {
     filteredInputan = semuaInputan;
@@ -266,13 +266,11 @@ class InputanController extends MyController {
     if (isDatePickerUsed) {
       onDateFilter();
     }
-    // if (selectedSTO.isNotEmpty) {
     if (selectedSTO != "STO" && selectedSTO.isNotEmpty) {
       onSTOFilter();
     } else {
       selectedSTO = "STO";
     }
-    // if (selectedDatel.isNotEmpty) {
     if (selectedDatel != "Datel" && selectedDatel.isNotEmpty) {
       onDatelFilter();
     } else {
@@ -306,10 +304,20 @@ class InputanController extends MyController {
     selectedDate = null;
     selectedSTO = "STO";
     selectedDatel = "Datel";
-    // dateController.clear();
-    // filterSTOKey.currentState?.reset();
-    // filterDatelKey.currentState?.reset();
     isLoading = false;
+    update();
+  }
+
+  void onSearch(query) {
+    filteredInputan = semuaInputan;
+    onFilter();
+    isFiltered = false;
+    filteredInputan = filteredInputan
+        .where((inputan) => inputan.nosc
+            .toString()
+            .toLowerCase()
+            .contains(query.toString().toLowerCase()))
+        .toList();
     update();
   }
 

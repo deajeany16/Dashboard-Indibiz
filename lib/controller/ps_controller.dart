@@ -16,15 +16,16 @@ class PSScreenController extends MyController {
   GlobalKey<FormFieldState> filterDatelKey = GlobalKey<FormFieldState>();
   TextEditingController dateController = TextEditingController();
   bool isLoading = true;
+  bool isFiltered = false;
 
   List semuaPS = [];
   List filteredPS = [];
   Map<String, dynamic> inputan = {};
 
-  DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate;
   bool isDatePickerUsed = false;
-  String selectedSTO = '';
-  String selectedDatel = '';
+  String selectedSTO = 'STO';
+  String selectedDatel = 'Datel';
   List stoList = ['PLK', 'PBU', 'SAI'];
   List datelList = ['Palangka Raya'];
 
@@ -266,7 +267,7 @@ class PSScreenController extends MyController {
   Future<void> selectDate() async {
     final DateTime? picked = await showDatePicker(
       context: Get.context!,
-      initialDate: selectedDate,
+      initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
@@ -281,14 +282,20 @@ class PSScreenController extends MyController {
 
   void onFilter() {
     filteredPS = semuaPS;
+    isFiltered = true;
+
     if (isDatePickerUsed) {
       onDateFilter();
     }
-    if (selectedSTO.isNotEmpty) {
+    if (selectedSTO != "STO" && selectedSTO.isNotEmpty) {
       onSTOFilter();
+    } else {
+      selectedSTO = "STO";
     }
-    if (selectedDatel.isNotEmpty) {
+    if (selectedDatel != "Datel" && selectedDatel.isNotEmpty) {
       onDatelFilter();
+    } else {
+      selectedDatel = "Datel";
     }
     update();
   }
@@ -296,7 +303,7 @@ class PSScreenController extends MyController {
   void onDateFilter() {
     filteredPS = filteredPS.where((inputan) {
       return (DateFormat('dd-MM-yyyy').format(inputan.createdAt) ==
-          DateFormat('dd-MM-yyyy').format(selectedDate));
+          DateFormat('dd-MM-yyyy').format(selectedDate!));
     }).toList();
   }
 
@@ -312,11 +319,25 @@ class PSScreenController extends MyController {
 
   void onResetFilter() {
     isLoading = true;
+    isFiltered = false;
     filteredPS = semuaPS;
-    dateController.clear();
-    filterSTOKey.currentState?.reset();
-    filterDatelKey.currentState?.reset();
+    selectedDate = null;
+    selectedSTO = "STO";
+    selectedDatel = "Datel";
     isLoading = false;
+    update();
+  }
+
+  void onSearch(query) {
+    filteredPS = semuaPS;
+    onFilter();
+    isFiltered = false;
+    filteredPS = filteredPS
+        .where((inputan) => inputan.nosc
+            .toString()
+            .toLowerCase()
+            .contains(query.toString().toLowerCase()))
+        .toList();
     update();
   }
 
