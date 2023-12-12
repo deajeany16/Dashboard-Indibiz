@@ -143,12 +143,9 @@ class _LeftBarState extends State<LeftBar>
                     isCondensed: isCondensed,
                     route: '/user',
                   ),
-<<<<<<< HEAD
                   if (hakAkses == 'admin' || hakAkses == 'inputer')
                     labelWidget('Sales'),
-=======
-                  if (hakAkses == 'admin') labelWidget('Sales'),
->>>>>>> 4215a5d8294c51d3201227c2b3b15007a106457a
+
                   NavigationItem(
                     iconData: Icons.group,
                     title: "Sales List".tr(),
