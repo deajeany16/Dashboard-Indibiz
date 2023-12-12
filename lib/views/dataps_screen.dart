@@ -300,20 +300,10 @@ class _PSScreenState extends State<PSScreen>
                                       backgroundColor: contentTheme.primary,
                                       borderRadiusAll:
                                           AppStyle.buttonRadius.medium,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(
-                                            Icons.add_outlined,
-                                            size: 20,
-                                            color: contentTheme.onPrimary,
-                                          ),
-                                          MySpacing.width(8),
-                                          MyText.labelSmall(
-                                            'Tambah Data'.tr().capitalizeWords,
-                                            color: contentTheme.onPrimary,
-                                          ),
-                                        ],
+                                      child: Icon(
+                                        Icons.add_outlined,
+                                        size: 20,
+                                        color: contentTheme.onPrimary,
                                       ),
                                     ),
                                 ],
