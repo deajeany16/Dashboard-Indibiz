@@ -103,6 +103,7 @@ class _SalesListState extends State<SalesList>
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+<<<<<<< HEAD
                     if (hakAkses == 'admin')
                       MyButton(
                         onPressed: () => showDialog(
@@ -134,6 +135,27 @@ class _SalesListState extends State<SalesList>
                             ),
                           ],
                         ),
+=======
+                    MyButton(
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) => CustomSalesDialog(
+                                title: "Tambah Sales",
+                                outlineInputBorder: outlineInputBorder,
+                                focusedInputBorder: focusedInputBorder,
+                                contentTheme: contentTheme,
+                                validator: controller.inputValidator,
+                                submit: () => controller.addSales(),
+                              )),
+                      elevation: 0,
+                      padding: MySpacing.xy(20, 16),
+                      backgroundColor: contentTheme.primary,
+                      borderRadiusAll: AppStyle.buttonRadius.medium,
+                      child: Icon(
+                        Icons.add_outlined,
+                        size: 20,
+                        color: contentTheme.onPrimary,
+>>>>>>> 4215a5d8294c51d3201227c2b3b15007a106457a
                       ),
                     MySpacing.height(14),
                     MyContainer.none(

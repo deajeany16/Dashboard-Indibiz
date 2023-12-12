@@ -77,12 +77,17 @@ class _LeftBarState extends State<LeftBar>
                     onTap: () {
                       Get.toNamed('/dashboard');
                     },
-                    child: Image.asset(
-                      'assets/images/logo/logo.png',
-                      height: 80,
-                      width: 140,
-                      alignment: Alignment.center,
-                    ),
+                    child: isCondensed
+                        ? Image.asset(
+                            'assets/images/logo/logo-indibiz.png',
+                            height: 40,
+                            alignment: Alignment.center,
+                          )
+                        : Image.asset(
+                            'assets/images/logo/logo.png',
+                            height: 40,
+                            alignment: Alignment.center,
+                          ),
                   )
                 ],
               ),
@@ -138,8 +143,12 @@ class _LeftBarState extends State<LeftBar>
                     isCondensed: isCondensed,
                     route: '/user',
                   ),
+<<<<<<< HEAD
                   if (hakAkses == 'admin' || hakAkses == 'inputer')
                     labelWidget('Sales'),
+=======
+                  if (hakAkses == 'admin') labelWidget('Sales'),
+>>>>>>> 4215a5d8294c51d3201227c2b3b15007a106457a
                   NavigationItem(
                     iconData: Icons.group,
                     title: "Sales List".tr(),
