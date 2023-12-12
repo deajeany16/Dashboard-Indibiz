@@ -138,8 +138,8 @@ class _LeftBarState extends State<LeftBar>
                     isCondensed: isCondensed,
                     route: '/user',
                   ),
-                  if (hakAkses == 'admin')
-                  labelWidget('Sales'),
+                  if (hakAkses == 'admin' || hakAkses == 'inputer')
+                    labelWidget('Sales'),
                   NavigationItem(
                     iconData: Icons.group,
                     title: "Sales List".tr(),

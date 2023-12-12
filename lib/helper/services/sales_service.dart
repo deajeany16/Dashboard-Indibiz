@@ -18,6 +18,21 @@ class SalesService extends ApiClient {
     }
   }
 
+  Future<Response> getAllSalesByInputer() async {
+    try {
+      var token = LocalStorage.getToken();
+      var response = await get(
+        "sales/inputer",
+        headers: {
+          'Authorization': 'Bearer $token', //carrier
+        },
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<Response> getSalesByAdmin(id) async {
     try {
       var token = LocalStorage.getToken();
