@@ -343,8 +343,8 @@ class _REScreenState extends State<REScreen>
                                             MaterialStatePropertyAll(
                                                 contentTheme.primary
                                                     .withAlpha(40)),
-                                        dataRowMaxHeight: 40,
-                                        dataRowMinHeight: 20,
+                                        dataRowMaxHeight: double.infinity,
+                                        dataRowMinHeight: 40,
                                         headingRowHeight: 45,
                                         columnSpacing: 20,
                                         showBottomBorder: false,
