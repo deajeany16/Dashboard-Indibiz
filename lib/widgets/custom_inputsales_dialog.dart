@@ -27,6 +27,7 @@ class CustomInputSalesDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+        elevation: 0,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         // titlePadding: MySpacing.xy(16, 12),
         insetPadding: MySpacing.xy(50, 50),

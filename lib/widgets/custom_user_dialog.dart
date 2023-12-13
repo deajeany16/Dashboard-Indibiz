@@ -27,6 +27,7 @@ class CustomUserDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      elevation: 0,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       insetPadding: MySpacing.xy(150, 100),
       child: SelectionArea(

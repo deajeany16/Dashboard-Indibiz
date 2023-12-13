@@ -126,7 +126,7 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                     MySpacing.width(12),
                                     MyButton.outlined(
                                       onPressed: () {
-                                        controller.selectDate();
+                                        controller.selectDateRange();
                                       },
                                       borderColor: contentTheme.primary,
                                       padding: MySpacing.xy(15, 15),
@@ -140,9 +140,9 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                           ),
                                           MySpacing.width(10),
                                           MyText.labelMedium(
-                                              controller.selectedDate != null
-                                                  ? dateFormatter.format(
-                                                      controller.selectedDate!)
+                                              controller.selectedDateRange !=
+                                                      null
+                                                  ? "${dateFormatter.format(controller.selectedDateRange!.elementAt(0)!)} - ${dateFormatter.format(controller.selectedDateRange!.elementAt(1)!)}"
                                                   : "Pilih Tanggal"
                                                       .tr()
                                                       .capitalizeWords,

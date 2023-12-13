@@ -215,7 +215,7 @@ class _PSScreenState extends State<PSScreen>
                                     MySpacing.width(8),
                                     MyButton.outlined(
                                       onPressed: () {
-                                        controller.selectDate();
+                                        controller.selectDateRange();
                                       },
                                       borderColor: contentTheme.primary,
                                       padding: MySpacing.xy(15, 15),
@@ -229,9 +229,9 @@ class _PSScreenState extends State<PSScreen>
                                           ),
                                           MySpacing.width(10),
                                           MyText.labelMedium(
-                                              controller.selectedDate != null
-                                                  ? dateFormatter.format(
-                                                      controller.selectedDate!)
+                                              controller.selectedDateRange !=
+                                                      null
+                                                  ? "${dateFormatter.format(controller.selectedDateRange!.elementAt(0)!)} - ${dateFormatter.format(controller.selectedDateRange!.elementAt(1)!)}"
                                                   : "Pilih Tanggal"
                                                       .tr()
                                                       .capitalizeWords,

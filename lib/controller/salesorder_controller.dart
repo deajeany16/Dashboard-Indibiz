@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:webui/app_constant.dart';
 import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/salesorder_service.dart';
 import 'package:webui/helper/storage/local_storage.dart';
@@ -22,7 +24,7 @@ class SalesOrderController extends MyController {
   List filteredSalesOrder = [];
   Map<String, dynamic> salesorderinputan = {};
 
-  DateTime? selectedDate;
+  List<DateTime?>? selectedDateRange;
   bool isDatePickerUsed = false;
 
   @override
@@ -161,17 +163,41 @@ class SalesOrderController extends MyController {
             DateTime.now()));
   }
 
-  Future<void> selectDate() async {
-    final DateTime? picked = await showDatePicker(
-      context: Get.context!,
-      initialDate: selectedDate ?? DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
-    );
+  Future<void> selectDateRange() async {
+    final List<DateTime?>? picked = await showCalendarDatePicker2Dialog(
+        context: Get.context!,
+        config: CalendarDatePicker2WithActionButtonsConfig(
+          calendarType: CalendarDatePicker2Type.range,
+          dayTextStyle:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+          selectedDayTextStyle:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+          weekdayLabelTextStyle: const TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.bold,
+          ),
+          controlsTextStyle: const TextStyle(
+            color: Colors.black,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          centerAlignModePicker: true,
+          selectedYearTextStyle:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+          yearTextStyle:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+        ),
+        dialogSize: const Size(325, 400),
+        value: selectedDateRange ??
+            [
+              DateTime.now(),
+            ],
+        borderRadius: BorderRadius.circular(15),
+        dialogBackgroundColor: Colors.white);
 
-    if (picked != null && picked != selectedDate) {
-      selectedDate = picked;
-      dateController.text = DateFormat('dd-MM-yyyy').format(picked);
+    if (picked != null && picked != selectedDateRange) {
+      selectedDateRange = picked;
+      dateController.text = selectedDateRange.toString();
       isDatePickerUsed = true;
       onFilter();
     }
@@ -188,9 +214,13 @@ class SalesOrderController extends MyController {
   }
 
   void onDateFilter() {
-    filteredSalesOrder = filteredSalesOrder.where((salesorderinputan) {
-      return (DateFormat('dd-MM-yyyy').format(salesorderinputan.createdAt) ==
-          DateFormat('dd-MM-yyyy').format(selectedDate!));
+    filteredSalesOrder = filteredSalesOrder.where((inputan) {
+      var startDate = selectedDateRange!.elementAt(0);
+      var endDate = DateFormat("dd/MM/yyyy hh:mm").parse(
+          '${dateFormatter.format(selectedDateRange!.elementAt(1)!)} 23:59');
+      return inputan.createdAt != null &&
+          inputan.createdAt.compareTo(startDate) >= 0 &&
+          inputan.createdAt.compareTo(endDate) <= 0;
     }).toList();
   }
 
@@ -209,7 +239,7 @@ class SalesOrderController extends MyController {
     isLoading = true;
     isFiltered = false;
     filteredSalesOrder = semuaSalesOrder;
-    selectedDate = null;
+    selectedDateRange = null;
     isLoading = false;
     update();
   }
