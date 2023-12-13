@@ -4,6 +4,7 @@ import 'package:get/instance_manager.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:webui/controller/sales_controller.dart';
 import 'package:webui/helper/extensions/extensions.dart';
+import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/app_style.dart';
 import 'package:webui/helper/theme/app_theme.dart';
 import 'package:webui/helper/utils/my_shadow.dart';
@@ -41,6 +42,7 @@ class _SalesListState extends State<SalesList>
 
   @override
   Widget build(BuildContext context) {
+    String? hakAkses = LocalStorage.getHakAkses();
     return Layout(
       child: GetBuilder(
         init: controller,
@@ -101,27 +103,38 @@ class _SalesListState extends State<SalesList>
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    MyButton(
-                      onPressed: () => showDialog(
-                          context: context,
-                          builder: (context) => CustomSalesDialog(
-                                title: "Tambah Sales",
-                                outlineInputBorder: outlineInputBorder,
-                                focusedInputBorder: focusedInputBorder,
-                                contentTheme: contentTheme,
-                                validator: controller.inputValidator,
-                                submit: () => controller.addSales(),
-                              )),
-                      elevation: 0,
-                      padding: MySpacing.xy(20, 16),
-                      backgroundColor: contentTheme.primary,
-                      borderRadiusAll: AppStyle.buttonRadius.medium,
-                      child: Icon(
-                        Icons.add_outlined,
-                        size: 20,
-                        color: contentTheme.onPrimary,
+                    if (hakAkses == 'admin')
+                      MyButton(
+                        onPressed: () => showDialog(
+                            context: context,
+                            builder: (context) => CustomSalesDialog(
+                                  title: "Tambah Sales",
+                                  outlineInputBorder: outlineInputBorder,
+                                  focusedInputBorder: focusedInputBorder,
+                                  contentTheme: contentTheme,
+                                  validator: controller.inputValidator,
+                                  submit: () => controller.addSales(),
+                                )),
+                        elevation: 0,
+                        padding: MySpacing.xy(20, 16),
+                        backgroundColor: contentTheme.primary,
+                        borderRadiusAll: AppStyle.buttonRadius.medium,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.add_outlined,
+                              size: 20,
+                              color: contentTheme.onPrimary,
+                            ),
+                            MySpacing.width(8),
+                            MyText.labelSmall(
+                              'Tambah Data'.tr().capitalizeWords,
+                              color: contentTheme.onPrimary,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                     MySpacing.height(14),
                     MyContainer.none(
                       borderRadiusAll: 4,
@@ -179,14 +192,15 @@ class _SalesListState extends State<SalesList>
                                         color: contentTheme.primary,
                                       ),
                                     )),
-                                    DataColumn(
-                                      label: Skeleton.keep(
-                                        child: MyText.labelMedium(
-                                          'Aksi'.tr().capitalizeWords,
-                                          color: contentTheme.primary,
+                                    if (hakAkses == 'admin')
+                                      DataColumn(
+                                        label: Skeleton.keep(
+                                          child: MyText.labelMedium(
+                                            'Aksi'.tr().capitalizeWords,
+                                            color: contentTheme.primary,
+                                          ),
                                         ),
                                       ),
-                                    ),
                                   ],
                                   rows: controller.filteredSales
                                       .mapIndexed(
@@ -201,71 +215,75 @@ class _SalesListState extends State<SalesList>
                                                   MyText.bodySmall(data.kodee)),
                                               DataCell(MyText.bodySmall(
                                                   data.usertele)),
-                                              DataCell(
-                                                Row(
-                                                  children: [
-                                                    IconButton(
-                                                        splashRadius: 20,
-                                                        onPressed: () async {
-                                                          await controller
-                                                              .getSales(
-                                                                  data.said);
-                                                          await controller
-                                                              .onEdit();
-                                                          if (mounted) {
-                                                            await showDialog(
+                                              if (hakAkses == 'admin')
+                                                DataCell(
+                                                  Row(
+                                                    children: [
+                                                      IconButton(
+                                                          splashRadius: 20,
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .getSales(
+                                                                    data.said);
+                                                            await controller
+                                                                .onEdit();
+                                                            if (mounted) {
+                                                              await showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) =>
+                                                                          CustomSalesDialog(
+                                                                            title:
+                                                                                "Edit Sales",
+                                                                            outlineInputBorder:
+                                                                                outlineInputBorder,
+                                                                            focusedInputBorder:
+                                                                                focusedInputBorder,
+                                                                            contentTheme:
+                                                                                contentTheme,
+                                                                            validator:
+                                                                                controller.editValidator,
+                                                                            submit: () =>
+                                                                                controller.editSales(),
+                                                                          ));
+                                                            }
+                                                          },
+                                                          icon: Icon(
+                                                              Icons
+                                                                  .edit_document,
+                                                              color: contentTheme
+                                                                  .primary)),
+                                                      IconButton(
+                                                          splashRadius: 20,
+                                                          onPressed: () {
+                                                            showDialog(
                                                                 context:
                                                                     context,
                                                                 builder:
                                                                     (context) =>
-                                                                        CustomSalesDialog(
+                                                                        CustomAlert(
+                                                                          context:
+                                                                              context,
                                                                           title:
-                                                                              "Edit Sales",
-                                                                          outlineInputBorder:
-                                                                              outlineInputBorder,
-                                                                          focusedInputBorder:
-                                                                              focusedInputBorder,
-                                                                          contentTheme:
-                                                                              contentTheme,
-                                                                          validator:
-                                                                              controller.editValidator,
-                                                                          submit: () =>
-                                                                              controller.editSales(),
+                                                                              'Hapus Data?',
+                                                                          text:
+                                                                              'Anda Yakin Ingin Menghapus Data?',
+                                                                          confirmBtnColor:
+                                                                              contentTheme.red,
+                                                                          showCancelText:
+                                                                              true,
+                                                                          onConfirmBtnTap: () =>
+                                                                              controller.deleteSales(data.said),
                                                                         ));
-                                                          }
-                                                        },
-                                                        icon: Icon(
-                                                            Icons.edit_document,
-                                                            color: contentTheme
-                                                                .primary)),
-                                                    IconButton(
-                                                        splashRadius: 20,
-                                                        onPressed: () {
-                                                          showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (context) =>
-                                                                      CustomAlert(
-                                                                        context:
-                                                                            context,
-                                                                        title:
-                                                                            'Hapus Data?',
-                                                                        text:
-                                                                            'Anda Yakin Ingin Menghapus Data?',
-                                                                        confirmBtnColor:
-                                                                            contentTheme.red,
-                                                                        showCancelText:
-                                                                            true,
-                                                                        onConfirmBtnTap:
-                                                                            () =>
-                                                                                controller.deleteSales(data.said),
-                                                                      ));
-                                                        },
-                                                        icon: Icon(Icons.delete,
-                                                            color: Colors.red))
-                                                  ],
+                                                          },
+                                                          icon: Icon(
+                                                              Icons.delete,
+                                                              color:
+                                                                  Colors.red))
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
                                             ]),
                                       )
                                       .toList()),

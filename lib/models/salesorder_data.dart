@@ -4,14 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:webui/helper/services/json_decoder.dart';
 
 class SalesOrderInputan {
-  final String soid, namasaless,
+  final String soid,
+      namasaless,
       kodesaless,
       namausaha,
       alamatt,
       cp,
       emaill,
       pakett,
-      maps;
+      maps,
+      statusinput;
   final DateTime createdAt;
 
   SalesOrderInputan(
@@ -24,6 +26,7 @@ class SalesOrderInputan {
       this.emaill,
       this.pakett,
       this.maps,
+      this.statusinput,
       this.createdAt);
 
   static SalesOrderInputan fromJSON(Map<String, dynamic> json) {
@@ -39,10 +42,11 @@ class SalesOrderInputan {
     String emaill = decoder.getString('emaill');
     String pakett = decoder.getString('pakett');
     String maps = decoder.getString('maps');
+    String statusinput = decoder.getString('statusinput');
     DateTime createdAt = decoder.getDateTime('createdAt');
 
     return SalesOrderInputan(soid, namasaless, kodesaless, namausaha, alamatt,
-        cp, emaill, pakett, maps, createdAt);
+        cp, emaill, pakett, maps, statusinput, createdAt);
   }
 
   static List<SalesOrderInputan> listFromJSON(List<dynamic> list) {

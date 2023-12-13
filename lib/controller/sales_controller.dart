@@ -95,7 +95,10 @@ class SalesController extends MyController {
       switch (hakAkses) {
         case "admin":
           sales = await salesService.getAllSalesByAdmin();
-          break;
+        break;
+        case "inputer":
+          sales = await salesService.getAllSalesByInputer();
+        break;
       }
       if (sales.statusCode == 401) {
         LocalStorage.setLoggedInUser(false);
@@ -234,4 +237,5 @@ class SalesController extends MyController {
 
     update();
   }
+
 }

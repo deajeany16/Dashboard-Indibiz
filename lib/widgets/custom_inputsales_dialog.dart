@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webui/helper/extensions/extensions.dart';
+import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/admin_theme.dart';
 import 'package:webui/helper/widgets/my_button.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
@@ -26,6 +27,7 @@ class CustomInputSalesDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? hakAkses = LocalStorage.getHakAkses();
     return Dialog(
         elevation: 0,
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -248,6 +250,33 @@ class CustomInputSalesDialog extends StatelessWidget {
                                     FloatingLabelBehavior.never,
                               ),
                             ),
+                            if (hakAkses == 'admin' || hakAkses == 'inputer')
+                              MySpacing.height(25),
+                            if (hakAkses == 'admin' || hakAkses == 'inputer')
+                              MyText.labelMedium(
+                                "Status Input".tr().capitalizeWords,
+                              ),
+                            MySpacing.height(8),
+                            if (hakAkses == 'admin' || hakAkses == 'inputer')
+                              TextFormField(
+                                validator:
+                                    validator.getValidation('statusinput'),
+                                controller:
+                                    validator.getController('statusinput'),
+                                keyboardType: TextInputType.name,
+                                decoration: InputDecoration(
+                                  labelText: "eg: done",
+                                  labelStyle:
+                                      MyTextStyle.bodySmall(xMuted: true),
+                                  border: outlineInputBorder,
+                                  enabledBorder: outlineInputBorder,
+                                  focusedBorder: focusedInputBorder,
+                                  contentPadding: MySpacing.all(16),
+                                  isCollapsed: true,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                ),
+                              ),
                           ]),
                     ),
                   ),

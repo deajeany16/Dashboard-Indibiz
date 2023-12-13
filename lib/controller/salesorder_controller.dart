@@ -83,6 +83,12 @@ class SalesOrderController extends MyController {
       required: false,
       controller: TextEditingController(),
     );
+    inputValidator.addField(
+      'statusinput',
+      label: "Status Input",
+      required: false,
+      controller: TextEditingController(text: salesorderinputan['statusinput']),
+    );
     editValidator.addField(
       'namasaless',
       label: "Nama Sales",
@@ -131,6 +137,12 @@ class SalesOrderController extends MyController {
       required: false,
       controller: TextEditingController(text: salesorderinputan['maps']),
     );
+    editValidator.addField(
+      'statusinput',
+      label: "Status Input",
+      required: false,
+      controller: TextEditingController(text: salesorderinputan['statusinput']),
+    );
   }
 
   Future<void> onEdit() async {
@@ -145,6 +157,8 @@ class SalesOrderController extends MyController {
     editValidator.setControllerText('emaill', salesorderinputan['emaill']);
     editValidator.setControllerText('pakett', salesorderinputan['pakett']);
     editValidator.setControllerText('maps', salesorderinputan['maps']);
+    editValidator.setControllerText(
+        'statusinput', salesorderinputan['statusinput']);
   }
 
   List<SalesOrderInputan> _placeholderData() {
@@ -160,6 +174,7 @@ class SalesOrderController extends MyController {
             'emaill',
             'pakett',
             'maps',
+            'statusinput',
             DateTime.now()));
   }
 
