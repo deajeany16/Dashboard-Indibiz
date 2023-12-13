@@ -136,7 +136,9 @@ class _LeftBarState extends State<LeftBar>
                     route: '/inputan-sales',
                     isCondensed: isCondensed,
                   ),
-                  labelWidget('User'),
+                  if (hakAkses == 'admin' || hakAkses == 'inputer')
+                    labelWidget('User'),
+                    if (hakAkses == 'admin' || hakAkses == 'inputer')
                   NavigationItem(
                     iconData: Icons.group,
                     title: "User List".tr(),
@@ -144,8 +146,8 @@ class _LeftBarState extends State<LeftBar>
                     route: '/user',
                   ),
                   if (hakAkses == 'admin' || hakAkses == 'inputer')
-                    labelWidget('Sales'),
-
+                  labelWidget('Sales'),
+                  if (hakAkses == 'admin' || hakAkses == 'inputer')
                   NavigationItem(
                     iconData: Icons.group,
                     title: "Sales List".tr(),

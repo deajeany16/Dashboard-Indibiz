@@ -13,7 +13,6 @@ import 'package:webui/views/datapi_screen.dart';
 import 'package:webui/views/datare_screen.dart';
 import 'package:webui/views/dataps_screen.dart';
 import 'package:webui/views/inputan_screen.dart';
-import 'package:webui/views/project_screen.dart';
 import 'package:webui/views/salesorder_screen.dart';
 
 class AuthMiddleware extends GetMiddleware {

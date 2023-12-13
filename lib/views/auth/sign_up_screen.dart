@@ -130,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                             .getController('hak_akses'),
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                            hintText: "Sales",
+                            hintText: "sales",
                             border: outlineInputBorder,
                             contentPadding: MySpacing.all(16),
                             isCollapsed: true,

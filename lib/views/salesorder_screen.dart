@@ -331,6 +331,15 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                               color: contentTheme.primary,
                                             ),
                                           )),
+                                          DataColumn(
+                                              label: Skeleton.keep(
+                                            child: MyText.labelMedium(
+                                              'Status Input'
+                                                  .tr()
+                                                  .capitalizeWords,
+                                              color: contentTheme.primary,
+                                            ),
+                                          )),
                                         ],
                                         rows: controller.filteredSalesOrder
                                             .mapIndexed((index, data) =>
@@ -437,6 +446,11 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                                         width: 200,
                                                         child: MyText.bodySmall(
                                                             data.maps),
+                                                      )),
+                                                      DataCell(SizedBox(
+                                                        width: 200,
+                                                        child: MyText.bodySmall(
+                                                            data.statusinput),
                                                       )),
                                                     ]))
                                             .toList()),
