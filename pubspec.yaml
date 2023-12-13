@@ -50,7 +50,6 @@ dependencies:
   syncfusion_flutter_maps: ^22.2.12
   intl: ^0.18.1
   flutter_native_splash: ^2.3.5
-  data_table_2: ^2.5.9
   skeletonizer: ^0.8.0
   excel: 3.0.0
   calendar_date_picker2: ^0.5.3

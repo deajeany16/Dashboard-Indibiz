@@ -40,6 +40,7 @@ class Layout extends StatelessWidget {
     return Scaffold(
       key: controller.scaffoldKey,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         elevation: 0,
         actions: [
           CustomPopupMenu(
