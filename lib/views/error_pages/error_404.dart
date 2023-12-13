@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webui/controller/error_pages/error_404_controller.dart';
 import 'package:webui/helper/utils/ui_mixins.dart';
 import 'package:webui/helper/widgets/my_text.dart';
@@ -35,7 +34,7 @@ class _Error404State extends State<Error404>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
-                  LucideIcons.frown,
+                  Icons.sentiment_dissatisfied_outlined,
                   size: 80,
                 ),
                 MyText.bodyMedium(
