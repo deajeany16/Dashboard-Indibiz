@@ -60,6 +60,8 @@ class AppTheme {
     /// Brightness
     brightness: Brightness.light,
 
+    useMaterial3: false,
+
     /// Primary Color
     primaryColor: Color(0x004466FF),
     scaffoldBackgroundColor: Color(0xfff0f0f0),
