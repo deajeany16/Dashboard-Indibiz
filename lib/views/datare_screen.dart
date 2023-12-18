@@ -154,7 +154,7 @@ class _REScreenState extends State<REScreen>
                                         child: MediaQuery.of(context)
                                                     .size
                                                     .width <=
-                                                576
+                                                768
                                             ? Icon(Icons.location_city,
                                                 size: 18,
                                                 color: contentTheme.primary)
@@ -209,7 +209,7 @@ class _REScreenState extends State<REScreen>
                                         child: MediaQuery.of(context)
                                                     .size
                                                     .width <=
-                                                576
+                                                768
                                             ? Icon(Icons.home_work_outlined,
                                                 size: 18,
                                                 color: contentTheme.primary)
@@ -244,7 +244,7 @@ class _REScreenState extends State<REScreen>
                                       child: MediaQuery.of(context)
                                                   .size
                                                   .width <=
-                                              576
+                                              768
                                           ? Icon(Icons.calendar_today_outlined,
                                               size: 18,
                                               color: contentTheme.primary)
@@ -299,7 +299,7 @@ class _REScreenState extends State<REScreen>
                                           controller.semuaRE),
                                       padding:
                                           MediaQuery.of(context).size.width <=
-                                                  576
+                                                  768
                                               ? MySpacing.xy(8, 8)
                                               : MySpacing.xy(16, 16),
                                       borderColor:
@@ -309,7 +309,7 @@ class _REScreenState extends State<REScreen>
                                         color: contentTheme.primary,
                                         size:
                                             MediaQuery.of(context).size.width <=
-                                                    576
+                                                    768
                                                 ? 18
                                                 : 22,
                                       ),
@@ -337,7 +337,7 @@ class _REScreenState extends State<REScreen>
                                       elevation: 0,
                                       padding:
                                           MediaQuery.of(context).size.width <=
-                                                  576
+                                                  768
                                               ? MySpacing.xy(8, 8)
                                               : MySpacing.xy(16, 16),
                                       backgroundColor: contentTheme.primary,
@@ -347,7 +347,7 @@ class _REScreenState extends State<REScreen>
                                         Icons.add_rounded,
                                         size:
                                             MediaQuery.of(context).size.width <=
-                                                    576
+                                                    768
                                                 ? 18
                                                 : 22,
                                         color: contentTheme.onPrimary,
