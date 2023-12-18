@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webui/controller/auth/locked_controller.dart';
 import 'package:webui/helper/extensions/string.dart';
 import 'package:webui/helper/theme/app_theme.dart';
@@ -124,7 +123,8 @@ class _LockedScreenState extends State<LockedScreen>
                                 size: 20,
                               ),
                             ),
-                            prefixIcon: const Icon(LucideIcons.lock, size: 18),
+                            prefixIcon:
+                                const Icon(Icons.lock_outline, size: 18),
                             hintText: "Password",
                             hintStyle: MyTextStyle.bodySmall(xMuted: true),
                             border: outlineInputBorder,
@@ -216,7 +216,7 @@ class _LockedScreenState extends State<LockedScreen>
                       'Nike Adapt BB 2.0',
                       fontWeight: 600,
                     ),
-                    Icon(LucideIcons.star)
+                    Icon(Icons.star_border)
                   ],
                 ),
                 MyText.bodyMedium('Consistent, customized fit, game-changing.'),

@@ -124,32 +124,40 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                       size: 24,
                                     ),
                                     MySpacing.width(12),
-                                    MyButton.outlined(
-                                      onPressed: () {
+                                    MyContainer.bordered(
+                                      onTap: () {
                                         controller.selectDateRange();
                                       },
                                       borderColor: contentTheme.primary,
-                                      padding: MySpacing.xy(15, 15),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.calendar_today_outlined,
-                                            color: contentTheme.primary,
-                                            size: 16,
-                                          ),
-                                          MySpacing.width(10),
-                                          MyText.labelMedium(
-                                              controller.selectedDateRange !=
-                                                      null
-                                                  ? "${dateFormatter.format(controller.selectedDateRange!.elementAt(0)!)} - ${dateFormatter.format(controller.selectedDateRange!.elementAt(1)!)}"
-                                                  : "Pilih Tanggal"
-                                                      .tr()
-                                                      .capitalizeWords,
-                                              fontWeight: 600,
-                                              color: contentTheme.primary),
-                                        ],
-                                      ),
+                                      padding: MySpacing.xy(8, 4),
+                                      child: MediaQuery.of(context)
+                                                  .size
+                                                  .width <=
+                                              576
+                                          ? Icon(Icons.calendar_today_outlined,
+                                              size: 18,
+                                              color: contentTheme.primary)
+                                          : Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.calendar_today_outlined,
+                                                  color: contentTheme.primary,
+                                                  size: 18,
+                                                ),
+                                                MySpacing.width(10),
+                                                MyText.labelMedium(
+                                                    controller.selectedDateRange !=
+                                                            null
+                                                        ? "${dateFormatter.format(controller.selectedDateRange!.elementAt(0)!)} - ${dateFormatter.format(controller.selectedDateRange!.elementAt(1)!)}"
+                                                        : "Rentang Tanggal"
+                                                            .tr()
+                                                            .capitalizeWords,
+                                                    fontWeight: 600,
+                                                    color:
+                                                        contentTheme.primary),
+                                              ],
+                                            ),
                                     ),
                                     MySpacing.width(8),
                                     if (controller.isFiltered)
@@ -178,43 +186,62 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                     child: MyButton.outlined(
                                       onPressed: () => Utils.createExcelFile(
                                           controller.semuaSalesOrder),
-                                      padding: MySpacing.xy(16, 16),
+                                      padding:
+                                          MediaQuery.of(context).size.width <=
+                                                  576
+                                              ? MySpacing.xy(8, 8)
+                                              : MySpacing.xy(16, 16),
                                       borderColor:
                                           contentTheme.primary.withAlpha(40),
                                       child: Icon(
                                         Icons.download,
                                         color: contentTheme.primary,
+                                        size:
+                                            MediaQuery.of(context).size.width <=
+                                                    576
+                                                ? 18
+                                                : 22,
                                       ),
                                     ),
                                   ),
                                   MySpacing.width(8),
-                                  MyButton(
-                                    onPressed: () => showDialog(
-                                        context: context,
-                                        builder: (context) =>
-                                            CustomInputSalesDialog(
-                                              title: "Tambah Sales Order",
-                                              outlineInputBorder:
-                                                  outlineInputBorder,
-                                              focusedInputBorder:
-                                                  focusedInputBorder,
-                                              contentTheme: contentTheme,
-                                              validator:
-                                                  controller.inputValidator,
-                                              submit: () =>
-                                                  controller.addSalesOrder(),
-                                            )),
-                                    elevation: 0,
-                                    padding: MySpacing.xy(20, 16),
-                                    backgroundColor: contentTheme.primary,
-                                    borderRadiusAll:
-                                        AppStyle.buttonRadius.medium,
-                                    child: Icon(
-                                      Icons.add_outlined,
-                                      size: 20,
-                                      color: contentTheme.onPrimary,
+                                  if (hakAkses == 'admin' ||
+                                      hakAkses == 'inputer')
+                                    MyButton(
+                                      onPressed: () => showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              CustomInputSalesDialog(
+                                                title: "Inputan Order Sales",
+                                                outlineInputBorder:
+                                                    outlineInputBorder,
+                                                focusedInputBorder:
+                                                    focusedInputBorder,
+                                                contentTheme: contentTheme,
+                                                validator:
+                                                    controller.inputValidator,
+                                                submit: () =>
+                                                    controller.addSalesOrder(),
+                                              )),
+                                      elevation: 0,
+                                      padding:
+                                          MediaQuery.of(context).size.width <=
+                                                  576
+                                              ? MySpacing.xy(8, 8)
+                                              : MySpacing.xy(16, 16),
+                                      backgroundColor: contentTheme.primary,
+                                      borderRadiusAll:
+                                          AppStyle.buttonRadius.medium,
+                                      child: Icon(
+                                        Icons.add_rounded,
+                                        size:
+                                            MediaQuery.of(context).size.width <=
+                                                    576
+                                                ? 18
+                                                : 22,
+                                        color: contentTheme.onPrimary,
+                                      ),
                                     ),
-                                  ),
                                 ],
                               )
                             ],

@@ -69,14 +69,14 @@ class _SignUpScreenState extends State<SignUpScreen>
                       ),
                       MySpacing.height(15),
                       MyText.bodyMedium(
-                        'Name',
+                        'Nama',
                       ),
                       MySpacing.height(8),
                       TextFormField(
                         validator:
-                            controller.basicValidator.getValidation('name'),
+                            controller.basicValidator.getValidation('nama'),
                         controller:
-                            controller.basicValidator.getController('name'),
+                            controller.basicValidator.getController('nama'),
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             border: outlineInputBorder,
@@ -108,9 +108,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                       MySpacing.height(8),
                       TextFormField(
                         validator:
-                            controller.basicValidator.getValidation('password'),
+                            controller.basicValidator.getValidation('pass'),
                         controller:
-                            controller.basicValidator.getController('password'),
+                            controller.basicValidator.getController('pass'),
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             border: outlineInputBorder,
@@ -137,37 +137,37 @@ class _SignUpScreenState extends State<SignUpScreen>
                             floatingLabelBehavior: FloatingLabelBehavior.never),
                       ),
                       MySpacing.height(12),
-                      InkWell(
-                        onTap: () =>
-                            controller.onChangeCheckBox(!controller.isChecked),
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              onChanged: controller.onChangeCheckBox,
-                              value: controller.isChecked,
-                              activeColor: theme.colorScheme.primary,
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              visualDensity: getCompactDensity,
-                            ),
-                            MySpacing.width(8),
-                            Expanded(
-                              child: MyText.bodyMedium(
-                                "I agree to all the statements in the term and service",
-                                overflow: TextOverflow.ellipsis,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () =>
+                      //       controller.onChangeCheckBox(!controller.isChecked),
+                      //   child: Row(
+                      //     children: [
+                      //       Checkbox(
+                      //         onChanged: controller.onChangeCheckBox,
+                      //         value: controller.isChecked,
+                      //         activeColor: theme.colorScheme.primary,
+                      //         materialTapTargetSize:
+                      //             MaterialTapTargetSize.shrinkWrap,
+                      //         visualDensity: getCompactDensity,
+                      //       ),
+                      //       MySpacing.width(8),
+                      //       Expanded(
+                      //         child: MyText.bodyMedium(
+                      //           "I agree to all the statements in the term and service",
+                      //           overflow: TextOverflow.ellipsis,
+                      //           fontSize: 12,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       MySpacing.height(15),
                       Center(
                         child: MyButton.block(
                             elevation: 0,
                             backgroundColor: contentTheme.primary,
                             padding: MySpacing.xy(40, 20),
-                            onPressed: () {},
+                            onPressed: () => controller.onSignUp(),
                             child: MyText.bodyMedium(
                               'Create account',
                               color: contentTheme.onPrimary,
@@ -185,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   TextSpan(
                                     text: 'Sign in',
                                     style: MyTextStyle.bodyMedium(
-                                        color: Color.fromRGBO(0, 169, 255, 1)),
+                                        color: contentTheme.primary),
                                   ),
                                 ]),
                           ),

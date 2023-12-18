@@ -1,40 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webui/helper/theme/app_theme.dart';
 
 extension IconExtension on Icon {
   Icon autoDirection() {
     if (AppTheme.textDirection == TextDirection.ltr) return this;
-    if (icon == LucideIcons.chevronRight) {
+    if (icon == Icons.chevron_right) {
       return Icon(
-        LucideIcons.chevronLeft,
+        Icons.chevron_left,
         color: color,
         textDirection: textDirection,
         size: size,
         key: key,
         semanticLabel: semanticLabel,
       );
-    } else if (icon == LucideIcons.chevronLeft) {
+    } else if (icon == Icons.chevron_left) {
       return Icon(
-        LucideIcons.chevronRight,
+        Icons.chevron_right,
         color: color,
         textDirection: textDirection,
         size: size,
         key: key,
         semanticLabel: semanticLabel,
       );
-    } else if (icon == LucideIcons.chevronLeft) {
+    } else if (icon == Icons.chevron_left) {
       return Icon(
-        LucideIcons.chevronRight,
+        Icons.chevron_right,
         color: color,
         textDirection: textDirection,
         size: size,
         key: key,
         semanticLabel: semanticLabel,
       );
-    } else if (icon == LucideIcons.chevronRight) {
+    } else if (icon == Icons.chevron_right) {
       return Icon(
-        LucideIcons.chevronLeft,
+        Icons.chevron_left,
         color: color,
         textDirection: textDirection,
         size: size,

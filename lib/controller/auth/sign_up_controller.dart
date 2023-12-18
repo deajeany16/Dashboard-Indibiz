@@ -4,6 +4,7 @@ import 'package:webui/controller/my_controller.dart';
 import 'package:webui/helper/services/auth_service.dart';
 import 'package:webui/helper/widgets/my_form_validator.dart';
 import 'package:webui/helper/widgets/my_validators.dart';
+import 'package:webui/widgets/custom_alert.dart';
 
 class SignUpController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -26,22 +27,28 @@ class SignUpController extends MyController {
   void onInit() {
     super.onInit();
     basicValidator.addField(
-      'email',
+      'username',
       required: true,
-      label: "Email",
-      validators: [MyEmailValidator()],
+      label: "Username",
       controller: TextEditingController(),
     );
     basicValidator.addField(
-      'name',
+      'nama',
       required: true,
-      label: 'Name',
+      label: 'Nama',
       controller: TextEditingController(),
     );
     basicValidator.addField(
-      'password',
+      'pass',
       required: true,
-      validators: [MyLengthValidator(min: 6, max: 10)],
+      label: "Password",
+      validators: [MyLengthValidator(min: 6, max: 20)],
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'hak_akses',
+      required: true,
+      label: 'Hak Akses',
       controller: TextEditingController(),
     );
   }
@@ -63,30 +70,40 @@ class SignUpController extends MyController {
   //   }
   // }
 
-  Future<void> onLogin() async {
+  Future<void> onSignUp() async {
     try {
       if (basicValidator.validateForm()) {
         update();
-        var auth = Get.put(AuthService());
-        var login = await auth.login(basicValidator.getData());
-        if (login.statusCode == 401) {
-          basicValidator.addErrors({"Auth Failed": "Gagal"});
-          basicValidator.validateForm();
-          basicValidator.clearErrors();
-        } else {
-          String nextUrl =
-              Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
-                      .queryParameters['next'] ??
-                  "/dashboard";
-          Get.toNamed(
-            nextUrl,
-          );
+        var authService = Get.put(AuthService());
+        dynamic userData = await authService.register(basicValidator.getData());
+        if (userData.statusCode == 200) {
+          Get.back();
+          Get.dialog(CustomAlert(
+            context: Get.context!,
+            title: 'Berhasil',
+            text: 'User berhasil dibuat',
+            confirmBtnText: 'Okay',
+          ));
+          basicValidator.resetForm();
+          Future.delayed(Duration(seconds: 2), () {
+            gotoLogin();
+          });
+        } else if (userData.statusCode == 400) {
+          Get.dialog(CustomAlert(
+            context: Get.context!,
+            title: 'Pendaftaran Gagal',
+            text: 'Pengguna sudah terdaftar',
+            confirmBtnText: 'Okay',
+          ));
         }
       }
     } catch (e) {
-      basicValidator.addErrors({"Auth Failed": "failed"});
-      basicValidator.validateForm();
-      basicValidator.clearErrors();
+      Get.dialog(CustomAlert(
+        context: Get.context!,
+        title: 'Error',
+        text: e.toString(),
+        confirmBtnText: 'Okay',
+      ));
     }
 
     update();
