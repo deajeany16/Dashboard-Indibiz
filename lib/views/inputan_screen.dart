@@ -86,7 +86,8 @@ class _InputanScreenState extends State<InputanScreen>
                           size: 18,
                         ),
                         isDense: true,
-                        labelText: "Cari Order (berdasarkan nomor SC)",
+                        labelText:
+                            "Cari Order (berdasarkan nomor SC/Nama Usaha)",
                         labelStyle: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
