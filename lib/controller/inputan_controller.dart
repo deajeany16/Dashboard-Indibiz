@@ -265,10 +265,7 @@ class InputanController extends MyController {
               const TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
         ),
         dialogSize: const Size(325, 400),
-        value: selectedDateRange ??
-            [
-              DateTime.now(),
-            ],
+        value: selectedDateRange ?? [DateTime.now(), DateTime.now()],
         borderRadius: BorderRadius.circular(15),
         dialogBackgroundColor: Colors.white);
 

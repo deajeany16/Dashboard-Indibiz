@@ -55,7 +55,9 @@ class _REScreenState extends State<REScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: MySpacing.x(flexSpacing),
+                    padding: MediaQuery.of(context).size.width <= 576
+                        ? MySpacing.x(16)
+                        : MySpacing.x(flexSpacing),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -74,7 +76,9 @@ class _REScreenState extends State<REScreen>
                     ),
                   ),
                   Padding(
-                    padding: MySpacing.xy(24, 16),
+                    padding: MediaQuery.of(context).size.width <= 576
+                        ? MySpacing.all(16)
+                        : MySpacing.xy(24, 16),
                     child: TextField(
                       onSubmitted: (value) => controller.onSearch(value),
                       decoration: InputDecoration(
@@ -104,7 +108,9 @@ class _REScreenState extends State<REScreen>
                   MyCard(
                       shadow: MyShadow(
                           elevation: 0.5, position: MyShadowPosition.bottom),
-                      margin: MySpacing.x(flexSpacing),
+                      margin: MediaQuery.of(context).size.width <= 576
+                          ? MySpacing.x(16)
+                          : MySpacing.x(flexSpacing),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -118,13 +124,18 @@ class _REScreenState extends State<REScreen>
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    MySpacing.width(8),
-                                    Icon(
-                                      Icons.filter_list_outlined,
-                                      color: contentTheme.primary,
-                                      size: 24,
-                                    ),
-                                    MySpacing.width(12),
+                                    if (MediaQuery.of(context).size.width > 576)
+                                      Row(
+                                        children: [
+                                          MySpacing.width(8),
+                                          Icon(
+                                            Icons.filter_list_outlined,
+                                            color: contentTheme.primary,
+                                            size: 24,
+                                          ),
+                                          MySpacing.width(12),
+                                        ],
+                                      ),
                                     PopupMenuButton(
                                       tooltip: "Pilih STO",
                                       itemBuilder: (BuildContext context) {
@@ -294,7 +305,7 @@ class _REScreenState extends State<REScreen>
                                 children: [
                                   Tooltip(
                                     message: "Download File Excel",
-                                    child: MyButton.outlined(
+                                    child: MyButton.small(
                                       onPressed: () => Utils.createExcelFile(
                                           controller.semuaRE),
                                       padding:
@@ -302,11 +313,13 @@ class _REScreenState extends State<REScreen>
                                                   992
                                               ? MySpacing.xy(8, 8)
                                               : MySpacing.xy(16, 16),
-                                      borderColor:
-                                          contentTheme.primary.withAlpha(40),
+                                      backgroundColor: contentTheme.primary,
+                                      borderRadiusAll:
+                                          AppStyle.buttonRadius.medium,
+                                      elevation: 0,
                                       child: Icon(
                                         Icons.download,
-                                        color: contentTheme.primary,
+                                        color: Colors.white,
                                         size:
                                             MediaQuery.of(context).size.width <=
                                                     992

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webui/controller/layout/layout_controller.dart';
+import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/admin_theme.dart';
 import 'package:webui/helper/theme/app_style.dart';
 import 'package:webui/helper/theme/app_theme.dart';
@@ -37,10 +38,10 @@ class Layout extends StatelessWidget {
   }
 
   Widget mobileScreen() {
+    String? nama = LocalStorage.getNama();
     return Scaffold(
       key: controller.scaffoldKey,
       appBar: AppBar(
-        scrolledUnderElevation: 0.0,
         actions: [
           CustomPopupMenu(
             backdrop: true,
@@ -65,8 +66,16 @@ class Layout extends StatelessWidget {
             offsetY: 4,
             menu: Padding(
               padding: MySpacing.xy(8, 8),
-              child: MyContainer.rounded(
-                  paddingAll: 0, child: Icon(Icons.account_circle_outlined)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  MyContainer.rounded(
+                      paddingAll: 0,
+                      child: Icon(Icons.account_circle_outlined)),
+                  MySpacing.width(8),
+                  MyText.labelLarge(nama ?? 'user')
+                ],
+              ),
             ),
             menuBuilder: (_) => buildAccountMenu(),
           ),
