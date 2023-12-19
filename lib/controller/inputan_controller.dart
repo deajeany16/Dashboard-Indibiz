@@ -338,13 +338,33 @@ class InputanController extends MyController {
     onFilter();
     isFiltered = false;
     filteredInputan = filteredInputan
-        .where((inputan) => inputan.nosc
-            .toString()
-            .toLowerCase()
-            .contains(query.toString().toLowerCase()))
+        .where(
+          (inputan) =>
+              inputan.nosc
+                  .toString()
+                  .toLowerCase()
+                  .contains(query.toLowerCase()) ||
+              inputan.namaperusahaan
+                  .toString()
+                  .toLowerCase()
+                  .contains(query.toLowerCase()),
+        )
         .toList();
     update();
   }
+
+  // void onSearch(query) {
+  //   filteredInputan = semuaInputan;
+  //   onFilter();
+  //   isFiltered = false;
+  //   filteredInputan = filteredInputan
+  //       .where((inputan) => inputan.nosc
+  //           .toString()
+  //           .toLowerCase()
+  //           .contains(query.toString().toLowerCase()))
+  //       .toList();
+  //   update();
+  // }
 
   Future<void> getAllOrder() async {
     try {
