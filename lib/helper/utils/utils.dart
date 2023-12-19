@@ -1,4 +1,5 @@
 import 'package:excel/excel.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webui/app_constant.dart';
 import 'package:webui/helper/extensions/extensions.dart';
 
@@ -168,5 +169,11 @@ class Utils {
 
     excel.save(
         fileName: "Inputan_${dateTimeFormatter.format(DateTime.now())}.xlsx");
+  }
+
+  static Future<void> launchLink(_url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }

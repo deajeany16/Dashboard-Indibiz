@@ -474,8 +474,17 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                                       )),
                                                       DataCell(SizedBox(
                                                         width: 200,
-                                                        child: MyText.bodySmall(
-                                                            data.maps),
+                                                        child: GestureDetector(
+                                                          onTap: () =>
+                                                              Utils.launchLink(
+                                                                  Uri.parse(data
+                                                                      .maps)),
+                                                          child:
+                                                              MyText.bodySmall(
+                                                            data.maps,
+                                                            color: Colors.blue,
+                                                          ),
+                                                        ),
                                                       )),
                                                       DataCell(SizedBox(
                                                         width: 200,
