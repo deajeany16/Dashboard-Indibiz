@@ -79,54 +79,87 @@ class Utils {
     }
   }
 
-  static Future<void> createExcelFile(semuaInputan) async {
+  static Future<void> createExcelFile(semuaInputan,
+      {tipeInputan = "semuaorder"}) async {
     var excel = Excel.createExcel();
     var sheet = excel[excel.getDefaultSheet()!];
 
     // Add headers
-    sheet.appendRow([
-      "Tanggal Input",
-      "Inputer",
-      "Nama SP/SA/CSR",
-      "Kode SP/SA/CSR",
-      "STO",
-      "Datel",
-      "Nama Perusahaan",
-      "Alamat Perusahaan",
-      "Koordinat",
-      "ODP",
-      "No HP",
-      "No HP Alternatif",
-      "Email",
-      "Paket Yg Diinginkan",
-      "NO SC",
-      "Status SC",
-      "Keterangan Status",
-      "Keterangan Lain",
-    ]);
+    if (tipeInputan == "salesorder") {
+      sheet.appendRow([
+        "Tanggal Input",
+        "Nama SP/SA/CSR",
+        "Kode SP/SA/CSR",
+        "Nama Perusahaan",
+        "Alamat Perusahaan",
+        "No HP",
+        "Email",
+        "Paket Yg Diinginkan",
+        "Maps",
+        "Status Input",
+      ]);
+    } else {
+      sheet.appendRow([
+        "Tanggal Input",
+        "Inputer",
+        "Nama SP/SA/CSR",
+        "Kode SP/SA/CSR",
+        "STO",
+        "Datel",
+        "Nama Perusahaan",
+        "Alamat Perusahaan",
+        "Koordinat",
+        "ODP",
+        "No HP",
+        "No HP Alternatif",
+        "Email",
+        "Paket Yg Diinginkan",
+        "NO SC",
+        "Status SC",
+        "Keterangan Status",
+        "Keterangan Lain",
+      ]);
+    }
 
     // Add data
-    for (var i = 0; i < semuaInputan.length; i++) {
-      sheet.appendRow([
-        dateFormatter.format(semuaInputan[i].createdAt),
-        semuaInputan[i].nama,
-        semuaInputan[i].namasales,
-        semuaInputan[i].kodesales,
-        semuaInputan[i].sto,
-        semuaInputan[i].datel,
-        semuaInputan[i].namaperusahaan,
-        semuaInputan[i].alamat,
-        semuaInputan[i].koordinat,
-        semuaInputan[i].odp,
-        semuaInputan[i].nohp,
-        semuaInputan[i].nohp2,
-        semuaInputan[i].email,
-        semuaInputan[i].paket,
-        semuaInputan[i].nosc,
-        semuaInputan[i].status,
-        semuaInputan[i].ketstat,
-        semuaInputan[i].ket,
-      ]);
+    if (tipeInputan == "salesorder") {
+      for (var i = 0; i < semuaInputan.length; i++) {
+        sheet.appendRow([
+          dateFormatter.format(semuaInputan[i].createdAt),
+          semuaInputan[i].namasaless,
+          semuaInputan[i].kodesaless,
+          semuaInputan[i].namausaha,
+          semuaInputan[i].alamatt,
+          semuaInputan[i].cp,
+          semuaInputan[i].emaill,
+          semuaInputan[i].pakett,
+          semuaInputan[i].maps,
+          semuaInputan[i].statusinput,
+        ]);
+      }
+    } else {
+      for (var i = 0; i < semuaInputan.length; i++) {
+        sheet.appendRow([
+          dateFormatter.format(semuaInputan[i].createdAt),
+          semuaInputan[i].nama,
+          semuaInputan[i].namasales,
+          semuaInputan[i].kodesales,
+          semuaInputan[i].sto,
+          semuaInputan[i].datel,
+          semuaInputan[i].namaperusahaan,
+          semuaInputan[i].alamat,
+          semuaInputan[i].koordinat,
+          semuaInputan[i].odp,
+          semuaInputan[i].nohp,
+          semuaInputan[i].nohp2,
+          semuaInputan[i].email,
+          semuaInputan[i].paket,
+          semuaInputan[i].nosc,
+          semuaInputan[i].status,
+          semuaInputan[i].ketstat,
+          semuaInputan[i].ket,
+        ]);
+      }
     }
 
     for (var i = 0; i < 18; i++) {
