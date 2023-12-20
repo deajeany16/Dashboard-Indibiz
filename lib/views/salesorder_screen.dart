@@ -205,43 +205,39 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                     ),
                                   ),
                                   MySpacing.width(8),
-                                  if (hakAkses == 'admin' ||
-                                      hakAkses == 'inputer')
-                                    MyButton(
-                                      onPressed: () => showDialog(
-                                          context: context,
-                                          builder: (context) =>
-                                              CustomInputSalesDialog(
-                                                title: "Inputan Order Sales",
-                                                outlineInputBorder:
-                                                    outlineInputBorder,
-                                                focusedInputBorder:
-                                                    focusedInputBorder,
-                                                contentTheme: contentTheme,
-                                                validator:
-                                                    controller.inputValidator,
-                                                submit: () =>
-                                                    controller.addSalesOrder(),
-                                              )),
-                                      elevation: 0,
-                                      padding:
-                                          MediaQuery.of(context).size.width <=
-                                                  576
-                                              ? MySpacing.xy(8, 8)
-                                              : MySpacing.xy(16, 16),
-                                      backgroundColor: contentTheme.primary,
-                                      borderRadiusAll:
-                                          AppStyle.buttonRadius.medium,
-                                      child: Icon(
-                                        Icons.add_rounded,
-                                        size:
-                                            MediaQuery.of(context).size.width <=
-                                                    576
-                                                ? 18
-                                                : 22,
-                                        color: contentTheme.onPrimary,
-                                      ),
+                                  MyButton(
+                                    onPressed: () => showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            CustomInputSalesDialog(
+                                              title: "Inputan Order Sales",
+                                              outlineInputBorder:
+                                                  outlineInputBorder,
+                                              focusedInputBorder:
+                                                  focusedInputBorder,
+                                              contentTheme: contentTheme,
+                                              validator:
+                                                  controller.inputValidator,
+                                              submit: () =>
+                                                  controller.addSalesOrder(),
+                                            )),
+                                    elevation: 0,
+                                    padding:
+                                        MediaQuery.of(context).size.width <= 576
+                                            ? MySpacing.xy(8, 8)
+                                            : MySpacing.xy(16, 16),
+                                    backgroundColor: contentTheme.primary,
+                                    borderRadiusAll:
+                                        AppStyle.buttonRadius.medium,
+                                    child: Icon(
+                                      Icons.add_rounded,
+                                      size: MediaQuery.of(context).size.width <=
+                                              576
+                                          ? 18
+                                          : 22,
+                                      color: contentTheme.onPrimary,
                                     ),
+                                  ),
                                 ],
                               )
                             ],
