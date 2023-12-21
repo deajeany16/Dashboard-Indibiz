@@ -55,7 +55,9 @@ class _InputanScreenState extends State<InputanScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: MySpacing.x(flexSpacing),
+                    padding: MediaQuery.of(context).size.width <= 576
+                        ? MySpacing.x(16)
+                        : MySpacing.x(flexSpacing),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -74,7 +76,9 @@ class _InputanScreenState extends State<InputanScreen>
                     ),
                   ),
                   Padding(
-                    padding: MySpacing.xy(24, 16),
+                    padding: MediaQuery.of(context).size.width <= 576
+                        ? MySpacing.all(16)
+                        : MySpacing.xy(24, 16),
                     child: TextField(
                       onSubmitted: (value) => controller.onSearch(value),
                       decoration: InputDecoration(
@@ -105,7 +109,9 @@ class _InputanScreenState extends State<InputanScreen>
                   MyCard(
                       shadow: MyShadow(
                           elevation: 0.5, position: MyShadowPosition.bottom),
-                      margin: MySpacing.x(flexSpacing),
+                      margin: MediaQuery.of(context).size.width <= 576
+                          ? MySpacing.x(16)
+                          : MySpacing.x(flexSpacing),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -119,13 +125,18 @@ class _InputanScreenState extends State<InputanScreen>
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    MySpacing.width(8),
-                                    Icon(
-                                      Icons.filter_list_outlined,
-                                      color: contentTheme.primary,
-                                      size: 24,
-                                    ),
-                                    MySpacing.width(12),
+                                    if (MediaQuery.of(context).size.width > 576)
+                                      Row(
+                                        children: [
+                                          MySpacing.width(8),
+                                          Icon(
+                                            Icons.filter_list_outlined,
+                                            color: contentTheme.primary,
+                                            size: 24,
+                                          ),
+                                          MySpacing.width(12),
+                                        ],
+                                      ),
                                     PopupMenuButton(
                                       tooltip: "Pilih STO",
                                       itemBuilder: (BuildContext context) {
@@ -277,16 +288,23 @@ class _InputanScreenState extends State<InputanScreen>
                                         onPressed: () {
                                           controller.onResetFilter();
                                         },
-                                        elevation: 0,
-                                        padding: MySpacing.xy(10, 8),
+                                        padding: MySpacing.xy(8, 4),
                                         borderColor: contentTheme.primary,
                                         splashColor: contentTheme.primary
                                             .withOpacity(0.1),
                                         borderRadiusAll: 20,
-                                        child: MyText.bodySmall(
-                                          'Reset',
-                                          color: contentTheme.primary,
-                                        ),
+                                        child:
+                                            MediaQuery.of(context).size.width <=
+                                                    992
+                                                ? Icon(
+                                                    Icons.refresh,
+                                                    size: 18,
+                                                    color: contentTheme.primary,
+                                                  )
+                                                : MyText.bodySmall(
+                                                    'Reset',
+                                                    color: contentTheme.primary,
+                                                  ),
                                       ),
                                   ],
                                 ),
@@ -295,7 +313,7 @@ class _InputanScreenState extends State<InputanScreen>
                                 children: [
                                   Tooltip(
                                     message: "Download File Excel",
-                                    child: MyButton.outlined(
+                                    child: MyButton.small(
                                       onPressed: () => Utils.createExcelFile(
                                           controller.semuaInputan),
                                       padding:
@@ -303,11 +321,13 @@ class _InputanScreenState extends State<InputanScreen>
                                                   992
                                               ? MySpacing.xy(8, 8)
                                               : MySpacing.xy(16, 16),
-                                      borderColor:
-                                          contentTheme.primary.withAlpha(40),
+                                      backgroundColor: contentTheme.primary,
+                                      borderRadiusAll:
+                                          AppStyle.buttonRadius.medium,
+                                      elevation: 0,
                                       child: Icon(
                                         Icons.download,
-                                        color: contentTheme.primary,
+                                        color: Colors.white,
                                         size:
                                             MediaQuery.of(context).size.width <=
                                                     992
@@ -319,7 +339,7 @@ class _InputanScreenState extends State<InputanScreen>
                                   MySpacing.width(8),
                                   if (hakAkses == 'admin' ||
                                       hakAkses == 'inputer')
-                                    MyButton(
+                                    MyButton.small(
                                       onPressed: () => showDialog(
                                           context: context,
                                           builder: (context) =>

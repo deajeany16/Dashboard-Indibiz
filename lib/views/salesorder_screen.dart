@@ -183,22 +183,25 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                 children: [
                                   Tooltip(
                                     message: "Download File Excel",
-                                    child: MyButton.outlined(
+                                    child: MyButton.small(
                                       onPressed: () => Utils.createExcelFile(
-                                          controller.semuaSalesOrder),
+                                          controller.semuaSalesOrder,
+                                          tipeInputan: "salesorder"),
                                       padding:
                                           MediaQuery.of(context).size.width <=
-                                                  576
+                                                  992
                                               ? MySpacing.xy(8, 8)
                                               : MySpacing.xy(16, 16),
-                                      borderColor:
-                                          contentTheme.primary.withAlpha(40),
+                                      backgroundColor: contentTheme.primary,
+                                      borderRadiusAll:
+                                          AppStyle.buttonRadius.medium,
+                                      elevation: 0,
                                       child: Icon(
                                         Icons.download,
-                                        color: contentTheme.primary,
+                                        color: Colors.white,
                                         size:
                                             MediaQuery.of(context).size.width <=
-                                                    576
+                                                    992
                                                 ? 18
                                                 : 22,
                                       ),
@@ -467,8 +470,17 @@ class _SalesOrderScreenState extends State<SalesOrderScreen>
                                                       )),
                                                       DataCell(SizedBox(
                                                         width: 200,
-                                                        child: MyText.bodySmall(
-                                                            data.maps),
+                                                        child: GestureDetector(
+                                                          onTap: () =>
+                                                              Utils.launchLink(
+                                                                  Uri.parse(data
+                                                                      .maps)),
+                                                          child:
+                                                              MyText.bodySmall(
+                                                            data.maps,
+                                                            color: Colors.blue,
+                                                          ),
+                                                        ),
                                                       )),
                                                       DataCell(SizedBox(
                                                         width: 200,
