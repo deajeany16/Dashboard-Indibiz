@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:webui/helper/services/auth_service.dart';
+import 'package:webui/views/profile_screen.dart';
 import 'package:webui/views/sales_screen.dart';
 import 'package:webui/views/dashboard_screen.dart';
 import 'package:webui/views/user_screen.dart';
@@ -52,11 +53,15 @@ getPageRoute() {
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: '/user', page: () => UserList(), middlewares: [AuthMiddleware()]),
+    //------------------Authentication Screens------------------
     GetPage(
         name: '/sales',
         page: () => SalesList(),
         middlewares: [AuthMiddleware()]),
-    //------------------Authentication Screens------------------
+    GetPage(
+        name: '/profile',
+        page: () => ProfileScreen(),
+        middlewares: [AuthMiddleware()]),
     GetPage(name: '/auth/login', page: () => const LoginScreen()),
     GetPage(name: '/auth/sign_up', page: () => const SignUpScreen()),
     GetPage(

@@ -133,11 +133,11 @@ class _TopBarState extends State<TopBar>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildNotification("Your order is received",
-                    "Order #1232 is ready to deliver"),
-                MySpacing.height(12),
-                buildNotification("Account Security ",
-                    "Your account password changed 1 hour ago"),
+                // buildNotification("Your order is received",
+                //     "Order #1232 is ready to deliver"),
+                // MySpacing.height(12),
+                // buildNotification("Account Security ",
+                //     "Your account password changed 1 hour ago"),
               ],
             ),
           ),
@@ -186,7 +186,8 @@ class _TopBarState extends State<TopBar>
               children: [
                 MyButton(
                   onPressed: () {
-                    Get.toNamed('/contacts/profile');
+                    Get.toNamed('/profile');
+                    accountHideFn?.call();
                     setState(() {});
                   },
                   // onPressed: () =>
@@ -206,33 +207,6 @@ class _TopBarState extends State<TopBar>
                       MySpacing.width(8),
                       MyText.labelMedium(
                         "My Profile",
-                        fontWeight: 600,
-                      )
-                    ],
-                  ),
-                ),
-                MySpacing.height(4),
-                MyButton(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  onPressed: () {
-                    Get.toNamed('/contacts/edit-profile');
-                    setState(() {});
-                  },
-                  borderRadiusAll: AppStyle.buttonRadius.medium,
-                  padding: MySpacing.xy(8, 4),
-                  splashColor: theme.colorScheme.onBackground.withAlpha(20),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.edit,
-                        size: 14,
-                        color: contentTheme.onBackground,
-                      ),
-                      MySpacing.width(8),
-                      MyText.labelMedium(
-                        "Edit Profile",
                         fontWeight: 600,
                       )
                     ],

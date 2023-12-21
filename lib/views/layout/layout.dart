@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webui/controller/layout/layout_controller.dart';
+import 'package:webui/helper/services/auth_service.dart';
 import 'package:webui/helper/storage/local_storage.dart';
 import 'package:webui/helper/theme/admin_theme.dart';
 import 'package:webui/helper/theme/app_style.dart';
@@ -20,6 +21,7 @@ import 'package:webui/widgets/custom_pop_menu.dart';
 
 class Layout extends StatelessWidget {
   final Widget? child;
+  late Function accountHideFn;
 
   final LayoutController controller = LayoutController();
   final topBarTheme = AdminTheme.theme.topBarTheme;
@@ -64,6 +66,7 @@ class Layout extends StatelessWidget {
             onChange: (_) {},
             offsetX: -90,
             offsetY: 4,
+            hideFn: (_) => accountHideFn = _,
             menu: Padding(
               padding: MySpacing.xy(8, 8),
               child: Row(
@@ -149,11 +152,11 @@ class Layout extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildNotification("Your order is received",
-                    "Order #1232 is ready to deliver"),
-                MySpacing.height(12),
-                buildNotification("Account Security ",
-                    "Your account password changed 1 hour ago"),
+                // buildNotification("Your order is received",
+                //     "Order #1232 is ready to deliver"),
+                // MySpacing.height(12),
+                // buildNotification("Account Security ",
+                //     "Your account password changed 1 hour ago"),
               ],
             ),
           ),
@@ -223,30 +226,6 @@ class Layout extends StatelessWidget {
                     ],
                   ),
                 ),
-                MySpacing.height(4),
-                MyButton(
-                  elevation: 0,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  onPressed: () => {},
-                  borderRadiusAll: AppStyle.buttonRadius.medium,
-                  padding: MySpacing.xy(8, 4),
-                  splashColor: theme.colorScheme.onBackground.withAlpha(20),
-                  backgroundColor: Colors.transparent,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.settings_outlined,
-                        size: 14,
-                        color: contentTheme.onBackground,
-                      ),
-                      MySpacing.width(8),
-                      MyText.labelMedium(
-                        "Settings",
-                        fontWeight: 600,
-                      )
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -259,7 +238,13 @@ class Layout extends StatelessWidget {
             child: MyButton(
               elevation: 0,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              onPressed: () => {},
+              onPressed: () {
+                AuthService.isLoggedIn = false;
+                LocalStorage.setLoggedInUser(false);
+                LocalStorage.setToken('');
+                Get.offAllNamed('/auth/login');
+                accountHideFn?.call();
+              },
               borderRadiusAll: AppStyle.buttonRadius.medium,
               padding: MySpacing.xy(8, 4),
               splashColor: contentTheme.danger.withAlpha(28),
